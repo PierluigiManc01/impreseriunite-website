@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Building2, FileText, ExternalLink } from "lucide-react";
 
 const ContactSection = () => (
   <section id="contatti" className="py-24 bg-accent/50">
@@ -10,31 +10,99 @@ const ContactSection = () => (
         viewport={{ once: true }}
         className="text-center max-w-3xl mx-auto mb-16"
       >
-        <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">Contatti</p>
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">
-          Parliamo del tuo prossimo progetto
+        <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+          Informazioni Istituzionali
+        </p>
+        <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
+          Sede e contatti del Gruppo
         </h2>
+        <p className="text-muted-foreground font-body">
+          Imprese Riunite opera prevalentemente nel settore delle opere pubbliche. Per informazioni istituzionali e comunicazioni ufficiali, di seguito i nostri recapiti.
+        </p>
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-      >
-        {[
-          { icon: Phone, label: "Telefono", value: "+39 06 123 4567" },
-          { icon: Mail, label: "Email", value: "info@impreseriunite.it" },
-          { icon: MapPin, label: "Sede", value: "Roma, Italia" },
-        ].map((c) => (
-          <div key={c.label} className="flex flex-col items-center text-center bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]">
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-              <c.icon className="w-6 h-6 text-primary" />
+
+      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Main contacts */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
+        >
+          <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-primary" />
+            Sede Legale e Operativa
+          </h3>
+          <div className="space-y-5">
+            <div className="flex items-start gap-3">
+              <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="font-body text-sm font-medium text-foreground">Indirizzo</p>
+                <p className="text-muted-foreground font-body text-sm">
+                  Piazzale Benito Juarez 10/11
+                  <br />
+                  00144, Roma (RM) – Italia
+                </p>
+              </div>
             </div>
-            <p className="font-heading font-semibold text-foreground mb-1">{c.label}</p>
-            <p className="text-muted-foreground font-body text-sm">{c.value}</p>
+            <div className="flex items-start gap-3">
+              <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="font-body text-sm font-medium text-foreground">Telefono</p>
+                <p className="text-muted-foreground font-body text-sm">
+                  06 45435416 – 06 45435417 – 06 45435418
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="font-body text-sm font-medium text-foreground">Email</p>
+                <p className="text-muted-foreground font-body text-sm">appalti@impreseriunite.it</p>
+                <p className="text-muted-foreground font-body text-sm">info@impreseriunite.it</p>
+              </div>
+            </div>
           </div>
-        ))}
-      </motion.div>
+        </motion.div>
+
+        {/* PEC and institutional */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
+        >
+          <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-primary" />
+            Comunicazioni Istituzionali
+          </h3>
+          <div className="space-y-5">
+            <div className="flex items-start gap-3">
+              <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="font-body text-sm font-medium text-foreground">PEC Costruzioni Angelico</p>
+                <p className="text-muted-foreground font-body text-sm break-all">
+                  costruzioniangelicostradalisrl@legalmail.it
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="font-body text-sm font-medium text-foreground">PEC Nuova C.C.S.</p>
+                <p className="text-muted-foreground font-body text-sm">nuovaccs@legalmail.it</p>
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-5 mt-5">
+              <p className="text-xs text-muted-foreground font-body leading-relaxed">
+                Le attività del Gruppo sono svolte per circa il 90% nel settore delle opere pubbliche.
+                Per informazioni su gare d'appalto e procedure di evidenza pubblica, contattare l'ufficio appalti tramite i recapiti indicati.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   </section>
 );

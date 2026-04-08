@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => (
@@ -14,7 +15,7 @@ const HeroSection = () => (
         transition={{ delay: 0.2 }}
         className="text-primary-foreground/70 font-body text-sm tracking-[0.3em] uppercase mb-4"
       >
-        Gruppo Immobiliare
+        Gruppo Immobiliare Properzi
       </motion.p>
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
@@ -28,20 +29,48 @@ const HeroSection = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="text-primary-foreground/80 font-body text-lg md:text-xl max-w-2xl mx-auto mb-10"
+        className="text-primary-foreground/80 font-body text-lg md:text-xl max-w-2xl mx-auto mb-4"
       >
-        Costruiamo il futuro con passione, qualità e innovazione dal cuore dell'Italia.
+        Dal 1976 nel settore delle grandi opere civili. Costruzioni, infrastrutture e impiantistica con oltre 40 anni di esperienza al servizio del territorio.
       </motion.p>
-      <motion.a
+      <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        href="#aziende"
-        className="inline-block rounded-lg px-8 py-3 font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
+        transition={{ delay: 0.7 }}
+        className="text-primary-foreground/60 font-body text-sm max-w-xl mx-auto mb-10"
       >
-        Scopri le nostre aziende
-      </motion.a>
+        Tre imprese, un unico obiettivo: eccellenza nella realizzazione di opere pubbliche e private in Italia e nel mondo.
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center"
+      >
+        <a
+          href="#aziende"
+          className="inline-block rounded-lg px-8 py-3 font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
+        >
+          Scopri le nostre aziende
+        </a>
+        <a
+          href="#storia"
+          className="inline-block rounded-lg px-8 py-3 font-heading font-semibold text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 transition-colors"
+        >
+          La nostra storia
+        </a>
+      </motion.div>
     </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 }}
+      className="absolute bottom-8 left-1/2 -translate-x-1/2"
+    >
+      <a href="#chi-siamo">
+        <ChevronDown className="w-6 h-6 text-primary-foreground/50 animate-bounce" />
+      </a>
+    </motion.div>
   </section>
 );
 
