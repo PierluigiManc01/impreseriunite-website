@@ -8,7 +8,8 @@ import {
   Building2,
   Award,
   Briefcase,
-  ChevronRight,
+  FileText,
+  ExternalLink,
 } from "lucide-react";
 import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
