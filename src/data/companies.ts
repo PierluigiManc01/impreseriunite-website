@@ -4,6 +4,7 @@ export type Project = {
   client: string;
   amount: string;
   description: string;
+  date?: string;
   images: string[];
 };
 
@@ -46,15 +47,15 @@ export const companies: Company[] = [
     pec: "costruzioniangelicostradalisrl@legalmail.it",
     email: "appalti@impreseriunite.it",
     certifications: [
-      { name: "ISO 45001", pdf: "/certificazioni/iso-45001.pdf" },
-      { name: "ISO 50001", pdf: "/certificazioni/iso-50001.pdf" },
-      { name: "ISO 37001", pdf: "/certificazioni/iso-37001.pdf" },
-      { name: "ISO 20400", pdf: "/certificazioni/iso-20400.pdf" },
-      { name: "SOA", pdf: "/certificazioni/soa-angelico.pdf" },
-      { name: "SA 8000", pdf: "/certificazioni/sa-8000.pdf" },
-      { name: "ISO 14000", pdf: "/certificazioni/iso-14000.pdf" },
-      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-angelico.pdf" },
-      { name: "IMQ", pdf: "/certificazioni/imq.pdf" },
+      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/ANGELICO-certificatoISO_45001-pdf" },
+      { name: "ISO 50001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
+      { name: "ISO 37001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
+      { name: "ISO 20400", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
+      { name: "SOA", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
+      { name: "SA 8000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
+      { name: "ISO 14000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-ISO_14000-pdf" },
+      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/angelico-certificato-iso_9001-pdf" },
+      { name: "IMQ", pdf: "https://www.impreseriunite.it/angelico-certificato-imq-pdf" },
     ],
     projects: [
       {
@@ -63,8 +64,15 @@ export const companies: Company[] = [
         client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
         amount: "8.454.874,99 €",
         description:
-          "Lavorazioni di realizzazione di un nuovo padiglione detentivo della capienza di 200 posti presso la Casa Circondariale di Ariano Irpino.",
-        images: [],
+          "Lavorazioni di realizzazione di un nuovo padiglione detentivo della capienza di n. 200 posti presso la casa circondariale di Ariano Irpino.",
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-1-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-2-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-8-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-3-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-4-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-5-1-800x600.jpg",
+        ],
       },
       {
         title: "Ristrutturazione DAP Roma",
@@ -73,7 +81,15 @@ export const companies: Company[] = [
         amount: "827.418,37 €",
         description:
           "Lavori di distribuzione funzionale ed architettonica delle aree di accesso e di accoglienza visitatori situate al piano terra presso Roma – DAP.",
-        images: [],
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-7-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-6-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-5-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-4-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-3-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-1-800x600.jpg",
+        ],
       },
       {
         title: "Ampliamento Casa Circondariale Livorno",
@@ -82,7 +98,14 @@ export const companies: Company[] = [
         amount: "10.918.068,58 €",
         description:
           'Lavori di realizzazione in ampliamento del padiglione "C" di un reparto detentivo da 100 posti presso la Casa Circondariale di Livorno.',
-        images: [],
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-10-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-9-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-3-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-4-800x600.jpg",
+        ],
       },
     ],
   },
@@ -97,32 +120,96 @@ export const companies: Company[] = [
       "Oggi l'Azienda vanta elevati standard di professionalità nell'installazione di impianti fotovoltaici, di gruppi elettrogeni, di continuità e cabine di trasformazione MT/BT e nella installazione e manutenzione di impianti elettrici, di sicurezza, d'illuminazione e di autonomia industriale.",
     admin: "Alfredo Mancinelli",
     address: "Piazzale Benito Juarez 10/11, 00144, Roma (RM)",
-    phone: "06 45435416",
-    pec: "nuovaccs@legalmail.it",
-    email: "info@impreseriunite.it",
+    phone: "06 45435416 – 06 45435417 – 06 45435418",
+    pec: "nuovaccs.srl@legalmail.it",
+    email: "appalti@impreseriunite.it",
     certifications: [
-      { name: "ISO 14001", pdf: "/certificazioni/iso-14001-ccs.pdf" },
-      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-ccs.pdf" },
-      { name: "SOA", pdf: "/certificazioni/soa-ccs.pdf" },
+      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_45001-pdf" },
+      { name: "SOA", pdf: "https://www.impreseriunite.it/nuova-css-certificato-soa-pdf" },
+      { name: "SA 8000", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-sa_8000-pdf" },
+      { name: "ISO 14001", pdf: "https://www.impreseriunite.it/nuova-css-certificato-ISO_14001-pdf" },
+      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_9001-pdf" },
     ],
     projects: [
       {
-        title: "Impianti Fotovoltaici per Enti Pubblici",
-        location: "Lazio",
-        client: "Vari Enti Pubblici",
-        amount: "",
+        title: "Nuovo Padiglione Casa Circondariale Cremona",
+        location: "Cremona",
+        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
+        amount: "9.896.713,00 €",
+        date: "08/01/2014",
         description:
-          "Installazione di impianti fotovoltaici di media e grande taglia per edifici pubblici e infrastrutture.",
-        images: [],
+          "Realizzazione di un nuovo padiglione presso la Casa Circondariale di Cremona.",
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-5-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-3-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-4-800x600.jpg",
+        ],
       },
       {
-        title: "Cabine di Trasformazione MT/BT",
-        location: "Roma e Provincia",
-        client: "Committenti Pubblici e Privati",
-        amount: "",
+        title: "Ristrutturazione Casa Circondariale Matera",
+        location: "Matera",
+        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
+        amount: "500.026,68 €",
         description:
-          "Progettazione e installazione di cabine di trasformazione media tensione/bassa tensione per complessi industriali e infrastrutturali.",
-        images: [],
+          "Ristrutturazione ed adeguamento al DPR 230/2000 del reparto osservazione – isolamento presso la casa circondariale di Matera.",
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-7-720x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-6-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-5-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-4-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-3-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-1-800x600.jpg",
+        ],
+      },
+      {
+        title: "Ampliamento Padiglione C – Livorno",
+        location: "Livorno",
+        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
+        amount: "7.686.221,09 €",
+        description:
+          'Realizzazione in ampliamento al padiglione "C" di un reparto detentivo da 100 posti compresa la fornitura e posa in opera di cabine MT e Gruppo Elettrogeno.',
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-7-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-6-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-5-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-4-1-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-3-1-768x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-2-1-768x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-1-1-800x600.jpg",
+        ],
+      },
+      {
+        title: "Ristrutturazione Padiglione Firenze – Poggioreale",
+        location: "Napoli – Poggioreale",
+        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
+        amount: "1.059.297,37 €",
+        description:
+          'Ristrutturazione del padiglione "Firenze" presso la casa circondariale di Napoli Poggio Reale.',
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-5-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-4-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-3-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-2-800x600.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-1-800x600.jpg",
+        ],
+      },
+      {
+        title: "Nuovo Istituto Penitenziario di Catania",
+        location: "Catania",
+        client: "Ufficio del Commissario delegato OPCM",
+        amount: "23.916.055,75 €",
+        description:
+          "Progettazione definitiva ed esecutiva ed esecuzione dei lavori di realizzazione del nuovo istituto penitenziario di Catania.",
+        images: [
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-5.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-4.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-3.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-2.jpg",
+          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-1.jpg",
+        ],
       },
     ],
   },
