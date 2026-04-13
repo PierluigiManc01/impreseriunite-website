@@ -7,6 +7,11 @@ export type Project = {
   images: string[];
 };
 
+export type Certification = {
+  name: string;
+  pdf?: string;
+};
+
 export type Company = {
   id: string;
   name: string;
@@ -20,7 +25,7 @@ export type Company = {
   phone: string;
   pec: string;
   email: string;
-  certifications: string[];
+  certifications: Certification[];
   projects: Project[];
 };
 
