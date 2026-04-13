@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, ArrowRight, Building, Hammer, HardHat } from "lucide-react";
+import { ArrowRight, Building, Hammer, HardHat, MapPin, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { companies } from "@/data/companies";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -56,28 +56,66 @@ const ProjectsSection = () => (
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all p-6 group"
+                  className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all overflow-hidden group"
                 >
-                  <div className="flex items-start gap-2 mb-1">
-                    <span className="text-xs font-semibold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
-                      {project.location}
-                    </span>
-                    {project.amount && (
-                      <span className="text-xs font-semibold bg-accent text-accent-foreground px-2.5 py-0.5 rounded-full">
-                        {project.amount}
-                      </span>
+                  {/* Project image */}
+                  {project.images.length > 0 && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={project.images[0]}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute bottom-3 left-3 flex gap-2">
+                        <span className="text-xs font-semibold bg-primary text-primary-foreground px-2.5 py-0.5 rounded-full">
+                          <MapPin className="w-3 h-3 inline mr-1" />
+                          {project.location}
+                        </span>
+                        {project.amount && (
+                          <span className="text-xs font-semibold bg-white/90 text-foreground px-2.5 py-0.5 rounded-full">
+                            {project.amount}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    {/* Fallback badges when no image */}
+                    {project.images.length === 0 && (
+                      <div className="flex items-start gap-2 mb-1">
+                        <span className="text-xs font-semibold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
+                          {project.location}
+                        </span>
+                        {project.amount && (
+                          <span className="text-xs font-semibold bg-accent text-accent-foreground px-2.5 py-0.5 rounded-full">
+                            {project.amount}
+                          </span>
+                        )}
+                      </div>
                     )}
+
+                    <h3 className="font-heading font-bold text-lg text-foreground mt-2 mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed mb-3">
+                      {project.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs text-muted-foreground font-body">
+                        <span className="font-medium text-foreground/70">Committente:</span>{" "}
+                        {project.client}
+                      </p>
+                      {project.date && (
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {project.date}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <h3 className="font-heading font-bold text-lg text-foreground mt-3 mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground font-body text-sm leading-relaxed mb-3">
-                    {project.description}
-                  </p>
-                  <p className="text-xs text-muted-foreground font-body">
-                    <span className="font-medium text-foreground/70">Committente:</span>{" "}
-                    {project.client}
-                  </p>
                 </motion.div>
               ))}
             </div>
