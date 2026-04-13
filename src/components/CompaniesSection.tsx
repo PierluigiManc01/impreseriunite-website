@@ -57,10 +57,10 @@ const CompaniesSection = () => (
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {c.certifications.slice(0, 4).map((cert) => (
                     <span
-                      key={cert}
+                      key={cert.name}
                       className="text-[10px] font-semibold bg-accent text-accent-foreground px-2 py-0.5 rounded"
                     >
-                      {cert}
+                      {cert.name}
                     </span>
                   ))}
                   {c.certifications.length > 4 && (

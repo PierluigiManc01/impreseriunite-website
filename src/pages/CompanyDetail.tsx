@@ -8,7 +8,8 @@ import {
   Building2,
   Award,
   Briefcase,
-  ChevronRight,
+  FileText,
+  ExternalLink,
 } from "lucide-react";
 import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
@@ -43,6 +44,11 @@ const CompanyDetail = () => {
           <Link
             to="/#aziende"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+            onClick={() => {
+              setTimeout(() => {
+                document.getElementById("aziende")?.scrollIntoView({ behavior: "smooth" });
+              }, 100);
+            }}
           >
             <ArrowLeft className="w-4 h-4" />
             Torna alle aziende
@@ -204,15 +210,19 @@ const CompanyDetail = () => {
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 {company.certifications.map((cert) => (
-                  <div
-                    key={cert}
-                    className="flex items-center gap-2 bg-accent rounded-lg px-4 py-3"
+                  <a
+                    key={cert.name}
+                    href={cert.pdf || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
                   >
-                    <ChevronRight className="w-4 h-4 text-primary shrink-0" />
-                    <span className="text-sm font-body font-medium text-accent-foreground">
-                      {cert}
+                    <FileText className="w-4 h-4 text-primary shrink-0" />
+                    <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors">
+                      {cert.name}
                     </span>
-                  </div>
+                    <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
+                  </a>
                 ))}
               </div>
             </motion.div>

@@ -7,6 +7,11 @@ export type Project = {
   images: string[];
 };
 
+export type Certification = {
+  name: string;
+  pdf?: string;
+};
+
 export type Company = {
   id: string;
   name: string;
@@ -20,7 +25,7 @@ export type Company = {
   phone: string;
   pec: string;
   email: string;
-  certifications: string[];
+  certifications: Certification[];
   projects: Project[];
 };
 
@@ -41,15 +46,15 @@ export const companies: Company[] = [
     pec: "costruzioniangelicostradalisrl@legalmail.it",
     email: "appalti@impreseriunite.it",
     certifications: [
-      "ISO 45001",
-      "ISO 50001",
-      "ISO 37001",
-      "ISO 20400",
-      "SOA",
-      "SA 8000",
-      "ISO 14000",
-      "ISO 9001",
-      "IMQ",
+      { name: "ISO 45001", pdf: "/certificazioni/iso-45001.pdf" },
+      { name: "ISO 50001", pdf: "/certificazioni/iso-50001.pdf" },
+      { name: "ISO 37001", pdf: "/certificazioni/iso-37001.pdf" },
+      { name: "ISO 20400", pdf: "/certificazioni/iso-20400.pdf" },
+      { name: "SOA", pdf: "/certificazioni/soa-angelico.pdf" },
+      { name: "SA 8000", pdf: "/certificazioni/sa-8000.pdf" },
+      { name: "ISO 14000", pdf: "/certificazioni/iso-14000.pdf" },
+      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-angelico.pdf" },
+      { name: "IMQ", pdf: "/certificazioni/imq.pdf" },
     ],
     projects: [
       {
@@ -95,7 +100,11 @@ export const companies: Company[] = [
     phone: "06 45435416",
     pec: "nuovaccs@legalmail.it",
     email: "info@impreseriunite.it",
-    certifications: ["ISO 14001", "ISO 9001", "SOA"],
+    certifications: [
+      { name: "ISO 14001", pdf: "/certificazioni/iso-14001-ccs.pdf" },
+      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-ccs.pdf" },
+      { name: "SOA", pdf: "/certificazioni/soa-ccs.pdf" },
+    ],
     projects: [
       {
         title: "Impianti Fotovoltaici per Enti Pubblici",
@@ -131,7 +140,11 @@ export const companies: Company[] = [
     phone: "06 45435416",
     pec: "info@pec.impreseriunite.it",
     email: "info@impreseriunite.it",
-    certifications: ["SOA", "ISO 9001", "ISO 14001"],
+    certifications: [
+      { name: "SOA", pdf: "/certificazioni/soa-properzi.pdf" },
+      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-properzi.pdf" },
+      { name: "ISO 14001", pdf: "/certificazioni/iso-14001-properzi.pdf" },
+    ],
     projects: [
       {
         title: "Viadotto Muzdalifah",
