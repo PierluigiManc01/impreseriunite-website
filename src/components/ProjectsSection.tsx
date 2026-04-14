@@ -3,6 +3,7 @@ import { ArrowRight, Building, Hammer, HardHat, MapPin, Calendar } from "lucide-
 import { Link } from "react-router-dom";
 import { companies } from "@/data/companies";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 
 const iconMap: Record<string, React.ElementType> = {
   "costruzioni-angelico": Hammer,
