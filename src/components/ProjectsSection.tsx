@@ -3,6 +3,7 @@ import { ArrowRight, Building, Hammer, HardHat, MapPin, Calendar } from "lucide-
 import { Link } from "react-router-dom";
 import { companies } from "@/data/companies";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 
 const iconMap: Record<string, React.ElementType> = {
   "costruzioni-angelico": Hammer,
@@ -58,17 +59,16 @@ const ProjectsSection = () => (
                   transition={{ delay: i * 0.1 }}
                   className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all overflow-hidden group"
                 >
-                  {/* Project image */}
+                  {/* Project image carousel */}
                   {project.images.length > 0 && (
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.images[0]}
+                    <div className="relative h-48">
+                      <ProjectImageCarousel
+                        images={project.images}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                        className="h-full"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                      <div className="absolute bottom-3 left-3 flex gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-3 left-3 flex gap-2 pointer-events-none">
                         <span className="text-xs font-semibold bg-primary text-primary-foreground px-2.5 py-0.5 rounded-full">
                           <MapPin className="w-3 h-3 inline mr-1" />
                           {project.location}
