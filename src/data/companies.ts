@@ -227,11 +227,7 @@ export const companies: Company[] = [
     phone: "06 45435416",
     pec: "info@pec.impreseriunite.it",
     email: "info@impreseriunite.it",
-    certifications: [
-      { name: "SOA", pdf: "/certificazioni/soa-properzi.pdf" },
-      { name: "ISO 9001", pdf: "/certificazioni/iso-9001-properzi.pdf" },
-      { name: "ISO 14001", pdf: "/certificazioni/iso-14001-properzi.pdf" },
-    ],
+    certifications: [],
     projects: [
       {
         title: "Viadotto Muzdalifah",
