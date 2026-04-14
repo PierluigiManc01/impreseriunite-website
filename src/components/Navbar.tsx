@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo-imprese-riunite.png";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
@@ -28,8 +29,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
       <div className="container flex items-center justify-between h-16">
-        <Link to="/" className="font-heading text-xl font-bold text-primary">
-          IMPRESE RIUNITE
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logo} alt="Imprese Riunite" className="h-10 w-10 object-contain" />
+          <span className="font-heading text-xl font-bold text-primary">IMPRESE RIUNITE</span>
         </Link>
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) =>
