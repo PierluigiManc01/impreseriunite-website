@@ -10,10 +10,12 @@ import {
   Briefcase,
   FileText,
   ExternalLink,
+  Calendar,
 } from "lucide-react";
 import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 
 const CompanyDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -97,7 +99,7 @@ const CompanyDetail = () => {
             </p>
           </motion.div>
 
-          <div className="grid gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {company.projects.map((project, i) => (
               <motion.div
                 key={project.title}
@@ -105,37 +107,62 @@ const CompanyDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all p-6 md:p-8"
+                className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all overflow-hidden"
               >
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  <div className="flex-1">
-                    <h3 className="font-heading font-bold text-lg text-foreground mb-3">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                      <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <MapPin className="w-3.5 h-3.5 text-primary" />
-                        <span className="font-body">{project.location}</span>
-                      </div>
+                {/* Image carousel */}
+                {project.images.length > 0 && (
+                  <div className="relative h-52">
+                    <ProjectImageCarousel
+                      images={project.images}
+                      alt={project.title}
+                      className="h-full"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-3 left-3 flex gap-2 pointer-events-none">
+                      <span className="text-xs font-semibold bg-primary text-primary-foreground px-2.5 py-0.5 rounded-full">
+                        <MapPin className="w-3 h-3 inline mr-1" />
+                        {project.location}
+                      </span>
                       {project.amount && (
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <span className="font-body font-semibold text-foreground">
-                            {project.amount}
-                          </span>
-                        </div>
+                        <span className="text-xs font-semibold bg-white/90 text-foreground px-2.5 py-0.5 rounded-full">
+                          {project.amount}
+                        </span>
                       )}
                     </div>
                   </div>
-                  <div className="md:text-right shrink-0">
-                    <p className="text-xs text-muted-foreground font-body uppercase tracking-wider mb-1">
-                      Stazione Appaltante
-                    </p>
-                    <p className="text-sm font-body text-foreground max-w-xs">
+                )}
+
+                <div className="p-6">
+                  {project.images.length === 0 && (
+                    <div className="flex items-start gap-2 mb-1">
+                      <span className="text-xs font-semibold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
+                        {project.location}
+                      </span>
+                      {project.amount && (
+                        <span className="text-xs font-semibold bg-accent text-accent-foreground px-2.5 py-0.5 rounded-full">
+                          {project.amount}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <h3 className="font-heading font-bold text-lg text-foreground mt-2 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground font-body text-sm leading-relaxed mb-3">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-muted-foreground font-body">
+                      <span className="font-medium text-foreground/70">Committente:</span>{" "}
                       {project.client}
                     </p>
+                    {project.date && (
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {project.date}
+                      </span>
+                    )}
                   </div>
                 </div>
               </motion.div>

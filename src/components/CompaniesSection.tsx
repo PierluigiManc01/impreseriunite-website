@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building, Hammer, HardHat, ArrowRight, Shield, Award } from "lucide-react";
+import { Building, Hammer, HardHat, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { companies } from "@/data/companies";
 
@@ -8,6 +8,9 @@ const iconMap: Record<string, React.ElementType> = {
   "nuova-ccs": HardHat,
   "gruppo-immobiliare-properzi": Building,
 };
+
+const capogruppo = companies.find((c) => c.id === "gruppo-immobiliare-properzi")!;
+const subsidiaries = companies.filter((c) => c.id !== "gruppo-immobiliare-properzi");
 
 const CompaniesSection = () => (
   <section id="aziende" className="py-24 bg-accent/50">
@@ -25,12 +28,75 @@ const CompaniesSection = () => (
           Competenze unite per grandi risultati
         </h2>
         <p className="text-muted-foreground font-body text-lg">
-          Tre realtà imprenditoriali con competenze complementari, unite sotto un'unica visione strategica per affrontare le sfide più ambiziose del settore.
+          Tre realtà imprenditoriali con competenze complementari, unite sotto un'unica visione strategica.
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {companies.map((c, i) => {
+      {/* Capogruppo card */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all max-w-3xl mx-auto mb-4"
+      >
+        <div className="p-8 md:p-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Building className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold tracking-wider uppercase text-primary/70">
+                {capogruppo.role}
+              </p>
+              <h3 className="font-heading font-bold text-xl text-foreground">
+                {capogruppo.name}
+              </h3>
+            </div>
+          </div>
+          <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
+            {capogruppo.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {capogruppo.certifications.slice(0, 4).map((cert) => (
+              <span
+                key={cert.name}
+                className="text-[10px] font-semibold bg-accent text-accent-foreground px-2 py-0.5 rounded"
+              >
+                {cert.name}
+              </span>
+            ))}
+            {capogruppo.certifications.length > 4 && (
+              <span className="text-[10px] font-semibold bg-accent text-accent-foreground px-2 py-0.5 rounded">
+                +{capogruppo.certifications.length - 4}
+              </span>
+            )}
+          </div>
+          <Link
+            to={`/azienda/${capogruppo.id}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group/link"
+          >
+            Scopri di più
+            <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* Tree connector */}
+      <div className="flex justify-center mb-4">
+        <div className="w-px h-10 bg-border" />
+      </div>
+      <div className="flex justify-center mb-4">
+        <div className="relative w-full max-w-2xl">
+          <div className="absolute top-0 left-1/4 right-1/4 h-px bg-border" />
+          <div className="absolute top-0 left-1/4 w-px h-6 bg-border" />
+          <div className="absolute top-0 right-1/4 w-px h-6 bg-border" />
+          <div className="h-6" />
+        </div>
+      </div>
+
+      {/* Subsidiary cards */}
+      <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        {subsidiaries.map((c, i) => {
           const Icon = iconMap[c.id] || Building;
           return (
             <motion.div
@@ -52,8 +118,6 @@ const CompaniesSection = () => (
                 <p className="text-muted-foreground font-body text-sm leading-relaxed line-clamp-4">
                   {c.description}
                 </p>
-
-                {/* Certifications preview */}
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {c.certifications.slice(0, 4).map((cert) => (
                     <span
@@ -70,7 +134,6 @@ const CompaniesSection = () => (
                   )}
                 </div>
               </div>
-
               <div className="px-8 pb-8 pt-2">
                 <Link
                   to={`/azienda/${c.id}`}
