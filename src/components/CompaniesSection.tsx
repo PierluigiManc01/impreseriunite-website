@@ -94,7 +94,7 @@ const CompaniesSection = () => (
       >
         {[
           { value: "1976", label: "Anno di fondazione" },
-          { value: "40+", label: "Anni di esperienza" },
+          { value: "50+", label: "Anni di esperienza" },
           { value: "3", label: "Aziende del gruppo" },
           { value: "15+", label: "Certificazioni" },
         ].map((stat) => (
