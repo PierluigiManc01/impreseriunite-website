@@ -174,7 +174,7 @@ const CompanyDetail = () => {
       {/* Company Info & Certifications */}
       <section className="py-20 bg-accent/50">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className={`grid ${company.certifications.length > 0 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-xl'} gap-8 max-w-5xl mx-auto`}>
             {/* Contact info */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
