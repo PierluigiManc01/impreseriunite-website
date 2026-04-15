@@ -215,13 +215,13 @@ export const companies: Company[] = [
   },
   {
     id: "gruppo-immobiliare-properzi",
-    name: "Gruppo Immobiliare Properzi",
-    fullName: "Gruppo Immobiliare Properzi – Properzi Costruzioni Generali",
-    role: "Capogruppo – Grandi opere civili",
+    name: "Imprese Riunite",
+    fullName: "Imprese Riunite – Properzi Costruzioni Generali",
+    role: "Capogruppo – Holding",
     description:
-      "Imprese Riunite – Properzi Costruzioni Generali è una realtà imprenditoriale italiana che lavora nel settore delle grandi opere civili dal 1976. In più di 40 anni di attività ci siamo affermati nel panorama nazionale come uno dei player più solidi del settore, portando avanti i nostri principi di sostenibilità ed innovazione.",
+      "Imprese Riunite è l'entità capogruppo che coordina e guida le società operative del gruppo. Nata dalla visione imprenditoriale di Pierluigi Properzi, dal 1976 rappresenta il punto di riferimento strategico per le attività di Costruzioni Angelico e Nuova C.C.S., garantendo solidità, governance e sviluppo.",
     longDescription:
-      "La solida esperienza maturata in vari settori quali: costruzioni civili, opere marittime ed idrauliche; opere stradali e ristrutturazioni globali ha portato la società ad ottenere importanti incarichi internazionali.",
+      "Non operativa direttamente, Imprese Riunite svolge il ruolo di holding, assicurando la coerenza strategica e la sinergia tra le aziende del gruppo. I lavori storici qui elencati risalgono alla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine.",
     admin: "Pierluigi Properzi",
     address: "Piazzale Benito Juarez 10/11, 00144, Roma (RM)",
     phone: "06 45435416",
@@ -232,37 +232,37 @@ export const companies: Company[] = [
       {
         title: "Viadotto Muzdalifah",
         location: "La Mecca – Arabia Saudita",
-        client: "Committente Internazionale",
+        client: "Committente Internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose del gruppo a livello internazionale.",
+          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla vecchia C.C.S. a livello internazionale.",
         images: [],
       },
       {
         title: "Raccordo Anulare Lotto 2",
         location: "Riyad – Arabia Saudita",
-        client: "Committente Internazionale",
+        client: "Committente Internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell'Arabia Saudita.",
+          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell'Arabia Saudita, realizzato dalla storica C.C.S.",
         images: [],
       },
       {
         title: "Porto Turistico Riva di Traiano",
         location: "Civitavecchia – Italia",
-        client: "Committente Pubblico",
+        client: "Committente Pubblico (ex C.C.S.)",
         amount: "",
         description:
-          "Realizzazione del Porto Turistico Riva di Traiano, importante infrastruttura marittima sulla costa laziale.",
+          "Realizzazione del Porto Turistico Riva di Traiano, importante infrastruttura marittima sulla costa laziale, tra i progetti storici della C.C.S.",
         images: [],
       },
       {
         title: "Facoltà di Ingegneria di Jedda",
         location: "Jedda – Arabia Saudita",
-        client: "Committente Internazionale",
+        client: "Committente Internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jedda.",
+          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jedda, opera realizzata dalla vecchia C.C.S.",
         images: [],
       },
     ],
