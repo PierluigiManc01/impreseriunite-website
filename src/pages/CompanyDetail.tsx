@@ -225,34 +225,36 @@ const CompanyDetail = () => {
             </motion.div>
 
             {/* Certifications */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
-            >
-              <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
-                <Award className="w-5 h-5 text-primary" />
-                Certificazioni
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {company.certifications.map((cert) => (
-                  <a
-                    key={cert.name}
-                    href={cert.pdf || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
-                  >
-                    <FileText className="w-4 h-4 text-primary shrink-0" />
-                    <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors">
-                      {cert.name}
-                    </span>
-                    <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+            {company.certifications.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
+              >
+                <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
+                  <Award className="w-5 h-5 text-primary" />
+                  Certificazioni
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {company.certifications.map((cert) => (
+                    <a
+                      key={cert.name}
+                      href={cert.pdf || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
+                    >
+                      <FileText className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors">
+                        {cert.name}
+                      </span>
+                      <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
