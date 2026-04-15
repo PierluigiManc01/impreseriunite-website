@@ -95,7 +95,9 @@ const CompanyDetail = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body">
-              Una selezione dei progetti più rappresentativi realizzati dall'azienda.
+              {company.id === "gruppo-immobiliare-properzi"
+                ? "Progetti storici realizzati dalla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine."
+                : "Una selezione dei progetti più rappresentativi realizzati dall'azienda."}
             </p>
           </motion.div>
 
