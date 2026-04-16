@@ -67,14 +67,13 @@ const FeatureRow = ({
   const mediaOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
   const iconScale = useTransform(scrollYProgress, [0.2, 0.35, 0.65, 0.8], [0.5, 1, 1, 0.5]);
 
-  const isEven = index % 2 === 0;
   const Icon = feature.icon;
 
   return (
     <div ref={ref} className="min-h-[60vh] flex items-center justify-center py-16 overflow-hidden">
       <motion.div
         style={{ opacity, scale }}
-        className={`container flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-16 origin-center`}
+        className="w-full flex flex-col md:flex-row items-center gap-8 md:gap-16 origin-center px-6 md:px-16 lg:px-24"
       >
         {/* Text side */}
         <div className="flex-1 space-y-5">

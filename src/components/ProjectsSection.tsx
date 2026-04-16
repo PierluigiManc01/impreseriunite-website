@@ -46,7 +46,7 @@ const ProjectsSection = () => (
 
       <div className="grid md:grid-cols-2 gap-6">
         {featuredProjects.map(({ project, company }, i) => (
-          <ScrollReveal key={project.title} scaleRange={[0.9, 1, 0.95]} fadeOut={false}>
+          <ScrollReveal key={project.title} scaleRange={[0.9, 1.5, 0.9]} fadeOut={false}>
             <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all overflow-hidden group h-full">
               {project.images.length > 0 && (
                 <div className="relative h-48">

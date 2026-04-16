@@ -13,7 +13,7 @@ interface ScrollRevealProps {
 const ScrollReveal = ({
   children,
   className = "",
-  scaleRange = [0.92, 1, 0.92],
+  scaleRange = [0.9, 1.5, 0.9],
   fadeOut = true,
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
