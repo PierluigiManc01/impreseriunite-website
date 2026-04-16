@@ -88,13 +88,13 @@ const CompaniesSection = () => (
       </div>
 
       {/* Subsidiary cards */}
-      <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-3xl mx-auto px-4 md:px-0">
         {subsidiaries.map((c) => {
           const Icon = iconMap[c.id] || Building;
           return (
-            <ScrollReveal key={c.id} scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
-              <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] hover:-translate-y-1 transition-all group flex flex-col h-[420px]">
-                <div className="p-8 flex-1 flex flex-col">
+            <ScrollReveal key={c.id} scaleRange={[0.95, 1.05, 0.95]} mobileScaleRange={[0.97, 1.02, 0.97]} fadeOut={false}>
+              <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] hover:-translate-y-1 transition-all group flex flex-col min-h-[360px] md:h-[420px]">
+                <div className="p-6 md:p-8 flex-1 flex flex-col">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                     <Icon className="w-7 h-7 text-primary" />
                   </div>

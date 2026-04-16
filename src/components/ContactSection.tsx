@@ -18,7 +18,7 @@ const ContactSection = () => (
         </div>
       </ScrollReveal>
 
-      <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-5xl mx-auto px-4 md:px-0">
         <ScrollReveal scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
           <div className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)] h-full">
             <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
