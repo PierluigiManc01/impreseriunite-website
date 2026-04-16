@@ -38,7 +38,7 @@ const HistoryTimeline = () => {
           {history.timeline.map((item, i) => (
             <ScrollReveal
               key={item.year}
-              scaleRange={[0.9, 1, 0.98]}
+              scaleRange={[0.9, 1.5, 0.9]}
               fadeOut={false}
             >
               <div
