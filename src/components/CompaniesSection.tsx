@@ -30,7 +30,7 @@ const CompaniesSection = () => (
       </ScrollReveal>
 
       {/* Capogruppo card */}
-      <ScrollReveal scaleRange={[0.9, 1.5, 0.9]}>
+      <ScrollReveal scaleRange={[0.95, 1.05, 0.95]}>
         <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all max-w-3xl mx-auto mb-4">
           <div className="p-8 md:p-10">
             <div className="flex items-center gap-4 mb-6">
@@ -88,11 +88,11 @@ const CompaniesSection = () => (
       </div>
 
       {/* Subsidiary cards */}
-      <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto">
         {subsidiaries.map((c) => {
           const Icon = iconMap[c.id] || Building;
           return (
-            <ScrollReveal key={c.id} scaleRange={[0.9, 1.5, 0.9]} fadeOut={false}>
+            <ScrollReveal key={c.id} scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
               <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] hover:-translate-y-1 transition-all group flex flex-col h-[420px]">
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">

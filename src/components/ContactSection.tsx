@@ -18,8 +18,8 @@ const ContactSection = () => (
         </div>
       </ScrollReveal>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        <ScrollReveal scaleRange={[0.9, 1.5, 0.9]} fadeOut={false}>
+      <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <ScrollReveal scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
           <div className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)] h-full">
             <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-primary" />
@@ -56,7 +56,7 @@ const ContactSection = () => (
           </div>
         </ScrollReveal>
 
-        <ScrollReveal scaleRange={[0.9, 1.5, 0.9]} fadeOut={false}>
+        <ScrollReveal scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
           <div className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)] h-full">
             <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
               <FileText className="w-5 h-5 text-primary" />
