@@ -73,37 +73,37 @@ const FeatureRow = ({
     <div ref={ref} className="min-h-[60vh] flex items-center justify-center py-16 overflow-hidden">
       <motion.div
         style={{ opacity, scale }}
-        className="w-full flex flex-col md:flex-row items-center gap-8 md:gap-16 origin-center px-6 md:px-16 lg:px-24"
+        className="w-full max-w-4xl mx-auto flex flex-col items-center text-center gap-6 origin-center px-6"
       >
-        {/* Text side */}
-        <div className="flex-1 space-y-5">
-          <div className="flex items-center gap-4">
-            <motion.div
-              style={{ scale: iconScale, opacity: mediaOpacity }}
-              className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center shrink-0"
-            >
-              <Icon className="w-6 h-6 text-accent-foreground" />
-            </motion.div>
-            <motion.h3
-              style={{ color }}
-              className="text-2xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight"
-            >
-              {feature.title}
-            </motion.h3>
-          </div>
-          <motion.p
-            style={{ opacity: descOpacity }}
-            className="text-muted-foreground font-body text-base md:text-lg leading-relaxed max-w-xl"
+        {/* Icon + Title */}
+        <div className="flex flex-col items-center gap-4">
+          <motion.div
+            style={{ scale: iconScale, opacity: mediaOpacity }}
+            className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center shrink-0"
           >
-            {feature.desc}
-          </motion.p>
+            <Icon className="w-6 h-6 text-accent-foreground" />
+          </motion.div>
+          <motion.h3
+            style={{ color }}
+            className="text-2xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight"
+          >
+            {feature.title}
+          </motion.h3>
         </div>
 
-        {/* Media side */}
+        {/* Description */}
+        <motion.p
+          style={{ opacity: descOpacity }}
+          className="text-muted-foreground font-body text-base md:text-lg leading-relaxed max-w-2xl"
+        >
+          {feature.desc}
+        </motion.p>
+
+        {/* Media / Logos */}
         {feature.images.length > 0 && (
           <motion.div
             style={{ opacity: mediaOpacity }}
-            className="flex-1 flex flex-wrap items-center justify-center gap-6"
+            className="flex flex-wrap items-center justify-center gap-6 mt-2"
           >
             {feature.images.map((img) => (
               <div
@@ -116,7 +116,6 @@ const FeatureRow = ({
                   className="h-14 md:h-20 w-auto object-contain"
                   loading="lazy"
                   onError={(e) => {
-                    // Hide broken images gracefully
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
