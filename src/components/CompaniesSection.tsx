@@ -89,12 +89,12 @@ const CompaniesSection = () => (
 
       {/* Subsidiary cards */}
       <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-        {subsidiaries.map((c, i) => {
+        {subsidiaries.map((c) => {
           const Icon = iconMap[c.id] || Building;
           return (
             <ScrollReveal key={c.id} scaleRange={[0.9, 1, 0.95]} fadeOut={false}>
-              <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] hover:-translate-y-1 transition-all group flex flex-col h-full">
-                <div className="p-8 flex-1">
+              <div className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] hover:-translate-y-1 transition-all group flex flex-col h-[420px]">
+                <div className="p-8 flex-1 flex flex-col">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                     <Icon className="w-7 h-7 text-primary" />
                   </div>
@@ -102,7 +102,7 @@ const CompaniesSection = () => (
                     {c.role}
                   </p>
                   <h3 className="font-heading font-bold text-xl text-foreground mb-3">{c.name}</h3>
-                  <p className="text-muted-foreground font-body text-sm leading-relaxed line-clamp-4">
+                  <p className="text-muted-foreground font-body text-sm leading-relaxed line-clamp-4 flex-1">
                     {c.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-4">

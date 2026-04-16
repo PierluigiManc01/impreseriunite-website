@@ -52,7 +52,7 @@ const FeatureRow = ({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.15, 1, 1, 0.15]);
-  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.9, 1.02, 1.02, 0.9]);
+  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.9, 1.5, 1.5, 0.9]);
   const color = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
@@ -71,10 +71,10 @@ const FeatureRow = ({
   const Icon = feature.icon;
 
   return (
-    <div ref={ref} className="min-h-[50vh] flex items-center py-12">
+    <div ref={ref} className="min-h-[60vh] flex items-center justify-center py-16 overflow-hidden">
       <motion.div
         style={{ opacity, scale }}
-        className={`container flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-16`}
+        className={`container flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-16 origin-center`}
       >
         {/* Text side */}
         <div className="flex-1 space-y-5">
