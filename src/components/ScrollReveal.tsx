@@ -31,8 +31,8 @@ const ScrollReveal = ({
   const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [60, 0, 0, -30]);
 
   return (
-    <div ref={ref} className={className}>
-      <motion.div style={{ opacity, scale, y }}>
+    <div ref={ref} className={`overflow-hidden ${className}`}>
+      <motion.div style={{ opacity, scale, y }} className="origin-center">
         {children}
       </motion.div>
     </div>
