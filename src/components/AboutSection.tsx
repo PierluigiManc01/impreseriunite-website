@@ -67,7 +67,6 @@ const FeatureRow = ({
   const mediaOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
   const iconScale = useTransform(scrollYProgress, [0.2, 0.35, 0.65, 0.8], [0.5, 1, 1, 0.5]);
 
-  const isEven = index % 2 === 0;
   const Icon = feature.icon;
 
   return (
