@@ -28,7 +28,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-primary-foreground/70 font-body text-sm tracking-[0.3em] uppercase mb-4"
+          className="text-primary-foreground/70 font-body text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-4"
         >
           Gruppo Immobiliare Properzi
         </motion.p>
@@ -36,7 +36,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold text-primary-foreground leading-tight mb-6"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-primary-foreground leading-tight mb-4 sm:mb-6"
         >
           Imprese Riunite
         </motion.h1>
@@ -44,7 +44,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="text-primary-foreground/80 font-body text-lg md:text-xl max-w-2xl mx-auto mb-4"
+          className="text-primary-foreground/80 font-body text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-4 px-2"
         >
           Dal 1976 nel settore delle grandi opere civili. Costruzioni, infrastrutture e impiantistica con oltre 50 anni di esperienza al servizio del territorio.
         </motion.p>
@@ -52,7 +52,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="text-primary-foreground/60 font-body text-sm max-w-xl mx-auto mb-10"
+          className="text-primary-foreground/60 font-body text-xs sm:text-sm max-w-xl mx-auto mb-8 sm:mb-10 px-2"
         >
           Tre imprese, un unico obiettivo: eccellenza nella realizzazione di opere pubbliche e private in Italia e nel mondo.
         </motion.p>
@@ -64,13 +64,13 @@ const HeroSection = () => {
         >
           <a
             href="#aziende"
-            className="inline-block rounded-lg px-8 py-3 font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
+            className="inline-block rounded-lg px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
           >
             Scopri le nostre aziende
           </a>
           <a
             href="#storia"
-            className="inline-block rounded-lg px-8 py-3 font-heading font-semibold text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 transition-colors"
+            className="inline-block rounded-lg px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 transition-colors"
           >
             La nostra storia
           </a>
