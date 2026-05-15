@@ -28,6 +28,7 @@ export type Company = {
   email: string;
   certifications: Certification[];
   projects: Project[];
+  highlights?: string[];
 };
 
 export const companies: Company[] = [
@@ -37,7 +38,7 @@ export const companies: Company[] = [
     fullName: "Costruzioni Angelico Edili Stradali s.r.l.",
     role: "Grandi opere infrastrutturali e opere pubbliche",
     description:
-      "Costruzioni Angelico Edili Stradali s.r.l. nasce nel 1971 e vede in Alfredo Mancinelli, in qualità di Amministratore Unico, ed in Giuseppe Saputo, in qualità di Direttore Tecnico, le figure chiave. Grazie ad una guida lungimirante ed al know how del top management, si è imposta fin da subito nel panorama nazionale delle opere pubbliche.",
+      "Costruzioni Angelico Edili Stradali s.r.l. nasce nel <strong>1971</strong> e vede in Alfredo Mancinelli (Amministratore Unico), ed in Giuseppe Saputo (Direttore Tecnico), le figure chiave. Grazie ad una guida lungimirante ed al <strong>know how</strong> del top management, si è imposta fin da subito nel panorama nazionale delle opere pubbliche.",
     longDescription:
       "Specializzata nella realizzazione di grandi interventi infrastrutturali, collabora da decenni con Roma Capitale, il Ministero della Giustizia, il Ministero della Difesa, l'ENAV e i principali enti pubblici italiani.",
     admin: "Geom. Pierluigi Properzi",
@@ -46,6 +47,11 @@ export const companies: Company[] = [
     phone: "06 45435416 – 06 45435417 – 06 45435418",
     pec: "costruzioniangelicostradalisrl@legalmail.it",
     email: "appalti@impreseriunite.it",
+    highlights: [
+      "Grandi opere infrastrutturali",
+      "Edilizia pubblica e penitenziaria",
+      "Progetti immobiliari privati"
+    ],
     certifications: [
       { name: "ISO 45001", pdf: "https://www.impreseriunite.it/ANGELICO-certificatoISO_45001-pdf" },
       { name: "ISO 50001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
@@ -115,7 +121,7 @@ export const companies: Company[] = [
     fullName: "Nuova C.C.S. S.r.l.",
     role: "Impiantistica e tecnologie",
     description:
-      "Nata nel 1997 dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, la Nuova C.C.S focalizza le sue competenze sulla parte impiantistica, mossa dalla spinta determinante del suo attuale amministratore, Alfredo Mancinelli.",
+      "Nata nel <strong>1997</strong> dalla scissione del ramo d'azienda della C.C.S., la Nuova C.C.S focalizza le sue competenze sulla parte <strong>impiantistica</strong>, mossa dalla spinta determinante del suo attuale amministratore, Alfredo Mancinelli.",
     longDescription:
       "Oggi l'Azienda vanta elevati standard di professionalità nell'installazione di impianti fotovoltaici, di gruppi elettrogeni, di continuità e cabine di trasformazione MT/BT e nella installazione e manutenzione di impianti elettrici, di sicurezza, d'illuminazione e di autonomia industriale.",
     admin: "Alfredo Mancinelli",
@@ -123,6 +129,11 @@ export const companies: Company[] = [
     phone: "06 45435416 – 06 45435417 – 06 45435418",
     pec: "nuovaccs.srl@legalmail.it",
     email: "appalti@impreseriunite.it",
+    highlights: [
+      "Impiantistica fotovoltaica e tecnologica",
+      "Sistemi di sicurezza e illuminazione",
+      "Impianti continuità e MT/BT"
+    ],
     certifications: [
       { name: "ISO 45001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_45001-pdf" },
       { name: "SOA", pdf: "https://www.impreseriunite.it/nuova-css-certificato-soa-pdf" },
@@ -227,6 +238,11 @@ export const companies: Company[] = [
     phone: "06 45435416",
     pec: "info@pec.impreseriunite.it",
     email: "info@impreseriunite.it",
+    highlights: [
+      "Coordinamento e guida strategica",
+      "Sinergia tra le società operative",
+      "Solidità e governance del gruppo"
+    ],
     certifications: [],
     projects: [
       {

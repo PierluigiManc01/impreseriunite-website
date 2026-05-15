@@ -16,6 +16,15 @@ import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
+import logoCcs from "@/assets/NUOVA-CCS.png";
+import logoAngelico from "@/assets/CostruzioniAngelico-logo.png";
+import logoimpreseRiunite from "@/assets/logo-imprese-riunite.png";
+
+const logoMap: Record<string, string> = {
+  "costruzioni-angelico": logoAngelico,
+  "nuova-ccs": logoCcs,
+  "gruppo-immobiliare-properzi": logoimpreseRiunite,
+};
 
 const CompanyDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,7 +50,7 @@ const CompanyDetail = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-24 pb-16 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-24 pb-5 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"
@@ -56,26 +65,47 @@ const CompanyDetail = () => {
             Torna alle aziende
           </Link>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl"
-          >
-            <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">
-              {company.role}
-            </p>
-            <h1 className="text-3xl md:text-5xl font-heading font-extrabold text-foreground mb-6">
-              {company.name}
-            </h1>
-            <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-3xl">
-              {company.description}
-            </p>
-            {company.longDescription && (
-              <p className="text-muted-foreground font-body leading-relaxed max-w-3xl mt-4">
-                {company.longDescription}
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex-1 w-full lg:w-1/2 order-2 lg:order-1"
+            >
+              
+              <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
+                {company.name}
+              </h1>
+              <p className="text-sm sm:text-base md:text-lg tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-8">
+                {company.role}
               </p>
+              <p 
+                className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: company.description }}
+              />
+              {company.longDescription && (
+                <p 
+                  className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed mt-8"
+                  dangerouslySetInnerHTML={{ __html: company.longDescription }}
+                />
+              )}
+            </motion.div>
+
+            {/* Logo on the right without boxes/borders */}
+            {logoMap[company.id] && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="flex-1 w-full lg:w-1/2 shrink-0 flex items-start justify-center lg:justify-end order-1 lg:order-2"
+              >
+                <img 
+                  src={logoMap[company.id]} 
+                  alt={`${company.name} logo`} 
+                  className="w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-3xl h-auto object-contain mix-blend-multiply" 
+                />
+              </motion.div>
             )}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -89,12 +119,12 @@ const CompanyDetail = () => {
             className="mb-12"
           >
             <div className="flex items-center gap-3 mb-2">
-              <Briefcase className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+              <Briefcase className="w-6 h-6 text-primary shrink-0" />
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground leading-tight">
                 Lavori Principali
               </h2>
             </div>
-            <p className="text-muted-foreground font-body">
+            <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
               {company.id === "gruppo-immobiliare-properzi"
                 ? "Progetti storici realizzati dalla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine."
                 : "Una selezione dei progetti più rappresentativi realizzati dall'azienda."}

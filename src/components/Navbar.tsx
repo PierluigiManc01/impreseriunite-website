@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo-imprese-riunite.png";
+import logo from "@/assets/impreseriunite-long-logo-removebg.png";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
@@ -15,8 +15,31 @@ const links = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const scrollTimeoutRef = useRef<number | null>(null);
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsHidden(true);
+      if (scrollTimeoutRef.current) {
+        window.clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        setIsHidden(false);
+      }, 180);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        window.clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleClick = (href: string) => {
     setOpen(false);
@@ -27,11 +50,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
-      <div className="container flex items-center justify-between h-16">
+    <nav className={`fixed top-0 left-0 right-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border transition-transform duration-300 ease-in-out ${isHidden ? "-translate-y-full" : "translate-y-0"}`}>
+      <div className="container flex items-center justify-between h-30 md:h-40">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Imprese Riunite" className="h-10 w-10 object-contain" />
-          <span className="font-heading text-xl font-bold text-primary">IMPRESE RIUNITE</span>
+          <img src={logo} alt="Imprese Riunite" className="h-30 w-44 md:h-35 md:w-80 object-contain" />
         </Link>
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) =>
@@ -39,7 +61,7 @@ const Navbar = () => {
               <a
                 key={l.href}
                 href={l.href.replace("/", "")}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-2xl font-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 {l.label}
               </a>
@@ -47,7 +69,7 @@ const Navbar = () => {
               <Link
                 key={l.href}
                 to={l.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-2xl font-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 {l.label}
               </Link>
@@ -73,7 +95,7 @@ const Navbar = () => {
                     key={l.href}
                     href={l.href.replace("/", "")}
                     onClick={() => handleClick(l.href)}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors"
                   >
                     {l.label}
                   </a>
@@ -82,7 +104,7 @@ const Navbar = () => {
                     key={l.href}
                     to={l.href}
                     onClick={() => setOpen(false)}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors"
                   >
                     {l.label}
                   </Link>

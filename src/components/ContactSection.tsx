@@ -5,14 +5,14 @@ const ContactSection = () => (
   <section id="contatti" className="py-24 bg-accent/50">
     <div className="container">
       <ScrollReveal>
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-16 px-4 sm:px-0">
+          <p className="text-xs sm:text-sm tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-3">
             Informazioni Istituzionali
           </p>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4">
             Sede e contatti del Gruppo
           </h2>
-          <p className="text-muted-foreground font-body">
+          <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed px-4 md:px-0">
             Imprese Riunite opera prevalentemente nel settore delle opere pubbliche. Per informazioni istituzionali e comunicazioni ufficiali, di seguito i nostri recapiti.
           </p>
         </div>
@@ -30,26 +30,37 @@ const ContactSection = () => (
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-body text-sm font-medium text-foreground">Indirizzo</p>
-                  <p className="text-muted-foreground font-body text-sm">
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Piazzale+Benito+Juarez+10%2F11%2C+00144+Roma+RM%2C+Italia" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground font-body text-sm hover:text-primary transition-colors block"
+                  >
                     Piazzale Benito Juarez 10/11<br />00144, Roma (RM) – Italia
-                  </p>
+                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-body text-sm font-medium text-foreground">Telefono</p>
-                  <p className="text-muted-foreground font-body text-sm">
-                    06 45435416 – 06 45435417 – 06 45435418
-                  </p>
+                  <div className="text-muted-foreground font-body text-sm">
+                    <a href="tel:+390645435416" className="hover:text-primary transition-colors">06 45435416</a> –{" "}
+                    <a href="tel:+390645435417" className="hover:text-primary transition-colors">06 45435417</a> –{" "}
+                    <a href="tel:+390645435418" className="hover:text-primary transition-colors">06 45435418</a>
+                  </div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-body text-sm font-medium text-foreground">Email</p>
-                  <p className="text-muted-foreground font-body text-sm">appalti@impreseriunite.it</p>
-                  <p className="text-muted-foreground font-body text-sm">info@impreseriunite.it</p>
+                  <p className="text-muted-foreground font-body text-sm">
+                    <a href="mailto:appalti@impreseriunite.it" className="hover:text-primary transition-colors">appalti@impreseriunite.it</a>
+                  </p>
+                  <p className="text-muted-foreground font-body text-sm">
+                    <a href="mailto:info@impreseriunite.it" className="hover:text-primary transition-colors">info@impreseriunite.it</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -68,7 +79,9 @@ const ContactSection = () => (
                 <div>
                   <p className="font-body text-sm font-medium text-foreground">PEC Costruzioni Angelico</p>
                   <p className="text-muted-foreground font-body text-sm break-all">
-                    costruzioniangelicostradalisrl@legalmail.it
+                    <a href="mailto:costruzioniangelicostradalisrl@legalmail.it" className="hover:text-primary transition-colors">
+                      costruzioniangelicostradalisrl@legalmail.it
+                    </a>
                   </p>
                 </div>
               </div>
@@ -76,7 +89,11 @@ const ContactSection = () => (
                 <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-body text-sm font-medium text-foreground">PEC Nuova C.C.S.</p>
-                  <p className="text-muted-foreground font-body text-sm">nuovaccs@legalmail.it</p>
+                  <p className="text-muted-foreground font-body text-sm">
+                    <a href="mailto:nuovaccs@legalmail.it" className="hover:text-primary transition-colors">
+                      nuovaccs@legalmail.it
+                    </a>
+                  </p>
                 </div>
               </div>
               <div className="border-t border-border pt-5 mt-5">

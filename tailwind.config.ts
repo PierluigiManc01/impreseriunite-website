@@ -70,6 +70,12 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      height: {
+        30: "7.5rem",
+        35: "8.75rem",
+        45: "11.25rem",
+        50: "12.5rem",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

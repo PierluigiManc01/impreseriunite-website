@@ -1,37 +1,43 @@
 import { motion } from "framer-motion";
+import logo_roma from "../assets/committenti/logo-romacapitale.png";
+import logo_difesa from "../assets/committenti/min-difesa.png";
+import logo_enav from "../assets/committenti/enav.png";
+import logo_anas from "../assets/committenti/anas-logo.png";
+import logo_giustizia from "../assets/committenti/min-giustizia-removebg.png";
+import logo_lavoripubblici from "../assets/committenti/Logo_MIT.png";
+import logo_citta_metropolitana from "../assets/committenti/citta-metropolitana-roma.png";
 
 const clients = [
-  { name: "ENAV", logo: "/loghi-committenti/enav.png" },
-  { name: "Roma Capitale", logo: "/loghi-committenti/roma-capitale.png" },
-  { name: "Ministero della Giustizia", logo: "/loghi-committenti/min-giustizia.png" },
-  { name: "Ministero della Difesa", logo: "/loghi-committenti/min-difesa.png" },
-  { name: "Dipartimento Amministrazione Penitenziaria", logo: "/loghi-committenti/dap.png" },
-  { name: "Provveditorato OO.PP.", logo: "/loghi-committenti/provveditorato.png" },
-  { name: "ANAS", logo: "/loghi-committenti/anas.png" },
-  { name: "Aeronautica Militare", logo: "/loghi-committenti/aeronautica.png" },
+  { name: "Roma Capitale", logo: logo_roma },
+  { name: "Ministero della Difesa", logo: logo_difesa },
+  { name: "ENAV", logo: logo_enav },
+  { name: "ANAS", logo: logo_anas },
+  { name: "Ministero della Giustizia", logo: logo_giustizia },
+  { name: "Ministero dei Lavori Pubblici", logo: logo_lavoripubblici },
+  { name: "Città Metropolitana di Roma", logo: logo_citta_metropolitana },
 ];
 
 const ClientLogosMarquee = () => {
   const duplicated = [...clients, ...clients];
 
   return (
-    <section className="py-12 bg-background border-y border-border overflow-hidden">
-      <div className="container mb-6">
-        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-semibold text-center">
+    <section className="py-18 bg-background border-y border-border overflow-hidden">
+      <div className="container mb-2 mt-5">
+        <p className="text-xs md:text-sm tracking-widest md:tracking-[0.2em] uppercase text-muted-foreground font-semibold text-center px-4 md:px-0">
           I nostri committenti
         </p>
       </div>
-      <div className="relative">
+      <div className="relative mb-5 mt-0">
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
         <motion.div
-          className="flex gap-16 items-center whitespace-nowrap"
+          className="flex gap-16 pr-16 items-center whitespace-nowrap w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 30,
+              duration: 20,
               ease: "linear",
             },
           }}
@@ -39,7 +45,7 @@ const ClientLogosMarquee = () => {
           {duplicated.map((client, i) => (
             <div
               key={`${client.name}-${i}`}
-              className="shrink-0 flex items-center justify-center h-16 w-40 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="shrink-0 flex items-center justify-center h-45 w-60 transition-all duration-300"
             >
               <img
                 src={client.logo}

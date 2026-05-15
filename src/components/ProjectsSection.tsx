@@ -31,14 +31,14 @@ const ProjectsSection = () => (
   <section id="progetti" className="py-24 bg-background">
     <div className="container">
       <ScrollReveal>
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 px-4 sm:px-0">
+          <p className="text-xs sm:text-sm tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-3">
             Progetti
           </p>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4">
             I nostri lavori più significativi
           </h2>
-          <p className="text-muted-foreground font-body">
+          <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
             Una selezione dei progetti più rappresentativi del gruppo.
           </p>
         </div>
@@ -113,7 +113,7 @@ const ProjectsSection = () => (
       <ScrollReveal fadeOut={false}>
         <div className="text-center mt-10">
           <p className="text-sm text-muted-foreground font-body">
-            Scopri tutti i progetti visitando la pagina di ciascuna azienda.
+            Scopri tutti i progetti visitando la pagina di <a href="#aziende" className="text-primary hover:underline font-medium">ciascuna azienda</a>.
           </p>
         </div>
       </ScrollReveal>

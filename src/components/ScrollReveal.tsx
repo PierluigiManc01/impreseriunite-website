@@ -27,12 +27,12 @@ const ScrollReveal = ({
     offset: ["start end", "center center", "end start"],
   });
 
-  // Dampen scale on mobile: reduce the delta by ~40%
+  // Make mobile start significantly smaller but grow to the previous maximum scale to make the effect more visible
   const effectiveScale = isMobile
     ? mobileScaleRange ?? [
-        1 - (1 - scaleRange[0]) * 0.5,
+        scaleRange[0] * 0.9,
         1 + (scaleRange[1] - 1) * 0.4,
-        1 - (1 - scaleRange[2]) * 0.5,
+        scaleRange[2] * 0.9,
       ]
     : scaleRange;
 
@@ -52,7 +52,7 @@ const ScrollReveal = ({
 
   return (
     <div ref={ref} className={className}>
-      <motion.div style={{ opacity, scale, y }} className="origin-center">
+      <motion.div style={{ opacity, scale, y }} className="origin-center h-full">
         {children}
       </motion.div>
     </div>

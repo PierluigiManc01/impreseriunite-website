@@ -3,8 +3,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Globe, Landmark, Zap, Award } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 type FeatureImage = { src: string; alt: string };
+
+import cantiere from "@/assets/cantiere.png";
+import iso from "@/assets/logo-iso-01.png";
+import soa from "@/assets/logo-soa.jpg";
+import sa from "@/assets/SA-logo.png";
 
 const features = [
   {
@@ -12,6 +16,7 @@ const features = [
     title: "Esperienza Internazionale",
     desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in Arabia Saudita — tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyad e la Facoltà di Ingegneria di Jedda — e importanti infrastrutture in Italia come il Porto Turistico Riva di Traiano.",
     images: [] as FeatureImage[],
+    mainImage: cantiere,         
     accent: "from-primary/20 to-primary/5",
   },
   {
@@ -19,6 +24,7 @@ const features = [
     title: "Opere Pubbliche",
     desc: "Collaborazione consolidata con Roma Capitale, Ministero della Giustizia, Ministero della Difesa, ENAV e i principali enti pubblici italiani. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche.",
     images: [] as FeatureImage[],
+    mainImage: cantiere,
     accent: "from-accent/60 to-accent/20",
   },
   {
@@ -26,6 +32,7 @@ const features = [
     title: "Impiantistica Avanzata",
     desc: "Impianti fotovoltaici, gruppi elettrogeni, gruppi di continuità e cabine di trasformazione MT/BT. Installazione e manutenzione di impianti elettrici, di sicurezza, illuminazione e autonomia industriale.",
     images: [] as FeatureImage[],
+    mainImage: cantiere,   
     accent: "from-primary/10 to-transparent",
   },
   {
@@ -33,11 +40,9 @@ const features = [
     title: "Qualità Certificata",
     desc: "I nostri standard di eccellenza sono garantiti dalle più importanti certificazioni di settore, a testimonianza del nostro impegno verso qualità, sicurezza e sostenibilità.",
     images: [
-      { src: "/loghi-certificazioni/iso-9001.png", alt: "ISO 9001" },
-      { src: "/loghi-certificazioni/iso-14001.png", alt: "ISO 14001" },
-      { src: "/loghi-certificazioni/iso-45001.png", alt: "ISO 45001" },
-      { src: "/loghi-certificazioni/sa-8000.png", alt: "SA 8000" },
-      { src: "/loghi-certificazioni/soa.png", alt: "SOA" },
+      { src: iso, alt: "ISO 9001" },
+      { src: sa, alt: "SA 8000" },
+      { src: soa, alt: "SOA" },
     ],
     accent: "from-primary/15 to-accent/30",
   },
@@ -59,7 +64,7 @@ const FeatureBlock = ({
   });
 
   // Dampened values on mobile
-  const mScale = isMobile ? [0.96, 1.04, 1.04, 0.96] : [0.92, 1.08, 1.08, 0.92];
+  const mScale = isMobile ? [0.96, 1.04, 1.04, 0.96] : [0.8, 1.2, 1.2, 0.8];
   const mY = isMobile ? [40, 0, 0, -20] : [80, 0, 0, -40];
 
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.1, 1, 1, 0.1]);
@@ -77,15 +82,15 @@ const FeatureBlock = ({
   const isEven = index % 2 === 0;
 
   return (
-    <div ref={ref} className="min-h-[50vh] md:min-h-[70vh] flex items-center justify-center py-10 md:py-20">
+    <div ref={ref} className="min-h-[30vh] md:min-h-[45vh] flex items-stretch justify-center py-4 ">
       <motion.div
         style={{ opacity, scale, y }}
-        className="w-full max-w-6xl mx-auto px-4 md:px-6 origin-center"
+        className="w-full max-w-xl md:max-w-7xl mx-auto px-4 md:px-6 origin-center h-full min-h-full flex flex-col"
       >
         {/* Stack on mobile, alternate two-col on desktop */}
-        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-16`}>
+        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-10`}>
           {/* Text side */}
-          <div className="flex-1 text-center md:text-left">
+          <div className="flex-1 text-center md:text-left px-6 md:px-4">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 justify-center md:justify-start">
               <motion.div
                 style={{ rotate: iconRotate, opacity: mediaOpacity }}
@@ -102,7 +107,7 @@ const FeatureBlock = ({
             </div>
             <motion.p
               style={{ opacity: mediaOpacity }}
-              className="text-muted-foreground font-body text-sm md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0"
+              className="text-muted-foreground font-body text-md md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0"
             >
               {feature.desc}
             </motion.p>
@@ -111,10 +116,10 @@ const FeatureBlock = ({
           {/* Visual side */}
           <motion.div
             style={{ opacity: mediaOpacity }}
-            className="flex-1 flex items-center justify-center w-full"
+            className="flex-1 flex items-center justify-center w-auto max-w-full md:w-full h-full px-4 md:px-0"
           >
             {feature.images.length > 0 ? (
-              <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-xs md:max-w-none">
+              <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-xs md:max-w-none ">
                 {feature.images.map((img) => (
                   <div
                     key={img.alt}
@@ -138,25 +143,13 @@ const FeatureBlock = ({
                 ))}
               </div>
             ) : (
-              <div className={`w-full max-w-[200px] md:max-w-sm aspect-square rounded-2xl md:rounded-3xl bg-gradient-to-br ${feature.accent} border border-border/50 flex items-center justify-center relative overflow-hidden`}>
-                <div className="absolute inset-0 opacity-[0.03]" style={{
-                  backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
-                  backgroundSize: '24px 24px'
-                }} />
-                <Icon className="w-12 h-12 md:w-20 md:h-20 text-primary/20" />
+              <div className="w-full h-full rounded-md md:rounded-3xl bg-muted/20 border border-border/50 flex items-center justify-center relative overflow-hidden">
+                <img src={feature.mainImage || ""} alt={feature.title} className="w-auto max-w-full md:w-full h-full object-cover" />
               </div>
             )}
           </motion.div>
         </div>
 
-        {index < features.length - 1 && (
-          <motion.div
-            style={{ opacity: mediaOpacity }}
-            className="flex justify-center mt-8 md:mt-16"
-          >
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-          </motion.div>
-        )}
       </motion.div>
     </div>
   );
@@ -168,37 +161,30 @@ const AboutSection = () => {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.85], ["0%", "100%"]);
 
   return (
-    <section id="chi-siamo" className="relative bg-background">
-      <div className="container py-16 md:py-24">
+    <section id="chi-siamo" className="relative bg-background overflow-hidden py-10 md:py-6">
+      <div className="container py-12 md:py-30">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-8">
-            <p className="text-sm tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+          <div className="text-center max-w-3xl mx-auto mb-8 px-4">
+            <p className="text-xs md:text-sm tracking-widest md:tracking-[0.2em] uppercase text-primary font-semibold mb-3">
               Chi Siamo
             </p>
-            <h2 className="text-2xl md:text-5xl font-heading font-bold text-foreground mb-4 md:mb-6">
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4 md:mb-6">
               Un gruppo solido al servizio del territorio
             </h2>
-            <p className="text-muted-foreground font-body text-base md:text-lg">
-              Imprese Riunite – Properzi Costruzioni Generali è una realtà imprenditoriale italiana che
-              lavora nel settore delle grandi opere civili dal 1976.
-            </p>
           </div>
         </ScrollReveal>
       </div>
 
       {/* Progress line */}
-      <div ref={sectionRef} className="relative">
-        <div className="absolute left-4 md:left-12 top-0 bottom-0 w-px bg-border">
-          <motion.div
-            className="w-full bg-primary origin-top"
-            style={{ height: lineHeight }}
-          />
+      <div className="relative">
+        <div className="absolute left-4 md:left-12 top-0 bottom-0 md:bottom-40 w-px bg-border">
+          <motion.div className="w-full bg-primary origin-top" style={{ height: lineHeight }} />
         </div>
 
-        <div className="space-y-0">
+        <div ref={sectionRef} className="space-y-10 md:space-y-20">
           {features.map((f, i) => (
             <FeatureBlock key={f.title} feature={f} index={i} />
           ))}
