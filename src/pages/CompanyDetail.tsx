@@ -1,3 +1,4 @@
+import { Fragment, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -18,7 +19,7 @@ import Footer from "@/components/Footer";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 import logoCcs from "@/assets/NUOVA-CCS.png";
 import logoAngelico from "@/assets/CostruzioniAngelico-logo.png";
-import logoimpreseRiunite from "@/assets/logo-imprese-riunite.png";
+import logoimpreseRiunite from "@/assets/logo-imprese-riunite.webp";
 
 const logoMap: Record<string, string> = {
   "costruzioni-angelico": logoAngelico,
@@ -26,9 +27,39 @@ const logoMap: Record<string, string> = {
   "gruppo-immobiliare-properzi": logoimpreseRiunite,
 };
 
+const renderRichText = (text: string) =>
+  text.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
+    const strongMatch = part.match(/^<strong>(.*?)<\/strong>$/);
+
+    if (strongMatch) {
+      return (
+        <strong key={`${strongMatch[1]}-${index}`} className="font-semibold text-foreground">
+          {strongMatch[1]}
+        </strong>
+      );
+    }
+
+    return <Fragment key={`${part}-${index}`}>{part.replace(/<[^>]*>/g, "")}</Fragment>;
+  });
+
 const CompanyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const company = companies.find((c) => c.id === id);
+
+  useEffect(() => {
+    if (!company) {
+      document.title = "Azienda non trovata | Imprese Riunite";
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", "La pagina azienda richiesta non e' disponibile.");
+      return;
+    }
+
+    document.title = `${company.name} | Imprese Riunite`;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", `${company.name}: ${company.role}. ${company.fullName}.`);
+  }, [company]);
 
   if (!company) {
     return (
@@ -50,7 +81,7 @@ const CompanyDetail = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-24 pb-5 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-36 md:pt-48 lg:pt-52 pb-5 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"
@@ -69,24 +100,22 @@ const CompanyDetail = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex-1 w-full lg:w-1/2 order-2 lg:order-1"
+              className="flex-1 w-full min-w-0 lg:w-1/2 order-2 lg:order-1"
             >
               
-              <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
+              <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6 break-words">
                 {company.name}
               </h1>
-              <p className="text-sm sm:text-base md:text-lg tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-8">
+              <p className="text-sm sm:text-base md:text-lg tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-8 break-words">
                 {company.role}
               </p>
-              <p 
-                className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: company.description }}
-              />
+              <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed">
+                {renderRichText(company.description)}
+              </p>
               {company.longDescription && (
-                <p 
-                  className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed mt-8"
-                  dangerouslySetInnerHTML={{ __html: company.longDescription }}
-                />
+                <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed mt-8">
+                  {renderRichText(company.longDescription)}
+                </p>
               )}
             </motion.div>
 
@@ -150,7 +179,7 @@ const CompanyDetail = () => {
                       className="h-full"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-3 left-3 flex gap-2 pointer-events-none">
+                    <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 pointer-events-none">
                       <span className="text-xs font-semibold bg-primary text-primary-foreground px-2.5 py-0.5 rounded-full">
                         <MapPin className="w-3 h-3 inline mr-1" />
                         {project.location}
@@ -164,9 +193,9 @@ const CompanyDetail = () => {
                   </div>
                 )}
 
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
                   {project.images.length === 0 && (
-                    <div className="flex items-start gap-2 mb-1">
+                    <div className="flex flex-wrap items-start gap-2 mb-1">
                       <span className="text-xs font-semibold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
                         {project.location}
                       </span>
@@ -184,8 +213,8 @@ const CompanyDetail = () => {
                   <p className="text-muted-foreground font-body text-sm leading-relaxed mb-3">
                     {project.description}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs text-muted-foreground font-body">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs text-muted-foreground font-body min-w-0">
                       <span className="font-medium text-foreground/70">Committente:</span>{" "}
                       {project.client}
                     </p>
@@ -209,10 +238,10 @@ const CompanyDetail = () => {
           <div className={`grid ${company.certifications.length > 0 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-xl'} gap-8 max-w-5xl mx-auto`}>
             {/* Contact info */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
+              className="bg-card rounded-xl p-6 sm:p-8 border border-border shadow-[var(--card-shadow)] min-w-0"
             >
               <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-primary" />
@@ -223,7 +252,7 @@ const CompanyDetail = () => {
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-body">
                     Ragione Sociale
                   </p>
-                  <p className="text-sm font-body text-foreground font-medium">{company.fullName}</p>
+                  <p className="text-sm font-body text-foreground font-medium break-words">{company.fullName}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-body">
@@ -242,7 +271,7 @@ const CompanyDetail = () => {
                 <div className="border-t border-border pt-4 space-y-3">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <p className="text-sm font-body text-muted-foreground">{company.address}</p>
+                    <p className="text-sm font-body text-muted-foreground break-words">{company.address}</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <Phone className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -259,26 +288,26 @@ const CompanyDetail = () => {
             {/* Certifications */}
             {company.certifications.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-card rounded-xl p-8 border border-border shadow-[var(--card-shadow)]"
+                className="bg-card rounded-xl p-6 sm:p-8 border border-border shadow-[var(--card-shadow)] min-w-0"
               >
                 <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />
                   Certificazioni
                 </h3>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid sm:grid-cols-2 gap-3">
                   {company.certifications.map((cert) => (
                     <a
                       key={cert.name}
                       href={cert.pdf || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
+                      className="flex min-w-0 items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
                     >
                       <FileText className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors">
+                      <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors break-words">
                         {cert.name}
                       </span>
                       <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />

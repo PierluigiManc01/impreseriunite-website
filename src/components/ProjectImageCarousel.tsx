@@ -39,6 +39,9 @@ const ProjectImageCarousel = ({
       className={cn("relative overflow-hidden group/carousel", className)}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
     >
       {/* Images */}
       <div
@@ -61,17 +64,17 @@ const ProjectImageCarousel = ({
         <>
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1 opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+            className="absolute left-2 top-1/2 min-h-10 min-w-10 -translate-y-1/2 touch-manipulation rounded-full bg-black/55 p-2 text-white opacity-100 transition-opacity hover:bg-black/75 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
             aria-label="Foto precedente"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1 opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+            className="absolute right-2 top-1/2 min-h-10 min-w-10 -translate-y-1/2 touch-manipulation rounded-full bg-black/55 p-2 text-white opacity-100 transition-opacity hover:bg-black/75 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
             aria-label="Foto successiva"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-5 h-5" />
           </button>
 
           {/* Dots */}
@@ -81,8 +84,8 @@ const ProjectImageCarousel = ({
                 key={i}
                 onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
                 className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-all",
-                  i === current ? "bg-white w-3" : "bg-white/50"
+                  "h-2.5 w-2.5 rounded-full transition-all",
+                  i === current ? "bg-white w-5" : "bg-white/60"
                 )}
                 aria-label={`Vai alla foto ${i + 1}`}
               />

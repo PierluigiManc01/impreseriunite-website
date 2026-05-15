@@ -4,7 +4,7 @@ import { companies } from "@/data/companies";
 import ScrollReveal from "@/components/ScrollReveal";
 import logoCcs from "@/assets/NUOVA-CCS.png";
 import logoAngelico from "@/assets/CostruzioniAngelico-logo.png";
-import logoimpreseRiunite from "@/assets/logo-imprese-riunite.png";
+import logoimpreseRiunite from "@/assets/logo-imprese-riunite.webp";
 
 const logoMap: Record<string, string> = {
   "costruzioni-angelico": logoAngelico,

@@ -21,6 +21,14 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
 
   useEffect(() => {
+    if (!location.hash) return;
+
+    window.requestAnimationFrame(() => {
+      document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, [location.hash, location.pathname]);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsHidden(true);
       if (scrollTimeoutRef.current) {
@@ -49,10 +57,17 @@ const Navbar = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    setOpen(false);
+    if (isHome) {
+      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border transition-transform duration-300 ease-in-out ${isHidden ? "-translate-y-full" : "translate-y-0"}`}>
       <div className="container flex items-center justify-between h-30 md:h-40">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/#home" className="flex items-center gap-2" onClick={handleLogoClick}>
           <img src={logo} alt="Imprese Riunite" className="h-30 w-44 md:h-35 md:w-80 object-contain" />
         </Link>
         <div className="hidden md:flex items-center gap-8">
@@ -76,7 +91,13 @@ const Navbar = () => {
             )
           )}
         </div>
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
+        <button
+          className="md:hidden text-foreground"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+        >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -86,6 +107,7 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            id="mobile-navigation"
             className="md:hidden bg-card border-b border-border overflow-hidden"
           >
             <div className="container py-4 flex flex-col gap-4">

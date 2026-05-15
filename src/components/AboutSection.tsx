@@ -1,11 +1,11 @@
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Globe, Landmark, Zap, Award } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useIsMobile } from "@/hooks/use-mobile";
 type FeatureImage = { src: string; alt: string };
 
-import cantiere from "@/assets/cantiere.png";
+import cantiere from "@/assets/cantiere.webp";
 import iso from "@/assets/logo-iso-01.png";
 import soa from "@/assets/logo-soa.jpg";
 import sa from "@/assets/SA-logo.png";
@@ -14,7 +14,7 @@ const features = [
   {
     icon: Globe,
     title: "Esperienza Internazionale",
-    desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in Arabia Saudita — tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyad e la Facoltà di Ingegneria di Jedda — e importanti infrastrutture in Italia come il Porto Turistico Riva di Traiano.",
+    desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyad e la Facoltà di Ingegneria di Jedda; e importanti infrastrutture in Italia come il <strong>Porto Turistico Riva di Traiano</strong>.",
     images: [] as FeatureImage[],
     mainImage: cantiere,         
     accent: "from-primary/20 to-primary/5",
@@ -22,7 +22,7 @@ const features = [
   {
     icon: Landmark,
     title: "Opere Pubbliche",
-    desc: "Collaborazione consolidata con Roma Capitale, Ministero della Giustizia, Ministero della Difesa, ENAV e i principali enti pubblici italiani. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche.",
+    desc: "Collaborazione consolidata con Roma Capitale, Ministeri della Giustizia e della Difesa e soprattutto con ENAV. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche come la pista di atterraggio di <strong>Ronchi Dei Legionari (Trieste)</strong>.",
     images: [] as FeatureImage[],
     mainImage: cantiere,
     accent: "from-accent/60 to-accent/20",
@@ -48,6 +48,21 @@ const features = [
   },
 ];
 
+const renderRichText = (text: string) =>
+  text.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
+    const strongMatch = part.match(/^<strong>(.*?)<\/strong>$/);
+
+    if (strongMatch) {
+      return (
+        <strong key={`${strongMatch[1]}-${index}`} className="font-semibold text-foreground">
+          {strongMatch[1]}
+        </strong>
+      );
+    }
+
+    return <Fragment key={`${part}-${index}`}>{part.replace(/<[^>]*>/g, "")}</Fragment>;
+  });
+
 /* ── Alternating Feature Block ── */
 const FeatureBlock = ({
   feature,
@@ -64,7 +79,7 @@ const FeatureBlock = ({
   });
 
   // Dampened values on mobile
-  const mScale = isMobile ? [0.96, 1.04, 1.04, 0.96] : [0.8, 1.2, 1.2, 0.8];
+  const mScale = isMobile ? [0.96, 1.04, 1.04, 0.96] : [0.92, 1, 1, 0.92];
   const mY = isMobile ? [40, 0, 0, -20] : [80, 0, 0, -40];
 
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.1, 1, 1, 0.1]);
@@ -82,15 +97,15 @@ const FeatureBlock = ({
   const isEven = index % 2 === 0;
 
   return (
-    <div ref={ref} className="min-h-[30vh] md:min-h-[45vh] flex items-stretch justify-center py-4 ">
+    <div ref={ref} className="min-h-[30vh] md:min-h-[50vh] flex items-stretch justify-center py-4">
       <motion.div
         style={{ opacity, scale, y }}
-        className="w-full max-w-xl md:max-w-7xl mx-auto px-4 md:px-6 origin-center h-full min-h-full flex flex-col"
+        className="w-full max-w-xl md:max-w-7xl xl:max-w-[1480px] mx-auto px-4 md:px-8 xl:px-10 origin-center h-full min-h-full flex flex-col"
       >
         {/* Stack on mobile, alternate two-col on desktop */}
-        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-10`}>
+        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-12 xl:gap-16`}>
           {/* Text side */}
-          <div className="flex-1 text-center md:text-left px-6 md:px-4">
+          <div className="flex-1 text-center md:text-left px-6 md:px-2 xl:px-4">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 justify-center md:justify-start">
               <motion.div
                 style={{ rotate: iconRotate, opacity: mediaOpacity }}
@@ -107,16 +122,16 @@ const FeatureBlock = ({
             </div>
             <motion.p
               style={{ opacity: mediaOpacity }}
-              className="text-muted-foreground font-body text-md md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0"
+              className="text-muted-foreground font-body text-md md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0"
             >
-              {feature.desc}
+              {renderRichText(feature.desc)}
             </motion.p>
           </div>
 
           {/* Visual side */}
           <motion.div
             style={{ opacity: mediaOpacity }}
-            className="flex-1 flex items-center justify-center w-auto max-w-full md:w-full h-full px-4 md:px-0"
+            className="flex-1 md:flex-[1.15] flex items-center justify-center w-auto max-w-full md:w-full h-full px-4 md:px-0"
           >
             {feature.images.length > 0 ? (
               <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-xs md:max-w-none ">
@@ -156,13 +171,6 @@ const FeatureBlock = ({
 };
 
 const AboutSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0.1, 0.85], ["0%", "100%"]);
-
   return (
     <section id="chi-siamo" className="relative bg-background overflow-hidden py-10 md:py-6">
       <div className="container py-12 md:py-30">
@@ -178,13 +186,8 @@ const AboutSection = () => {
         </ScrollReveal>
       </div>
 
-      {/* Progress line */}
       <div className="relative">
-        <div className="absolute left-4 md:left-12 top-0 bottom-0 md:bottom-40 w-px bg-border">
-          <motion.div className="w-full bg-primary origin-top" style={{ height: lineHeight }} />
-        </div>
-
-        <div ref={sectionRef} className="space-y-10 md:space-y-20">
+        <div className="space-y-10 md:space-y-20">
           {features.map((f, i) => (
             <FeatureBlock key={f.title} feature={f} index={i} />
           ))}

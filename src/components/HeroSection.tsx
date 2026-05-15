@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import heroBg from "@/assets/blueprint.png";
+import heroBg from "@/assets/blueprint.webp";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
