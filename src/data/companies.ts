@@ -256,7 +256,7 @@ export const companies: Company[] = [
       },
       {
         title: "Raccordo Anulare Lotto 2",
-        location: "Riyad – Arabia Saudita",
+        location: "Riyadh – Arabia Saudita",
         client: "Committente Internazionale (ex C.C.S.)",
         amount: "",
         description:
@@ -273,12 +273,12 @@ export const companies: Company[] = [
         images: [],
       },
       {
-        title: "Facoltà di Ingegneria di Jedda",
-        location: "Jedda – Arabia Saudita",
+        title: "Facoltà di Ingegneria di Jeddah",
+        location: "Jeddah – Arabia Saudita",
         client: "Committente Internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jedda, opera realizzata dalla vecchia C.C.S.",
+          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla vecchia C.C.S.",
         images: [],
       },
     ],
@@ -302,12 +302,12 @@ export const history = {
     {
       year: "1997",
       title: "Nascita della Nuova C.C.S.",
-      desc: "Dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, nasce la Nuova C.C.S che focalizza le sue competenze sulla parte impiantistica.",
+      desc: "Dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, nasce la Nuova C.C.S che focalizza le sue competenze sull' impiantistica elettrica.",
     },
     {
       year: "Oggi",
       title: "Un team di eccellenza",
-      desc: "Attualmente Imprese Riunite vanta un team dinamico composto da ingegneri, architetti e tecnici altamente specializzati che, unito alle grandi capacità di leadership dimostrate dalla famiglia Properzi, ha reso il Gruppo in grado di affrontare qualsiasi tipologia di sfida.",
+      desc: "Attualmente Imprese Riunite - amministrata da Alfredo Mancinelli - vanta un team dinamico composto da ingegneri, architetti e tecnici altamente specializzati che, unito alle grandi capacità di leadership dimostrate dalla famiglia Properzi, ha reso il Gruppo in grado di affrontare qualsiasi tipologia di sfida.",
     },
   ],
 };

@@ -14,7 +14,7 @@ const features = [
   {
     icon: Globe,
     title: "Esperienza Internazionale",
-    desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyad e la Facoltà di Ingegneria di Jedda; e importanti infrastrutture in Italia come il <strong>Porto Turistico Riva di Traiano</strong>.",
+    desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah; e importanti infrastrutture in Italia come il <strong>Porto Turistico Riva di Traiano</strong>.",
     images: [] as FeatureImage[],
     mainImage: cantiere,         
     accent: "from-primary/20 to-primary/5",
@@ -22,7 +22,7 @@ const features = [
   {
     icon: Landmark,
     title: "Opere Pubbliche",
-    desc: "Collaborazione consolidata con Roma Capitale, Ministeri della Giustizia e della Difesa e soprattutto con ENAV. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche come la pista di atterraggio di <strong>Ronchi Dei Legionari (Trieste)</strong>.",
+    desc: "Collaborazione consolidata con Roma Capitale, Ministeri della Giustizia e della Difesa e soprattutto con ENAV. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche come la pista di atterraggio dell'aeroporto <strong>Ronchi Dei Legionari (Trieste)</strong>.",
     images: [] as FeatureImage[],
     mainImage: cantiere,
     accent: "from-accent/60 to-accent/20",

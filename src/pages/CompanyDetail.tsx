@@ -130,7 +130,7 @@ const CompanyDetail = () => {
                 <img 
                   src={logoMap[company.id]} 
                   alt={`${company.name} logo`} 
-                  className="w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-3xl h-auto object-contain mix-blend-multiply" 
+                  className="w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg h-auto object-contain" 
                 />
               </motion.div>
             )}
