@@ -5,7 +5,7 @@ import logo_enav from "../assets/committenti/enav.png";
 import logo_anas from "../assets/committenti/anas-logo.png";
 import logo_giustizia from "../assets/committenti/min-giustizia-removebg.png";
 import logo_lavoripubblici from "../assets/committenti/Logo_MIT.png";
-import logo_citta_metropolitana from "../assets/committenti/citta-metropolitana-roma.png";
+import logo_citta_metropolitana from "../assets/committenti/Citta-metropolitana-Roma.png";
 
 const clients = [
   { name: "Roma Capitale", logo: logo_roma },
