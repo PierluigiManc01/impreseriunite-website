@@ -110,9 +110,9 @@ const ProjectsSection = () => (
         ))}
       </div>
 
-      <ScrollReveal fadeOut={false}>
-        <div className="text-center mt-10">
-          <p className="text-sm text-muted-foreground font-body">
+      <ScrollReveal fadeOut={false} mobileScaleRange={[1, 1, 1]}>
+        <div className="text-center mt-10 px-4 sm:px-0">
+          <p className="mx-auto max-w-xs text-sm leading-relaxed text-muted-foreground font-body sm:max-w-none">
             Scopri tutti i progetti visitando la pagina di <a href="#aziende" className="text-primary hover:underline font-medium">ciascuna azienda</a>.
           </p>
         </div>
