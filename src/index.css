@@ -61,17 +61,51 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading tracking-normal;
   }
 
   section[id]:not(#home) {
-    scroll-margin-top: 8.5rem;
+    scroll-margin-top: 5rem;
   }
 
   @media (min-width: 768px) {
     section[id]:not(#home) {
-      scroll-margin-top: 11rem;
+      scroll-margin-top: 6rem;
     }
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply py-14 md:py-20;
+  }
+
+  .section-eyebrow {
+    @apply text-sm md:text-base font-semibold uppercase tracking-[0.16em] text-primary;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-heading font-bold text-foreground leading-tight;
+  }
+
+  .section-copy {
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground font-body;
+  }
+
+  .panel-title {
+    @apply font-heading font-bold text-xl md:text-2xl text-foreground leading-tight;
+  }
+
+  .micro-label {
+    @apply text-sm font-semibold uppercase tracking-[0.14em];
+  }
+
+  .architectural-panel {
+    @apply rounded-lg border border-border/80 bg-card shadow-[var(--card-shadow)] transition-all duration-300;
+  }
+
+  .architectural-panel:hover {
+    @apply shadow-[var(--card-shadow-hover)];
   }
 }
 

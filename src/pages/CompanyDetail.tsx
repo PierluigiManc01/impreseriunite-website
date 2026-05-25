@@ -81,7 +81,7 @@ const CompanyDetail = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-36 md:pt-48 lg:pt-52 pb-5 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-28 md:pt-36 pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"
@@ -106,14 +106,14 @@ const CompanyDetail = () => {
               <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6 break-words">
                 {company.name}
               </h1>
-              <p className="text-sm sm:text-base md:text-lg tracking-widest sm:tracking-[0.2em] uppercase text-primary font-semibold mb-8 break-words">
+              <p className="micro-label text-primary mb-8 break-words">
                 {company.role}
               </p>
-              <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed">
+              <p className="section-copy md:text-lg">
                 {renderRichText(company.description)}
               </p>
               {company.longDescription && (
-                <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed mt-8">
+                <p className="section-copy md:text-lg mt-8">
                   {renderRichText(company.longDescription)}
                 </p>
               )}
@@ -139,13 +139,13 @@ const CompanyDetail = () => {
       </section>
 
       {/* Projects */}
-      <section className="py-20 bg-background">
+      <section className="section-shell bg-background">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12"
+            className="mb-8"
           >
             <div className="flex items-center gap-3 mb-2">
               <Briefcase className="w-6 h-6 text-primary shrink-0" />
@@ -153,14 +153,14 @@ const CompanyDetail = () => {
                 Lavori Principali
               </h2>
             </div>
-            <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
+            <p className="section-copy">
               {company.id === "gruppo-immobiliare-properzi"
                 ? "Progetti storici realizzati dalla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine."
                 : "Una selezione dei progetti più rappresentativi realizzati dall'azienda."}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {company.projects.map((project, i) => (
               <motion.div
                 key={project.title}
@@ -168,11 +168,11 @@ const CompanyDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-card rounded-xl border border-border shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all overflow-hidden"
+                className="architectural-panel overflow-hidden"
               >
                 {/* Image carousel */}
                 {project.images.length > 0 && (
-                  <div className="relative h-52">
+                  <div className="relative aspect-[4/3]">
                     <ProjectImageCarousel
                       images={project.images}
                       alt={project.title}
@@ -210,7 +210,7 @@ const CompanyDetail = () => {
                   <h3 className="font-heading font-bold text-lg text-foreground mt-2 mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground font-body text-sm leading-relaxed mb-3">
+                  <p className="section-copy mb-3">
                     {project.description}
                   </p>
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -233,15 +233,15 @@ const CompanyDetail = () => {
       </section>
 
       {/* Company Info & Certifications */}
-      <section className="py-20 bg-accent/50">
+      <section className="section-shell bg-accent/50">
         <div className="container">
-          <div className={`grid ${company.certifications.length > 0 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-xl'} gap-8 max-w-5xl mx-auto`}>
+          <div className={`grid ${company.certifications.length > 0 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-xl'} gap-5 md:gap-6 max-w-5xl mx-auto`}>
             {/* Contact info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-card rounded-xl p-6 sm:p-8 border border-border shadow-[var(--card-shadow)] min-w-0"
+              className="architectural-panel p-6 sm:p-8 min-w-0"
             >
               <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-primary" />
@@ -291,7 +291,7 @@ const CompanyDetail = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-card rounded-xl p-6 sm:p-8 border border-border shadow-[var(--card-shadow)] min-w-0"
+                className="architectural-panel p-6 sm:p-8 min-w-0"
               >
                 <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />

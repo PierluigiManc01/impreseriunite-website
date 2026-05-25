@@ -19,11 +19,20 @@ const HeroSection = () => {
   return (
     <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
-        <img src={heroBg} alt="Skyline italiano" className="w-full h-full object-cover opacity-40 obscurity-20" width={1920} height={1080} />
+        <img
+          src={heroBg}
+          alt="Trama architettonica e blueprint"
+          className="h-full w-full object-cover opacity-40"
+          width={1920}
+          height={1080}
+        />
       </motion.div>
       <motion.div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/80" style={{ opacity: overlayOpacity }} />
 
-      <motion.div className="relative container text-center" style={{ y: textY, scale: textScale, opacity: textOpacity }}>
+      <motion.div
+        className="relative container text-center"
+        style={{ y: textY, scale: textScale, opacity: textOpacity }}
+      >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

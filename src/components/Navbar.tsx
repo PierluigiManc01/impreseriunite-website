@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/impreseriunite-long-logo-removebg.png";
@@ -7,84 +7,79 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
   { label: "Home", href: "/#home" },
   { label: "Chi Siamo", href: "/#chi-siamo" },
-  { label: "Storia", href: "/#storia" },
+  { label: "Committenti", href: "/#committenti" },
   { label: "Aziende", href: "/#aziende" },
   { label: "Progetti", href: "/#progetti" },
+  { label: "Storia", href: "/#storia" },
   { label: "Contatti", href: "/#contatti" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  const scrollTimeoutRef = useRef<number | null>(null);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
-  useEffect(() => {
-    if (!location.hash) return;
+  useLayoutEffect(() => {
+    if (!isHome || !location.hash) return;
 
-    window.requestAnimationFrame(() => {
-      document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
-    });
-  }, [location.hash, location.pathname]);
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    target?.scrollIntoView({ block: "start" });
+  }, [isHome, location.hash]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsHidden(true);
-      if (scrollTimeoutRef.current) {
-        window.clearTimeout(scrollTimeoutRef.current);
-      }
-      scrollTimeoutRef.current = window.setTimeout(() => {
-        setIsHidden(false);
-      }, 180);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeoutRef.current) {
-        window.clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const handleClick = (href: string) => {
+  const handleClick = () => {
     setOpen(false);
-    if (isHome && href.startsWith("/#")) {
-      const el = document.querySelector(href.replace("/", ""));
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   const handleLogoClick = () => {
     setOpen(false);
-    if (isHome) {
-      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border transition-transform duration-300 ease-in-out ${isHidden ? "-translate-y-full" : "translate-y-0"}`}>
-      <div className="container flex items-center justify-between h-30 md:h-40">
-        <Link to="/#home" className="flex items-center gap-2" onClick={handleLogoClick}>
-          <img src={logo} alt="Imprese Riunite" className="h-30 w-44 md:h-35 md:w-80 object-contain" />
-        </Link>
-        <div className="hidden md:flex items-center gap-8">
+    <nav className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 shadow-sm backdrop-blur-xl">
+      <div className="container flex h-20 items-center justify-between gap-4 md:h-24">
+        {isHome ? (
+          <a
+            href="#home"
+            className="flex min-h-11 items-center gap-2"
+            onClick={handleLogoClick}
+            aria-label="Vai alla home di Imprese Riunite"
+          >
+            <img
+              src={logo}
+              alt="Imprese Riunite"
+              className="h-16 w-44 object-contain md:h-20 md:w-64"
+            />
+          </a>
+        ) : (
+          <Link
+            to="/#home"
+            className="flex min-h-11 items-center gap-2"
+            onClick={handleLogoClick}
+            aria-label="Vai alla home di Imprese Riunite"
+          >
+            <img
+              src={logo}
+              alt="Imprese Riunite"
+              className="h-16 w-44 object-contain md:h-20 md:w-64"
+            />
+          </Link>
+        )}
+        <div className="hidden items-center gap-0.5 lg:flex">
           {links.map((l) =>
             isHome ? (
               <a
-                key={l.href}
-                href={l.href.replace("/", "")}
-                className="text-2xl font-medium text-muted-foreground hover:text-primary transition-colors"
-              >
+                    key={l.href}
+                    href={l.href.replace("/", "")}
+                    onClick={handleClick}
+                    className="inline-flex min-h-11 items-center rounded-md px-2 text-sm md:text-lg font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
+                  >
                 {l.label}
               </a>
             ) : (
               <Link
                 key={l.href}
                 to={l.href}
-                className="text-2xl font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="inline-flex min-h-11 items-center rounded-md px-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
               >
                 {l.label}
               </Link>
@@ -92,7 +87,7 @@ const Navbar = () => {
           )}
         </div>
         <button
-          className="md:hidden text-foreground"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}
           aria-expanded={open}
@@ -108,16 +103,16 @@ const Navbar = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             id="mobile-navigation"
-            className="md:hidden bg-card border-b border-border overflow-hidden"
+            className="overflow-hidden border-b border-border bg-card lg:hidden"
           >
-            <div className="container py-4 flex flex-col gap-4">
+            <div className="container flex flex-col gap-1 py-3">
               {links.map((l) =>
                 isHome ? (
                   <a
                     key={l.href}
                     href={l.href.replace("/", "")}
-                    onClick={() => handleClick(l.href)}
-                    className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors"
+                    onClick={handleClick}
+                    className="flex min-h-11 items-center rounded-md px-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     {l.label}
                   </a>
@@ -126,7 +121,7 @@ const Navbar = () => {
                     key={l.href}
                     to={l.href}
                     onClick={() => setOpen(false)}
-                    className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="flex min-h-11 items-center rounded-md px-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     {l.label}
                   </Link>

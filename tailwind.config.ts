@@ -71,6 +71,13 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        18: "4.5rem",
+        30: "7.5rem",
+      },
+      maxWidth: {
+        "8xl": "88rem",
+      },
       height: {
         30: "7.5rem",
         35: "8.75rem",

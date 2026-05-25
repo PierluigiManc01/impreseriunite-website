@@ -5,7 +5,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
-  /** Scale range: how much to grow/shrink. Default [0.9, 1.5, 0.9] desktop, [0.95, 1.15, 0.95] mobile */
+  /** Scale range: how much to grow/shrink. Default is intentionally subtle. */
   scaleRange?: [number, number, number];
   /** Mobile scale override — if not set, auto-dampened from scaleRange */
   mobileScaleRange?: [number, number, number];
@@ -16,9 +16,9 @@ interface ScrollRevealProps {
 const ScrollReveal = ({
   children,
   className = "",
-  scaleRange = [0.9, 1.5, 0.9],
+  scaleRange = [0.94, 1.04, 1],
   mobileScaleRange,
-  fadeOut = true,
+  fadeOut = false,
 }: ScrollRevealProps) => {
   const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
@@ -27,16 +27,15 @@ const ScrollReveal = ({
     offset: ["start end", "center center", "end start"],
   });
 
-  // Make mobile start significantly smaller but grow to the previous maximum scale to make the effect more visible
   const effectiveScale = isMobile
     ? mobileScaleRange ?? [
-        scaleRange[0] * 0.9,
-        1 + (scaleRange[1] - 1) * 0.4,
-        scaleRange[2] * 0.9,
+        Math.max(0.96, scaleRange[0]),
+        Math.min(1.025, scaleRange[1]),
+        scaleRange[2],
       ]
     : scaleRange;
 
-  const yRange = isMobile ? [30, 0, 0, -15] : [60, 0, 0, -30];
+  const yRange = isMobile ? [24, 0, 0, 0] : [36, 0, 0, 0];
 
   const opacity = useTransform(
     scrollYProgress,

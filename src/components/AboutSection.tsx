@@ -9,13 +9,15 @@ import cantiere from "@/assets/cantiere.webp";
 import iso from "@/assets/logo-iso-01.png";
 import soa from "@/assets/logo-soa.jpg";
 import sa from "@/assets/SA-logo.png";
+import international from "@/assets/internazionali.jpg";
+import data_center from "@/assets/data_center.jpg";
 
 const features = [
   {
     icon: Globe,
     title: "Esperienza Internazionale",
     desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah; e importanti infrastrutture in Italia come il <strong>Porto Turistico Riva di Traiano</strong>.",
-    images: [] as FeatureImage[],
+    images: [{ src: international, alt: "Progetti Internazionali" }] as FeatureImage[],
     mainImage: cantiere,         
     accent: "from-primary/20 to-primary/5",
   },
@@ -31,7 +33,7 @@ const features = [
     icon: Zap,
     title: "Impiantistica Avanzata",
     desc: "Impianti fotovoltaici, gruppi elettrogeni, gruppi di continuità e cabine di trasformazione MT/BT. Installazione e manutenzione di impianti elettrici, di sicurezza, illuminazione e autonomia industriale.",
-    images: [] as FeatureImage[],
+    images: [{ src: data_center, alt: "Data Center" }] as FeatureImage[],
     mainImage: cantiere,   
     accent: "from-primary/10 to-transparent",
   },
@@ -95,15 +97,16 @@ const FeatureBlock = ({
 
   const Icon = feature.icon;
   const isEven = index % 2 === 0;
+  const singleFeatureImage = feature.images.length === 1 ? feature.images[0] : null;
 
   return (
-    <div ref={ref} className="min-h-[30vh] md:min-h-[50vh] flex items-stretch justify-center py-4">
+    <div ref={ref} className="min-h-[30vh] md:min-h-[40vh] flex items-stretch justify-center py-3 md:py-3">
       <motion.div
         style={{ opacity, scale, y }}
         className="w-full max-w-xl md:max-w-7xl xl:max-w-[1480px] mx-auto px-4 md:px-8 xl:px-10 origin-center h-full min-h-full flex flex-col"
       >
         {/* Stack on mobile, alternate two-col on desktop */}
-        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-12 xl:gap-16`}>
+        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-5 md:gap-8 xl:gap-10`}>
           {/* Text side */}
           <div className="flex-1 text-center md:text-left px-6 md:px-2 xl:px-4">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 justify-center md:justify-start">
@@ -115,14 +118,14 @@ const FeatureBlock = ({
               </motion.div>
               <motion.h3
                 style={{ color }}
-                className="text-xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight"
+                className="text-2xl md:text-3xl font-heading font-bold leading-tight"
               >
                 {feature.title}
               </motion.h3>
             </div>
             <motion.p
               style={{ opacity: mediaOpacity }}
-              className="text-muted-foreground font-body text-md md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0"
+              className="section-copy max-w-2xl mx-auto md:mx-0"
             >
               {renderRichText(feature.desc)}
             </motion.p>
@@ -133,7 +136,16 @@ const FeatureBlock = ({
             style={{ opacity: mediaOpacity }}
             className="flex-1 md:flex-[1.15] flex items-center justify-center w-auto max-w-full md:w-full h-full px-4 md:px-0"
           >
-            {feature.images.length > 0 ? (
+            {singleFeatureImage ? (
+              <div className="w-full h-full rounded-md md:rounded-3xl bg-muted/20 border border-border/50 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={singleFeatureImage.src}
+                  alt={singleFeatureImage.alt}
+                  className="w-auto max-w-full md:w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ) : feature.images.length > 0 ? (
               <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-xs md:max-w-none ">
                 {feature.images.map((img) => (
                   <div
@@ -172,14 +184,14 @@ const FeatureBlock = ({
 
 const AboutSection = () => {
   return (
-    <section id="chi-siamo" className="relative bg-background overflow-hidden py-10 md:py-6">
-      <div className="container py-12 md:py-30">
+    <section id="chi-siamo" className="relative bg-background overflow-hidden pt-14 pb-1 md:pt-20 md:pb-2">
+      <div className="container pb-1">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-8 px-4">
-            <p className="text-xs md:text-sm tracking-widest md:tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+          <div className="text-center max-w-4xl mx-auto mb-6 px-4">
+            <p className="section-eyebrow mb-3">
               Chi Siamo
             </p>
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4 md:mb-6">
+            <h2 className="section-title mb-4 md:mb-6">
               Un gruppo solido al servizio del territorio
             </h2>
           </div>
@@ -187,7 +199,7 @@ const AboutSection = () => {
       </div>
 
       <div className="relative">
-        <div className="space-y-10 md:space-y-20">
+        <div className="space-y-8 md:space-y-12">
           {features.map((f, i) => (
             <FeatureBlock key={f.title} feature={f} index={i} />
           ))}

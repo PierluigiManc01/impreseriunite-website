@@ -17,6 +17,7 @@ const ProjectImageCarousel = ({
 }: ProjectImageCarouselProps) => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   const next = useCallback(() => {
     setCurrent((c) => (c + 1) % images.length);
@@ -27,16 +28,26 @@ const ProjectImageCarousel = ({
   }, [images.length]);
 
   useEffect(() => {
-    if (paused || images.length <= 1) return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (paused || reducedMotion || images.length <= 1) return;
     const id = setInterval(next, autoplayInterval);
     return () => clearInterval(id);
-  }, [paused, next, autoplayInterval, images.length]);
+  }, [paused, reducedMotion, next, autoplayInterval, images.length]);
 
   if (images.length === 0) return null;
 
   return (
     <div
       className={cn("relative overflow-hidden group/carousel", className)}
+      role="region"
+      aria-label={`Galleria immagini: ${alt}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -54,7 +65,8 @@ const ProjectImageCarousel = ({
             src={src}
             alt={`${alt} - ${i + 1}`}
             className="w-full h-full object-cover shrink-0"
-            loading="lazy"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
           />
         ))}
       </div>
@@ -84,9 +96,10 @@ const ProjectImageCarousel = ({
                 key={i}
                 onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
                 className={cn(
-                  "h-2.5 w-2.5 rounded-full transition-all",
-                  i === current ? "bg-white w-5" : "bg-white/60"
+                  "flex min-h-6 min-w-6 items-center justify-center rounded-full transition-all before:block before:h-2 before:w-2 before:rounded-full before:content-['']",
+                  i === current ? "bg-white/20 before:bg-white" : "bg-transparent before:bg-white/60"
                 )}
+                aria-current={i === current ? "true" : undefined}
                 aria-label={`Vai alla foto ${i + 1}`}
               />
             ))}
