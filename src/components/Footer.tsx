@@ -23,7 +23,7 @@ const Footer = () => (
       </div>
 
       <div>
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">
+        <p className="mb-4 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground/60">
           Navigazione
         </p>
         <nav className="grid gap-2">
@@ -40,7 +40,7 @@ const Footer = () => (
       </div>
 
       <div>
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">
+        <p className="mb-4 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground/60">
           Sede
         </p>
         <address className="not-italic text-base leading-relaxed text-primary-foreground/75">

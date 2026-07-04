@@ -44,7 +44,7 @@ const HistoryTimeline = () => {
               <div className={`relative flex items-start mb-12 md:mb-16 lg:mb-20 md:w-full`}>
                 <div className="absolute left-3 md:left-1/2 w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 bg-primary rounded-full -translate-x-1/2 md:-translate-x-2 lg:-translate-x-2.5 mt-2 md:mt-3 ml-2 md:ml-0 ring-4 ring-background z-10" />
                 <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 lg:pr-24 md:text-right" : "md:pl-16 lg:pl-24 md:ml-auto"}`}>
-                  <span className="inline-block text-sm md:text-base font-bold text-primary bg-primary/10 px-3 md:px-5 py-1 md:py-1.5 rounded-full mb-3 md:mb-4">
+                  <span className="inline-block font-mono text-sm md:text-base font-semibold text-primary bg-primary/10 px-3 md:px-5 py-1 md:py-1.5 rounded-full mb-3 md:mb-4">
                     {item.year}
                   </span>
                   <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground mb-2 md:mb-4">{item.title}</h3>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -34,7 +34,7 @@
     --input: 214 20% 90%;
     --ring: 217 91% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --hero-gradient: linear-gradient(135deg, hsl(217 91% 50%), hsl(210 100% 40%));
     --card-shadow: 0 4px 24px -4px hsl(217 91% 50% / 0.1);
@@ -81,11 +81,16 @@
   }
 
   .section-eyebrow {
-    @apply text-sm md:text-base font-semibold uppercase tracking-[0.16em] text-primary;
+    @apply inline-flex items-center gap-3 font-mono text-xs md:text-sm font-medium uppercase tracking-[0.22em] text-primary;
+  }
+
+  .section-eyebrow::before {
+    content: "";
+    @apply h-px w-8 shrink-0 bg-primary/50;
   }
 
   .section-title {
-    @apply text-4xl md:text-6xl font-heading font-bold text-foreground leading-tight;
+    @apply text-4xl md:text-6xl font-heading font-bold text-foreground leading-[1.05] tracking-tight;
   }
 
   .section-copy {
@@ -97,15 +102,75 @@
   }
 
   .micro-label {
-    @apply text-sm font-semibold uppercase tracking-[0.14em];
+    @apply font-mono text-xs font-medium uppercase tracking-[0.14em];
   }
 
+  /* Registration-mark corners — a nod to blueprint/survey drafting marks.
+     Two diagonal corners only, kept small and quiet. */
   .architectural-panel {
-    @apply rounded-lg border border-border/80 bg-card shadow-[var(--card-shadow)] transition-all duration-300;
+    @apply relative rounded-md border border-border/80 bg-card shadow-[var(--card-shadow)] transition-all duration-300;
+  }
+
+  .architectural-panel::before,
+  .architectural-panel::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    filter: drop-shadow(0 0 2px hsl(var(--background) / 0.8));
+  }
+
+  .architectural-panel::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid hsl(var(--primary) / 0.55);
+    border-left: 2px solid hsl(var(--primary) / 0.55);
+  }
+
+  .architectural-panel::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid hsl(var(--primary) / 0.55);
+    border-right: 2px solid hsl(var(--primary) / 0.55);
   }
 
   .architectural-panel:hover {
     @apply shadow-[var(--card-shadow-hover)];
+  }
+
+  .architectural-panel:hover::before,
+  .architectural-panel:hover::after {
+    border-color: hsl(var(--primary));
+  }
+
+  /* Standalone corner-mark frame for non-panel elements (e.g. hero viewport) */
+  .tech-frame {
+    @apply relative;
+  }
+
+  .tech-frame::before,
+  .tech-frame::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .tech-frame::before {
+    top: 12px;
+    left: 12px;
+    border-top: 2px solid hsl(var(--foreground) / 0.35);
+    border-left: 2px solid hsl(var(--foreground) / 0.35);
+  }
+
+  .tech-frame::after {
+    bottom: 12px;
+    right: 12px;
+    border-bottom: 2px solid hsl(var(--foreground) / 0.35);
+    border-right: 2px solid hsl(var(--foreground) / 0.35);
   }
 }
 

@@ -17,7 +17,7 @@ const HeroSection = () => {
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.8], [0.6, 0.9]);
 
   return (
-    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} id="home" className="tech-frame relative min-h-screen flex items-center justify-center overflow-hidden">
       <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
         <img
           src={heroBg}
@@ -33,11 +33,19 @@ const HeroSection = () => {
         className="relative container text-center"
         style={{ y: textY, scale: textScale, opacity: textOpacity }}
       >
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-4 font-mono text-xs sm:text-sm font-medium uppercase tracking-[0.3em] text-primary"
+        >
+          Roma · dal 1976
+        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-foreground leading-tight mb-4 sm:mb-8"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-heading font-extrabold text-foreground leading-[0.95] tracking-tight mb-4 sm:mb-8"
         >
           Imprese Riunite
         </motion.h1>
@@ -47,7 +55,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6 }}
           className="text-foreground/80 font-body text-sm sm:text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto mb-6 px-2 sm:px-4"
         >
-          Dal 1976 nel settore delle grandi opere civili. Costruzioni, infrastrutture e impiantistica con oltre 50 anni di esperienza al servizio del territorio.
+          Costruzioni, infrastrutture e impiantistica: oltre 50 anni di grandi opere civili al servizio del territorio.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,13 +65,13 @@ const HeroSection = () => {
         >
           <a
             href="#aziende"
-            className="inline-block rounded-lg px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
+            className="inline-block rounded-md px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors shadow-lg"
           >
             Scopri le nostre aziende
           </a>
           <a
             href="#storia"
-            className="inline-block rounded-lg px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-foreground border border-foreground/30 hover:bg-foreground/10 transition-colors"
+            className="inline-block rounded-md px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-heading font-semibold text-foreground border border-foreground/30 hover:bg-foreground/10 transition-colors"
           >
             La nostra storia
           </a>

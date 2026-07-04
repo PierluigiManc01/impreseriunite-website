@@ -81,7 +81,7 @@ const ProjectsSection = () => (
                 )}
 
                 <div className={cn("p-5", featured && "md:p-7")}>
-                  <div className="mb-4 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+                  <div className="mb-4 grid gap-1.5 font-mono text-xs text-muted-foreground sm:grid-cols-2">
                     <span className="inline-flex min-w-0 items-center gap-1.5">
                       <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
                       <span className="truncate">{project.location}</span>
@@ -93,12 +93,12 @@ const ProjectsSection = () => (
                       </span>
                     )}
                     <span className="min-w-0 sm:col-span-2">
-                      <span className="font-medium text-foreground/70">Committente:</span>{" "}
+                      <span className="text-foreground/70">committente&gt;</span>{" "}
                       {project.client}
                     </span>
                     {project.amount && (
                       <span className="sm:col-span-2">
-                        <span className="font-medium text-foreground/70">Importo:</span>{" "}
+                        <span className="text-foreground/70">importo&gt;</span>{" "}
                         {project.amount}
                       </span>
                     )}
