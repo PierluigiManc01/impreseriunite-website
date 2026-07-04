@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import logo_roma from "../assets/committenti/logo-romacapitale.png";
-import logo_difesa from "../assets/committenti/min-difesa.png";
-import logo_enav from "../assets/committenti/enav.png";
-import logo_anas from "../assets/committenti/anas-logo.png";
-import logo_giustizia from "../assets/committenti/min-giustizia-removebg.png";
-import logo_lavoripubblici from "../assets/committenti/Logo_MIT.png";
-import logo_citta_metropolitana from "../assets/committenti/Citta-metropolitana-Roma.png";
+import logo_roma from "../assets/committenti/logo-romacapitale.webp";
+import logo_difesa from "../assets/committenti/min-difesa.webp";
+import logo_enav from "../assets/committenti/enav.webp";
+import logo_anas from "../assets/committenti/anas-logo.webp";
+import logo_giustizia from "../assets/committenti/min-giustizia-removebg.webp";
+import logo_lavoripubblici from "../assets/committenti/Logo_MIT.webp";
+import logo_citta_metropolitana from "../assets/committenti/Citta-metropolitana-Roma.webp";
 
 const clients = [
   { name: "Roma Capitale", logo: logo_roma },

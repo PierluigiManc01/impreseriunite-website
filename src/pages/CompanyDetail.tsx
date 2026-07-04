@@ -17,8 +17,8 @@ import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
-import logoCcs from "@/assets/NUOVA-CCS.png";
-import logoAngelico from "@/assets/CostruzioniAngelico-logo.png";
+import logoCcs from "@/assets/NUOVA-CCS.webp";
+import logoAngelico from "@/assets/CostruzioniAngelico-logo.webp";
 import logoimpreseRiunite from "@/assets/logo-imprese-riunite.webp";
 
 const logoMap: Record<string, string> = {

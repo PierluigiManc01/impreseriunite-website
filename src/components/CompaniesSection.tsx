@@ -2,10 +2,10 @@ import { ArrowRight, Building } from "lucide-react";
 import { Link } from "react-router-dom";
 import { companies } from "@/data/companies";
 import ScrollReveal from "@/components/ScrollReveal";
-import logoCcs from "@/assets/NUOVA-CCS.png";
-import logoAngelico from "@/assets/CostruzioniAngelico-logo.png";
+import logoCcs from "@/assets/NUOVA-CCS.webp";
+import logoAngelico from "@/assets/CostruzioniAngelico-logo.webp";
 import logoimpreseRiunite from "@/assets/logo-imprese-riunite.webp";
-import logoSignify from "@/assets/partnerships/signify-logo.png";
+import logoSignify from "@/assets/partnerships/signify-logo.webp";
 import logoKnx from "@/assets/partnerships/KNX_logo.svg";
 
 const logoMap: Record<string, string> = {

@@ -6,9 +6,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 type FeatureImage = { src: string; alt: string };
 
 import cantiere from "@/assets/cantiere.webp";
-import iso from "@/assets/logo-iso-01.png";
+import iso from "@/assets/logo-iso-01.webp";
 import soa from "@/assets/logo-soa.jpg";
-import sa from "@/assets/SA-logo.png";
+import sa from "@/assets/SA-logo.webp";
 import international from "@/assets/internazionali.jpg";
 import data_center from "@/assets/data_center.jpg";
 
