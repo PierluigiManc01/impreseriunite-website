@@ -12,7 +12,6 @@ import {
   FileText,
   ExternalLink,
   Calendar,
-  Scale,
 } from "lucide-react";
 import { companies } from "@/data/companies";
 import Navbar from "@/components/Navbar";
@@ -299,37 +298,21 @@ const CompanyDetail = () => {
                   Certificazioni
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {company.certifications.map((cert) => {
-                    const isMandatoryPolicy = cert.name === "Politica per la Parità di Genere";
-                    const CertIcon = isMandatoryPolicy ? Scale : FileText;
-
-                    return (
-                      <a
-                        key={cert.name}
-                        href={cert.pdf || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex min-w-0 items-center gap-2 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer ${
-                          isMandatoryPolicy
-                            ? "border border-primary/30 bg-primary/5 hover:bg-primary/10"
-                            : "bg-accent hover:bg-primary/10"
-                        }`}
-                      >
-                        <CertIcon className="w-4 h-4 text-primary shrink-0" />
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors break-words">
-                            {cert.name}
-                          </span>
-                          {isMandatoryPolicy && (
-                            <span className="micro-label block text-primary/70 mt-0.5">
-                              Documento obbligatorio
-                            </span>
-                          )}
-                        </span>
-                        <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
-                      </a>
-                    );
-                  })}
+                  {company.certifications.map((cert) => (
+                    <a
+                      key={cert.name}
+                      href={cert.pdf || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex min-w-0 items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
+                    >
+                      <FileText className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors break-words">
+                        {cert.name}
+                      </span>
+                      <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
+                    </a>
+                  ))}
                 </div>
               </motion.div>
             )}
