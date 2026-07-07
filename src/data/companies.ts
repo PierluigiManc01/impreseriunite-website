@@ -53,15 +53,15 @@ export const companies: Company[] = [
       "Progetti immobiliari privati"
     ],
     certifications: [
-      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/ANGELICO-certificatoISO_45001-pdf" },
-      { name: "ISO 50001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "ISO 37001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "ISO 20400", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
-      { name: "SOA", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "SA 8000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
-      { name: "ISO 14000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-ISO_14000-pdf" },
-      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/angelico-certificato-iso_9001-pdf" },
-      { name: "IMQ", pdf: "https://www.impreseriunite.it/angelico-certificato-imq-pdf" },
+      { name: "ISO 14000", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-14000.pdf" },
+      { name: "ISO 45001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-45001.pdf" },
+      { name: "ISO 50001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-50001.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-9001.pdf" },
+      { name: "SA 8000", pdf: "/assets/certifications/costruzioni-angelico/angelico-sa-8000.pdf" },
+      { name: "SOA", pdf: "/assets/certifications/costruzioni-angelico/angelico-soa.pdf" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-uni-pdr-125.pdf" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-politica-parita-genere.pdf" },
+      { name: "ESG Rating", pdf: "/assets/certifications/costruzioni-angelico/angelico-esg-rating.pdf" },
     ],
     projects: [
       {
@@ -135,11 +135,14 @@ export const companies: Company[] = [
       "Impianti continuità e MT/BT"
     ],
     certifications: [
-      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_45001-pdf" },
-      { name: "SOA", pdf: "https://www.impreseriunite.it/nuova-css-certificato-soa-pdf" },
-      { name: "SA 8000", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-sa_8000-pdf" },
-      { name: "ISO 14001", pdf: "https://www.impreseriunite.it/nuova-css-certificato-ISO_14001-pdf" },
-      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_9001-pdf" },
+      { name: "ISO 14001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-14001.pdf" },
+      { name: "ISO 45001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-45001.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-9001.pdf" },
+      { name: "SA 8000", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-sa-8000.pdf" },
+      { name: "SOA", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-soa.pdf" },
+      { name: "Attestato FGAS", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-fgas.pdf" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-pdr125.pdf" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-politica-parita-genere.pdf" },
     ],
     projects: [
       {
