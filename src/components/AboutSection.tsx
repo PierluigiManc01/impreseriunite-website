@@ -100,7 +100,7 @@ const FeatureBlock = ({
   const singleFeatureImage = feature.images.length === 1 ? feature.images[0] : null;
 
   return (
-    <div ref={ref} className="min-h-[30vh] md:min-h-[40vh] flex items-stretch justify-center py-3 md:py-3">
+    <div ref={ref} className="min-h-[30vh] md:min-h-[40vh] flex items-stretch justify-center py-10 md:py-16">
       <motion.div
         style={{ opacity, scale, y }}
         className="w-full max-w-xl md:max-w-7xl xl:max-w-[1480px] mx-auto px-4 md:px-8 xl:px-10 origin-center h-full min-h-full flex flex-col"
@@ -112,7 +112,7 @@ const FeatureBlock = ({
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 justify-center md:justify-start">
               <motion.div
                 style={{ rotate: iconRotate, opacity: mediaOpacity }}
-                className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 shadow-lg"
+                className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/10 flex items-center justify-center shrink-0"
               >
                 <Icon className="w-5 h-5 md:w-7 md:h-7 text-primary" />
               </motion.div>
@@ -150,7 +150,7 @@ const FeatureBlock = ({
                 {feature.images.map((img) => (
                   <div
                     key={img.alt}
-                    className="bg-card rounded-lg md:rounded-xl p-3 md:p-5 shadow-[var(--card-shadow)] border border-border flex items-center justify-center hover:shadow-[var(--card-shadow-hover)] transition-shadow"
+                    className="bg-card rounded-lg md:rounded-xl p-4 md:p-6 border border-border/70 flex items-center justify-center transition-colors hover:border-primary/30"
                   >
                     <img
                       src={img.src}
@@ -184,10 +184,10 @@ const FeatureBlock = ({
 
 const AboutSection = () => {
   return (
-    <section id="chi-siamo" className="relative bg-background overflow-hidden pt-14 pb-1 md:pt-20 md:pb-2">
+    <section id="chi-siamo" className="relative bg-background overflow-hidden pt-14 pb-6 md:pt-20 md:pb-10">
       <div className="container pb-1">
         <ScrollReveal>
-          <div className="text-center max-w-4xl mx-auto mb-6 px-4">
+          <div className="text-center max-w-4xl mx-auto mb-8 md:mb-12 px-4">
             <p className="section-eyebrow mb-3">
               Chi Siamo
             </p>
@@ -199,7 +199,7 @@ const AboutSection = () => {
       </div>
 
       <div className="relative">
-        <div className="space-y-8 md:space-y-12">
+        <div className="divide-y divide-border/70">
           {features.map((f, i) => (
             <FeatureBlock key={f.title} feature={f} index={i} />
           ))}

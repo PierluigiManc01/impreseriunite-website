@@ -12,10 +12,10 @@ const HistoryTimeline = () => {
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
   return (
-    <section ref={sectionRef} id="storia" className="section-shell mb-0 mt-0 bg-background overflow-hidden relative">
+    <section ref={sectionRef} id="storia" className="section-shell bg-background overflow-hidden relative">
       <div className="container">
         <ScrollReveal>
-          <div className="text-center max-w-4xl mx-auto mb-8 md:mb-10 px-4 md:px-0">
+          <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16 px-4 md:px-0">
             <p className="section-eyebrow mb-3">
               La Nostra Storia
             </p>
@@ -26,30 +26,26 @@ const HistoryTimeline = () => {
           </div>
         </ScrollReveal>
 
-        <div className="relative max-w-8xl mx-auto px-0 md:px-0 mt-5 md:mt-10">
-          {/* Static line bg */}
-          <div className="absolute left-3 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-px" />
-          {/* Animated fill */}
+        {/* Single-column list: a plain vertical line with square markers,
+            no left/right zigzag — simpler to scan than the prior layout. */}
+        <div className="relative max-w-3xl mx-auto mt-8 md:mt-16 pl-8 md:pl-10">
+          <div className="absolute left-2 md:left-2.5 top-1 bottom-1 w-px bg-border" />
           <motion.div
-            className="absolute left-3 md:left-1/2 top-0 w-px bg-primary md:-translate-x-px origin-top"
+            className="absolute left-2 md:left-2.5 top-1 w-px bg-primary origin-top"
             style={{ height: lineHeight }}
           />
 
-          {history.timeline.map((item, i) => (
-            <ScrollReveal
-              key={item.year}
-              scaleRange={[0.9, 1.05, 0.9]}
-              fadeOut={false}
-            >
-              <div className={`relative flex items-start mb-12 md:mb-16 lg:mb-20 md:w-full`}>
-                <div className="absolute left-3 md:left-1/2 w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 bg-primary rounded-full -translate-x-1/2 md:-translate-x-2 lg:-translate-x-2.5 mt-2 md:mt-3 ml-2 md:ml-0 ring-4 ring-background z-10" />
-                <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 lg:pr-24 md:text-right" : "md:pl-16 lg:pl-24 md:ml-auto"}`}>
-                  <span className="inline-block font-mono text-sm md:text-base font-semibold text-primary bg-primary/10 px-3 md:px-5 py-1 md:py-1.5 rounded-full mb-3 md:mb-4">
-                    {item.year}
-                  </span>
-                  <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground mb-2 md:mb-4">{item.title}</h3>
-                  <p className="section-copy">{item.desc}</p>
-                </div>
+          {history.timeline.map((item) => (
+            <ScrollReveal key={item.year} scaleRange={[0.98, 1, 1]} fadeOut={false}>
+              <div className="relative pb-14 md:pb-16 last:pb-0">
+                <div className="absolute -left-8 md:-left-10 top-1.5 w-3 h-3 bg-primary" />
+                <span className="font-heading text-3xl md:text-4xl font-bold text-primary tracking-wide">
+                  {item.year}
+                </span>
+                <h3 className="font-heading font-semibold text-xl md:text-2xl text-foreground mt-2 mb-3">
+                  {item.title}
+                </h3>
+                <p className="section-copy max-w-2xl">{item.desc}</p>
               </div>
             </ScrollReveal>
           ))}

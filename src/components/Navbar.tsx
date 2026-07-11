@@ -7,10 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
   { label: "Home", href: "/#home" },
   { label: "Chi Siamo", href: "/#chi-siamo" },
-  { label: "Committenti", href: "/#committenti" },
-  { label: "Aziende", href: "/#aziende" },
   { label: "Progetti", href: "/#progetti" },
-  { label: "Storia", href: "/#storia" },
   { label: "Contatti", href: "/#contatti" },
 ];
 
@@ -35,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 shadow-sm backdrop-blur-xl">
+    <nav className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 backdrop-blur-xl">
       <div className="container flex h-20 items-center justify-between gap-4 md:h-24">
         {isHome ? (
           <a
@@ -64,22 +61,22 @@ const Navbar = () => {
             />
           </Link>
         )}
-        <div className="hidden items-center gap-0.5 lg:flex">
+        <div className="hidden items-center gap-8 lg:flex xl:gap-10">
           {links.map((l) =>
             isHome ? (
               <a
-                    key={l.href}
-                    href={l.href.replace("/", "")}
-                    onClick={handleClick}
-                    className="inline-flex min-h-11 items-center rounded-md px-2 text-sm md:text-lg font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
-                  >
+                key={l.href}
+                href={l.href.replace("/", "")}
+                onClick={handleClick}
+                className="micro-label inline-flex min-h-11 items-center border-b border-transparent px-1 font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 {l.label}
               </a>
             ) : (
               <Link
                 key={l.href}
                 to={l.href}
-                className="inline-flex min-h-11 items-center rounded-md px-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
+                className="micro-label inline-flex min-h-11 items-center border-b border-transparent px-1 font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {l.label}
               </Link>
@@ -105,14 +102,14 @@ const Navbar = () => {
             id="mobile-navigation"
             className="overflow-hidden border-b border-border bg-card lg:hidden"
           >
-            <div className="container flex flex-col gap-1 py-3">
+            <div className="container flex flex-col divide-y divide-border py-2">
               {links.map((l) =>
                 isHome ? (
                   <a
                     key={l.href}
                     href={l.href.replace("/", "")}
                     onClick={handleClick}
-                    className="flex min-h-11 items-center rounded-md px-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="flex min-h-11 items-center px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:text-primary"
                   >
                     {l.label}
                   </a>
@@ -121,7 +118,7 @@ const Navbar = () => {
                     key={l.href}
                     to={l.href}
                     onClick={() => setOpen(false)}
-                    className="flex min-h-11 items-center rounded-md px-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="flex min-h-11 items-center px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:text-primary"
                   >
                     {l.label}
                   </Link>

@@ -21,14 +21,14 @@ const ClientLogosMarquee = () => {
   const duplicated = [...clients, ...clients];
 
   return (
-    <section id="committenti" className="pt-6 pb-14 md:pt-8 md:pb-18 border-y border-border bg-background overflow-hidden">
-      <div className="container mb-1">
+    <section id="committenti" className="pt-14 pb-16 md:pt-20 md:pb-24 border-y border-border bg-background overflow-hidden">
+      <div className="container mb-8 md:mb-12">
         <p className="section-eyebrow text-center text-muted-foreground">
           I nostri committenti
         </p>
       </div>
 
-      <div className="relative mb-4 mt-0">
+      <div className="relative mb-0 mt-0">
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
 

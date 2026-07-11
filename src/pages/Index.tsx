@@ -1,25 +1,29 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import CompaniesSection from "@/components/CompaniesSection";
+import CertificationsSection from "@/components/CertificationsSection";
 import HistoryTimeline from "@/components/HistoryTimeline";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
-import CompaniesSection from "@/components/CompaniesSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import ProjectsShowcase from "@/components/ProjectsShowcase";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
-const Index = () => (
-  <div className="min-h-screen overflow-x-hidden">
-    <Navbar />
-    <HeroSection />
-    <AboutSection />
-    <ClientLogosMarquee />
-    <CompaniesSection />
-    <ProjectsSection />
-    <HistoryTimeline />
-    <ContactSection />
-    <Footer />
-  </div>
-);
+const Index = () => {
+  return (
+    <div className="min-h-screen overflow-x-hidden">
+      <Navbar />
+      <HeroSection />
+      <AboutSection />
+      <CompaniesSection />
+      <CertificationsSection />
+      <HistoryTimeline />
+      <ClientLogosMarquee />
+      <ProjectsShowcase />
+      <ContactSection />
+      <Footer />
+    </div>
+  );
+};
 
 export default Index;
