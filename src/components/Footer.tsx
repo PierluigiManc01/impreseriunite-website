@@ -1,4 +1,5 @@
 import logo from "@/assets/impreseriunite-long-logo-removebg.png";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   { label: "Home", href: "/#home" },
@@ -7,9 +8,14 @@ const footerLinks = [
   { label: "Contatti", href: "/#contatti" },
 ];
 
+const complianceLinks = [
+  { label: "Costruzioni Angelico", href: "/certificazioni#costruzioni-angelico" },
+  { label: "Nuova C.C.S.", href: "/certificazioni#nuova-ccs" },
+];
+
 const Footer = () => (
   <footer className="border-t border-border bg-foreground text-primary-foreground">
-    <div className="container grid gap-12 py-16 md:grid-cols-[1.2fr_0.8fr_0.8fr] md:gap-16 md:py-24">
+    <div className="container grid gap-12 py-16 md:grid-cols-[1.1fr_0.7fr_0.7fr_0.8fr] md:gap-12 md:py-24">
       <div>
         <img
           src={logo}
@@ -34,6 +40,29 @@ const Footer = () => (
             >
               {link.label}
             </a>
+          ))}
+        </nav>
+      </div>
+
+      <div>
+        <p className="micro-label mb-5 text-primary-foreground/60">
+          Compliance
+        </p>
+        <nav className="grid gap-3">
+          <Link
+            to="/certificazioni"
+            className="text-base text-primary-foreground/75 transition-colors hover:text-primary-foreground"
+          >
+            Certificazioni
+          </Link>
+          {complianceLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className="text-base text-primary-foreground/75 transition-colors hover:text-primary-foreground"
+            >
+              {link.label}
+            </Link>
           ))}
         </nav>
       </div>

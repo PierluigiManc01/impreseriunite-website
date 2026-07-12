@@ -8,8 +8,11 @@ const links = [
   { label: "Home", href: "/#home" },
   { label: "Chi Siamo", href: "/#chi-siamo" },
   { label: "Progetti", href: "/#progetti" },
+  { label: "Certificazioni", href: "/certificazioni" },
   { label: "Contatti", href: "/#contatti" },
 ];
+
+const isAnchorLink = (href: string) => href.startsWith("/#");
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -63,7 +66,7 @@ const Navbar = () => {
         )}
         <div className="hidden items-center gap-8 lg:flex xl:gap-10">
           {links.map((l) =>
-            isHome ? (
+            isHome && isAnchorLink(l.href) ? (
               <a
                 key={l.href}
                 href={l.href.replace("/", "")}
@@ -76,6 +79,7 @@ const Navbar = () => {
               <Link
                 key={l.href}
                 to={l.href}
+                onClick={handleClick}
                 className="micro-label inline-flex min-h-11 items-center border-b border-transparent px-1 font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {l.label}
@@ -104,7 +108,7 @@ const Navbar = () => {
           >
             <div className="container flex flex-col divide-y divide-border py-2">
               {links.map((l) =>
-                isHome ? (
+                isHome && isAnchorLink(l.href) ? (
                   <a
                     key={l.href}
                     href={l.href.replace("/", "")}

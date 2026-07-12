@@ -13,6 +13,12 @@ export type Certification = {
   pdf?: string;
 };
 
+export type SoaCategory = {
+  code: string;
+  classifica: string;
+  description: string;
+};
+
 export type Company = {
   id: string;
   name: string;
@@ -27,6 +33,7 @@ export type Company = {
   pec: string;
   email: string;
   certifications: Certification[];
+  soaCategories?: SoaCategory[];
   projects: Project[];
   highlights?: string[];
 };
@@ -51,6 +58,12 @@ export const companies: Company[] = [
       "Grandi opere infrastrutturali",
       "Edilizia pubblica e penitenziaria",
       "Progetti immobiliari privati"
+    ],
+    soaCategories: [
+      { code: "OG 1", classifica: "VII", description: "Edifici civili e industriali" },
+      { code: "OS 3", classifica: "III", description: "Impianti idrico-sanitari, cucine, lavanderie" },
+      { code: "OS 28", classifica: "II", description: "Impianti termici e di condizionamento" },
+      { code: "OS 30", classifica: "III-bis", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
       { name: "ISO 45001", pdf: "https://www.impreseriunite.it/ANGELICO-certificatoISO_45001-pdf" },
@@ -133,6 +146,15 @@ export const companies: Company[] = [
       "Impiantistica fotovoltaica e tecnologica",
       "Sistemi di sicurezza e illuminazione",
       "Impianti continuità e MT/BT"
+    ],
+    soaCategories: [
+      { code: "OG 1", classifica: "VIII", description: "Edifici civili e industriali" },
+      { code: "OG 3", classifica: "II", description: "Strade, autostrade, ponti, viadotti, ferrovie, metropolitane" },
+      { code: "OG 9", classifica: "III-bis", description: "Impianti per la produzione di energia elettrica" },
+      { code: "OG 10", classifica: "III-bis", description: "Impianti per la trasformazione e distribuzione di energia elettrica e per la pubblica illuminazione" },
+      { code: "OS 3", classifica: "III", description: "Impianti idrico-sanitari, cucine, lavanderie" },
+      { code: "OS 28", classifica: "III", description: "Impianti termici e di condizionamento" },
+      { code: "OS 30", classifica: "V", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
       { name: "ISO 45001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_45001-pdf" },
