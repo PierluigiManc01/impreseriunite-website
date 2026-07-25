@@ -40,10 +40,10 @@ const Certifications = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-28 md:pt-36 pb-14 md:pb-20 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-32 md:pt-40 pb-14 md:pb-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
-            to="/"
+            to="/#home"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -72,28 +72,37 @@ const Certifications = () => {
         >
           <div className="container">
             <ScrollReveal>
-              <div className="flex flex-wrap items-center gap-4 mb-10 border-l-4 border-primary pl-6">
+              <div className="flex flex-wrap items-center gap-5 mb-12 border-l-4 border-primary pl-6">
                 {logoMap[company.id] && (
                   <img
                     src={logoMap[company.id]}
                     alt={`${company.name} logo`}
-                    className="h-10 w-auto object-contain"
+                    className="h-14 md:h-16 w-auto object-contain"
                   />
                 )}
                 <div>
-                  <h2 className="panel-title">{company.name}</h2>
-                  <p className="section-copy">{company.role}</p>
+                  <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight tracking-tight">
+                    {company.name}
+                  </h2>
+                  <p className="section-copy md:text-lg">{company.role}</p>
                 </div>
               </div>
             </ScrollReveal>
 
             {company.soaCategories && company.soaCategories.length > 0 && (
-              <div className="mb-12">
-                <p className="micro-label text-primary mb-1">Attestazione SOA</p>
-                <p className="section-copy mb-6">
+              <div className="mb-16">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+                  <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground">
+                    Attestazione SOA
+                  </h3>
+                  <span className="micro-label text-primary">
+                    {company.soaCategories.length} categorie
+                  </span>
+                </div>
+                <p className="section-copy mb-8">
                   Qualificazione all'esecuzione di lavori pubblici (D.P.R. 207/2010)
                 </p>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                   {company.soaCategories.map((cat, i) => {
                     const Icon = cat.code.startsWith("OG") ? Building2 : Zap;
                     return (
@@ -102,19 +111,25 @@ const Certifications = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: i * 0.05 }}
-                        className="architectural-panel p-6 flex flex-col h-full"
+                        transition={{ delay: i * 0.04 }}
+                        className="architectural-panel p-5 flex flex-col h-full"
                       >
-                        <div className="w-11 h-11 flex items-center justify-center rounded-md bg-primary/10 text-primary mb-4 shrink-0">
-                          <Icon className="w-5 h-5" />
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-11 h-11 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span className="font-heading font-bold text-xl md:text-2xl text-foreground">
+                            Cat. {cat.code}
+                          </span>
                         </div>
-                        <span className="panel-title text-base mb-2">Cat. {cat.code}</span>
-                        <p className="text-sm text-muted-foreground font-body flex-grow">
+                        <p className="text-sm md:text-base leading-snug text-muted-foreground font-body flex-grow">
                           {cat.description}
                         </p>
-                        <div className="flex justify-between items-center pt-4 mt-4 border-t border-border">
-                          <span className="micro-label text-muted-foreground">Classifica</span>
-                          <span className="px-2.5 py-1 bg-accent text-accent-foreground text-xs font-bold rounded uppercase">
+                        <div className="flex justify-between items-center gap-2 pt-3.5 mt-3.5 border-t border-border">
+                          <span className="font-body text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                            Classifica
+                          </span>
+                          <span className="px-2.5 py-1 bg-primary text-primary-foreground text-sm font-bold rounded uppercase">
                             {cat.classifica}
                           </span>
                         </div>
@@ -125,8 +140,15 @@ const Certifications = () => {
               </div>
             )}
 
-            <p className="micro-label text-primary mb-6">Certificazioni di Sistema</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-8">
+              <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground">
+                Certificazioni di Sistema
+              </h3>
+              <span className="micro-label text-primary">
+                {company.certifications.length} attestati
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {company.certifications.map((cert, i) => (
                 <motion.a
                   key={cert.name}
@@ -136,17 +158,16 @@ const Certifications = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="architectural-panel group p-6 flex flex-col gap-4"
+                  transition={{ delay: i * 0.04 }}
+                  className="architectural-panel group p-5 flex items-center gap-4"
                 >
-                  <div className="w-11 h-11 flex items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
+                  <div className="w-11 h-11 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                     <FileText className="w-5 h-5" />
                   </div>
-                  <span className="panel-title text-base">{cert.name}</span>
-                  <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-body font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    Visualizza documento
-                    <ExternalLink className="w-3.5 h-3.5" />
+                  <span className="font-heading font-bold text-base md:text-lg leading-snug text-foreground group-hover:text-primary transition-colors">
+                    {cert.name}
                   </span>
+                  <ExternalLink className="ml-auto w-5 h-5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.a>
               ))}
             </div>

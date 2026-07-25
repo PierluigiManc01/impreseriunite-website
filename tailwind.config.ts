@@ -11,16 +11,17 @@ export default {
       padding: {
         DEFAULT: "1rem",
         md: "2rem",
+        xl: "3rem",
       },
       screens: {
-        "2xl": "1400px",
+        "2xl": "1720px",
       },
     },
     extend: {
       fontFamily: {
         heading: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

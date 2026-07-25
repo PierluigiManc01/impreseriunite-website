@@ -8,9 +8,15 @@ import { cn } from "@/lib/utils";
 
 type ProjectEntry = { project: Project; company: Company };
 
-// Flatten every company's projects once, preserving authored order
+// The showcase only covers the two operating companies; the holding
+// (Imprese Riunite) keeps its projects on its own detail page.
+const showcaseCompanies = companies.filter(
+  (company) => company.id === "costruzioni-angelico" || company.id === "nuova-ccs"
+);
+
+// Flatten the showcased companies' projects once, preserving authored order
 // (company order as in data, then project order within each company).
-const allProjectEntries: ProjectEntry[] = companies.flatMap((company) =>
+const allProjectEntries: ProjectEntry[] = showcaseCompanies.flatMap((company) =>
   company.projects.map((project) => ({ project, company }))
 );
 
@@ -38,16 +44,11 @@ const ProjectsShowcase = () => {
     <section id="progetti" className="section-shell bg-background">
       <div className="container">
         <ScrollReveal>
-          <div className="mb-8 grid gap-4 px-4 sm:px-0 md:grid-cols-[0.85fr_1.15fr] md:items-end">
-            <div>
-              <p className="section-eyebrow mb-3">Progetti</p>
-              <h2 className="section-title">
-                Cantieri, committenti e risultati verificabili
-              </h2>
-            </div>
-            <p className="section-copy max-w-2xl md:ml-auto">
-              Filtra per azienda per esplorare i cantieri del gruppo, con evidenza di luogo, committente e importi ove disponibili.
-            </p>
+          <div className="mb-8 px-4 sm:px-0">
+            <p className="section-eyebrow mb-3">Progetti</p>
+            <h2 className="section-title max-w-6xl">
+              Cantieri e risultati verificabili
+            </h2>
           </div>
         </ScrollReveal>
 
@@ -62,7 +63,7 @@ const ProjectsShowcase = () => {
             onClick={() => selectCompany("all")}
             aria-pressed={activeCompanyId === "all"}
             className={cn(
-              "min-h-11 rounded-full px-4 py-2 font-mono text-xs font-medium uppercase tracking-[0.12em] transition-colors md:text-sm",
+              "min-h-11 rounded-xl px-5 py-2 font-body text-sm font-medium uppercase tracking-[0.12em] transition-colors md:text-base",
               activeCompanyId === "all"
                 ? "bg-primary text-primary-foreground"
                 : "border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"
@@ -70,14 +71,14 @@ const ProjectsShowcase = () => {
           >
             Tutte
           </button>
-          {companies.map((company) => (
+          {showcaseCompanies.map((company) => (
             <button
               key={company.id}
               type="button"
               onClick={() => selectCompany(company.id)}
               aria-pressed={activeCompanyId === company.id}
               className={cn(
-                "min-h-11 rounded-full px-4 py-2 font-mono text-xs font-medium uppercase tracking-[0.12em] transition-colors md:text-sm",
+                "min-h-11 rounded-xl px-5 py-2 font-body text-sm font-medium uppercase tracking-[0.12em] transition-colors md:text-base",
                 activeCompanyId === company.id
                   ? "bg-primary text-primary-foreground"
                   : "border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"
@@ -88,14 +89,72 @@ const ProjectsShowcase = () => {
           ))}
         </div>
 
-        <div className="grid gap-x-10 px-4 sm:px-0 lg:grid-cols-2 lg:items-start lg:gap-x-16">
+        {/* Mobile/tablet cards: each project carries its own gallery and facts. */}
+        <div className="grid gap-5 px-4 sm:grid-cols-2 sm:px-0 lg:hidden">
+          {filtered.map(({ project, company }, i) => (
+            <article
+              key={`${company.id}-${project.title}`}
+              data-testid="mobile-project-card"
+              className="overflow-hidden rounded-xl border border-border bg-card shadow-sm"
+            >
+              <div className="aspect-video overflow-hidden bg-accent/60">
+                {project.images.length > 0 ? (
+                  <ProjectImageCarousel
+                    images={project.images}
+                    alt={project.title}
+                    className="h-full"
+                    indicatorVariant="counter"
+                    autoplay={false}
+                    eagerFirstImage={i === 0}
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center p-6">
+                    <p className="micro-label text-center text-accent-foreground">
+                      Archivio storico
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-4 sm:p-5">
+                <p className="micro-label mb-2 flex items-center gap-1.5 text-muted-foreground">
+                  <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
+                  <span>{project.location} — {company.name}</span>
+                </p>
+
+                <h3 className="font-heading text-xl font-bold leading-tight text-foreground sm:text-2xl">
+                  <Link
+                    to={`/azienda/${company.id}`}
+                    className="rounded-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  >
+                    {project.title}
+                  </Link>
+                </h3>
+
+                <dl className="mt-4 grid gap-3 border-t border-border pt-4 font-body text-sm">
+                  <div>
+                    <dt className="micro-label text-muted-foreground">Committente</dt>
+                    <dd className="mt-1 leading-snug text-foreground">{project.client}</dd>
+                  </div>
+                  <div>
+                    <dt className="micro-label text-muted-foreground">Importo</dt>
+                    <dd className="mt-1 font-semibold tabular-nums text-foreground">
+                      {project.amount || "Non disponibile"}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="hidden gap-x-10 px-4 sm:px-0 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-16">
           {/* Row list */}
           <div className="divide-y divide-border min-w-0">
             {filtered.map(({ project, company }, i) => (
               <Link
                 key={`${company.id}-${project.title}`}
                 to={`/azienda/${company.id}`}
-                onClick={() => window.scrollTo(0, 0)}
                 onMouseEnter={() => setFocusedIndex(i)}
                 onFocus={() => setFocusedIndex(i)}
                 className="group flex items-center justify-between gap-5 rounded-sm py-6 outline-none transition-colors focus-visible:bg-accent/40 sm:py-7"
@@ -107,30 +166,11 @@ const ProjectsShowcase = () => {
                       {project.location} — {company.name}
                     </span>
                   </span>
-                  <h3 className="font-heading text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-3xl">
+                  <h3 className="font-heading text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-3xl xl:text-4xl">
                     {project.title}
                   </h3>
                 </div>
 
-                {/* Mobile/touch fallback: hover has no equivalent on touch, so show
-                    a thumbnail inline per row instead of relying on the preview panel. */}
-                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-md bg-accent/60 sm:h-24 sm:w-24 lg:hidden">
-                  {project.images.length > 0 ? (
-                    <img
-                      src={project.images[0]}
-                      alt={project.title}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center p-1.5">
-                      <span className="text-center font-mono text-[9px] uppercase leading-tight text-accent-foreground">
-                        Archivio storico
-                      </span>
-                    </div>
-                  )}
-                </div>
               </Link>
             ))}
           </div>
@@ -156,24 +196,40 @@ const ProjectsShowcase = () => {
             </div>
 
             {currentEntry && (
-              <div className="mt-4 space-y-1.5 font-mono text-xs text-muted-foreground">
-                <p className="truncate">
-                  <span className="text-foreground/70">committente&gt;</span> {currentEntry.project.client}
-                </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  {currentEntry.project.amount && (
-                    <span>
-                      <span className="text-foreground/70">importo&gt;</span> {currentEntry.project.amount}
-                    </span>
-                  )}
-                  {currentEntry.project.date && (
-                    <span className="inline-flex items-center gap-1.5">
-                      <Calendar className="h-3.5 w-3.5 text-primary" />
-                      {currentEntry.project.date}
-                    </span>
-                  )}
+              <dl
+                data-testid="desktop-project-facts"
+                className="mt-5 grid grid-cols-[minmax(0,1fr)_max-content] gap-x-8 gap-y-4 border-t border-border pt-5 font-body"
+              >
+                <div className="min-w-0">
+                  <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                    Committente
+                  </dt>
+                  <dd className="mt-1.5 text-lg font-semibold leading-snug text-foreground xl:text-xl">
+                    {currentEntry.project.client}
+                  </dd>
                 </div>
-              </div>
+
+                {currentEntry.project.amount && (
+                  <div className="text-right">
+                    <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                      Importo
+                    </dt>
+                    <dd className="mt-1.5 whitespace-nowrap font-heading text-xl font-bold tabular-nums text-foreground xl:text-2xl">
+                      {currentEntry.project.amount}
+                    </dd>
+                  </div>
+                )}
+
+                {currentEntry.project.date && (
+                  <div className="col-span-2">
+                    <dt className="sr-only">Data</dt>
+                    <dd className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                      <Calendar className="h-4 w-4 text-primary" />
+                      {currentEntry.project.date}
+                    </dd>
+                  </div>
+                )}
+              </dl>
             )}
           </div>
         </div>

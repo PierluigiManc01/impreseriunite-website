@@ -1,52 +1,104 @@
-import { Fragment, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Globe, Landmark, Zap, Award } from "lucide-react";
+import { Fragment } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { useIsMobile } from "@/hooks/use-mobile";
-type FeatureImage = { src: string; alt: string };
+import { history } from "@/data/companies";
+import { cn } from "@/lib/utils";
 
 import cantiere from "@/assets/cantiere.webp";
 import iso from "@/assets/logo-iso-01.webp";
 import soa from "@/assets/logo-soa.jpg";
 import sa from "@/assets/SA-logo.webp";
 import international from "@/assets/internazionali.jpg";
-import data_center from "@/assets/data_center.jpg";
+import dataCenter from "@/assets/data_center.jpg";
 
-const features = [
+type ChapterVisual =
+  | {
+      kind: "image";
+      src: string;
+      alt: string;
+      caption: string;
+    }
+  | {
+      kind: "certifications";
+      caption: string;
+    };
+
+type StoryChapter = {
+  year: string;
+  milestone: string;
+  capability: string;
+  historyText: string;
+  historyShort: string;
+  capabilityText: string;
+  capabilityShort: string;
+  visual: ChapterVisual;
+};
+
+const storyChapters: StoryChapter[] = [
   {
-    icon: Globe,
-    title: "Esperienza Internazionale",
-    desc: "Dal 1976 nel settore delle grandi opere civili, marittime e idrauliche. Progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah; e importanti infrastrutture in Italia come il <strong>Porto Turistico Riva di Traiano</strong>.",
-    images: [{ src: international, alt: "Progetti Internazionali" }] as FeatureImage[],
-    mainImage: cantiere,         
-    accent: "from-primary/20 to-primary/5",
+    year: history.timeline[0].year,
+    milestone: history.timeline[0].title,
+    capability: "Esperienza internazionale",
+    historyText: history.timeline[0].desc,
+    historyShort: history.timeline[0].short ?? history.timeline[0].desc,
+    capabilityText:
+      "Dal 1976 il gruppo opera nelle grandi opere civili, marittime e idrauliche. Ha realizzato progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah; e in Italia il <strong>Porto Turistico Riva di Traiano</strong>.",
+    capabilityShort:
+      "Dalle origini, grandi opere civili, marittime e idrauliche in <strong>Arabia Saudita</strong> e in Italia.",
+    visual: {
+      kind: "image",
+      src: international,
+      alt: "Progetti internazionali del gruppo Imprese Riunite",
+      caption: "Arabia Saudita · Italia",
+    },
   },
   {
-    icon: Landmark,
-    title: "Opere Pubbliche",
-    desc: "Collaborazione consolidata con Roma Capitale, Ministeri della Giustizia e della Difesa e soprattutto con ENAV. Decenni di esperienza nella realizzazione di strutture detentive, ristrutturazioni istituzionali e opere infrastrutturali strategiche come la pista di atterraggio dell'aeroporto <strong>Ronchi Dei Legionari (Trieste)</strong>.",
-    images: [] as FeatureImage[],
-    mainImage: cantiere,
-    accent: "from-accent/60 to-accent/20",
+    year: history.timeline[1].year,
+    milestone: history.timeline[1].title,
+    capability: "Opere pubbliche",
+    historyText: history.timeline[1].desc,
+    historyShort: history.timeline[1].short ?? history.timeline[1].desc,
+    capabilityText:
+      "La nuova fase consolida collaborazioni con Roma Capitale, Ministeri della Giustizia e della Difesa ed <strong>ENAV</strong>. Il gruppo realizza strutture detentive, sedi istituzionali e infrastrutture strategiche come la pista di <strong>Ronchi dei Legionari</strong>.",
+    capabilityShort:
+      "Costruzioni Angelico diventa riferimento per istituzioni, strutture detentive e infrastrutture nazionali.",
+    visual: {
+      kind: "image",
+      src: cantiere,
+      alt: "Cantiere di una grande opera pubblica",
+      caption: "Costruzioni Angelico",
+    },
   },
   {
-    icon: Zap,
-    title: "Impiantistica Avanzata",
-    desc: "Impianti fotovoltaici, gruppi elettrogeni, gruppi di continuità e cabine di trasformazione MT/BT. Installazione e manutenzione di impianti elettrici, di sicurezza, illuminazione e autonomia industriale.",
-    images: [{ src: data_center, alt: "Data Center" }] as FeatureImage[],
-    mainImage: cantiere,   
-    accent: "from-primary/10 to-transparent",
+    year: history.timeline[2].year,
+    milestone: history.timeline[2].title,
+    capability: "Impiantistica avanzata",
+    historyText: history.timeline[2].desc,
+    historyShort: history.timeline[2].short ?? history.timeline[2].desc,
+    capabilityText:
+      "Nuova C.C.S. sviluppa competenze in impianti fotovoltaici, gruppi elettrogeni e di continuità, cabine di trasformazione MT/BT, sicurezza, illuminazione e autonomia industriale.",
+    capabilityShort:
+      "Energia, continuità e tecnologia: fotovoltaico, cabine MT/BT, sicurezza e illuminazione.",
+    visual: {
+      kind: "image",
+      src: dataCenter,
+      alt: "Impiantistica avanzata in un data center",
+      caption: "Nuova C.C.S.",
+    },
   },
   {
-    icon: Award,
-    title: "Qualità Certificata",
-    desc: "I nostri standard di eccellenza sono garantiti dalle più importanti certificazioni di settore, a testimonianza del nostro impegno verso qualità, sicurezza e sostenibilità.",
-    images: [
-      { src: iso, alt: "ISO 9001" },
-      { src: sa, alt: "SA 8000" },
-      { src: soa, alt: "SOA" },
-    ],
-    accent: "from-primary/15 to-accent/30",
+    year: history.timeline[3].year,
+    milestone: history.timeline[3].title,
+    capability: "Qualità certificata",
+    historyText: history.timeline[3].desc,
+    historyShort: history.timeline[3].short ?? history.timeline[3].desc,
+    capabilityText:
+      "Competenze integrate e leadership familiare sono sostenute dalle principali certificazioni di settore, a garanzia di qualità, sicurezza, responsabilità sociale e solidità operativa.",
+    capabilityShort:
+      "Team specializzato e standard certificati per qualità, sicurezza e responsabilità sociale.",
+    visual: {
+      kind: "certifications",
+      caption: "Standard di gruppo",
+    },
   },
 ];
 
@@ -65,148 +117,139 @@ const renderRichText = (text: string) =>
     return <Fragment key={`${part}-${index}`}>{part.replace(/<[^>]*>/g, "")}</Fragment>;
   });
 
-/* ── Alternating Feature Block ── */
-const FeatureBlock = ({
-  feature,
-  index,
-}: {
-  feature: (typeof features)[0];
-  index: number;
-}) => {
-  const isMobile = useIsMobile();
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center center", "end start"],
-  });
-
-  // Dampened values on mobile
-  const mScale = isMobile ? [0.96, 1.04, 1.04, 0.96] : [0.92, 1, 1, 0.92];
-  const mY = isMobile ? [40, 0, 0, -20] : [80, 0, 0, -40];
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.1, 1, 1, 0.1]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], mScale);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], mY);
-  const color = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    ["hsl(215, 16%, 47%)", "hsl(217, 91%, 50%)", "hsl(217, 91%, 50%)", "hsl(215, 16%, 47%)"]
-  );
-  const mediaOpacity = useTransform(scrollYProgress, [0.15, 0.35, 0.65, 0.85], [0, 1, 1, 0]);
-  const iconRotate = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [-15, 0, 0, 15]);
-
-  const Icon = feature.icon;
-  const isEven = index % 2 === 0;
-  const singleFeatureImage = feature.images.length === 1 ? feature.images[0] : null;
-
-  return (
-    <div ref={ref} className="min-h-[30vh] md:min-h-[40vh] flex items-stretch justify-center py-10 md:py-16">
-      <motion.div
-        style={{ opacity, scale, y }}
-        className="w-full max-w-xl md:max-w-7xl xl:max-w-[1480px] mx-auto px-4 md:px-8 xl:px-10 origin-center h-full min-h-full flex flex-col"
-      >
-        {/* Stack on mobile, alternate two-col on desktop */}
-        <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-5 md:gap-8 xl:gap-10`}>
-          {/* Text side */}
-          <div className="flex-1 text-center md:text-left px-6 md:px-2 xl:px-4">
-            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 justify-center md:justify-start">
-              <motion.div
-                style={{ rotate: iconRotate, opacity: mediaOpacity }}
-                className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/10 flex items-center justify-center shrink-0"
-              >
-                <Icon className="w-5 h-5 md:w-7 md:h-7 text-primary" />
-              </motion.div>
-              <motion.h3
-                style={{ color }}
-                className="text-2xl md:text-3xl font-heading font-bold leading-tight"
-              >
-                {feature.title}
-              </motion.h3>
-            </div>
-            <motion.p
-              style={{ opacity: mediaOpacity }}
-              className="section-copy max-w-2xl mx-auto md:mx-0"
+const ChapterVisualPanel = ({ chapter }: { chapter: StoryChapter }) => {
+  if (chapter.visual.kind === "certifications") {
+    return (
+      <figure className="grid min-h-0 place-items-center py-2 md:aspect-[4/3] md:min-h-96 md:py-0">
+        <div className="grid w-full grid-cols-3 gap-2 md:gap-4">
+          {[
+            { src: iso, alt: "ISO 9001" },
+            { src: sa, alt: "SA 8000" },
+            { src: soa, alt: "SOA" },
+          ].map((certification) => (
+            <div
+              key={certification.alt}
+              className="flex min-h-24 items-center justify-center rounded-xl border border-border/70 bg-background p-3 transition-colors hover:border-primary/30 md:min-h-40 md:bg-card md:p-6"
             >
-              {renderRichText(feature.desc)}
-            </motion.p>
-          </div>
-
-          {/* Visual side */}
-          <motion.div
-            style={{ opacity: mediaOpacity }}
-            className="flex-1 md:flex-[1.15] flex items-center justify-center w-auto max-w-full md:w-full h-full px-4 md:px-0"
-          >
-            {singleFeatureImage ? (
-              <div className="w-full h-full rounded-md md:rounded-3xl bg-muted/20 border border-border/50 flex items-center justify-center relative overflow-hidden">
-                <img
-                  src={singleFeatureImage.src}
-                  alt={singleFeatureImage.alt}
-                  className="w-auto max-w-full md:w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            ) : feature.images.length > 0 ? (
-              <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-xs md:max-w-none ">
-                {feature.images.map((img) => (
-                  <div
-                    key={img.alt}
-                    className="bg-card rounded-lg md:rounded-xl p-4 md:p-6 border border-border/70 flex items-center justify-center transition-colors hover:border-primary/30"
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="h-10 md:h-20 w-auto object-contain"
-                      loading="lazy"
-                      onError={(e) => {
-                        const el = e.target as HTMLImageElement;
-                        el.style.display = "none";
-                        const parent = el.parentElement;
-                        if (parent) {
-                          parent.innerHTML = `<span class="text-xs font-semibold text-primary/70">${img.alt}</span>`;
-                        }
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="w-full h-full rounded-md md:rounded-3xl bg-muted/20 border border-border/50 flex items-center justify-center relative overflow-hidden">
-                <img src={feature.mainImage || ""} alt={feature.title} className="w-auto max-w-full md:w-full h-full object-cover" />
-              </div>
-            )}
-          </motion.div>
-        </div>
-
-      </motion.div>
-    </div>
-  );
-};
-
-const AboutSection = () => {
-  return (
-    <section id="chi-siamo" className="relative bg-background overflow-hidden pt-14 pb-6 md:pt-20 md:pb-10">
-      <div className="container pb-1">
-        <ScrollReveal>
-          <div className="text-center max-w-4xl mx-auto mb-8 md:mb-12 px-4">
-            <p className="section-eyebrow mb-3">
-              Chi Siamo
-            </p>
-            <h2 className="section-title mb-4 md:mb-6">
-              Un gruppo solido al servizio del territorio
-            </h2>
-          </div>
-        </ScrollReveal>
-      </div>
-
-      <div className="relative">
-        <div className="divide-y divide-border/70">
-          {features.map((f, i) => (
-            <FeatureBlock key={f.title} feature={f} index={i} />
+              <img
+                src={certification.src}
+                alt={certification.alt}
+                className="h-10 w-full object-contain md:h-20"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           ))}
         </div>
-      </div>
-    </section>
+      </figure>
+    );
+  }
+
+  return (
+    <figure className="group relative aspect-[5/4] min-h-0 overflow-hidden rounded-xl border border-border/70 bg-card shadow-[var(--card-shadow)] md:aspect-[4/3] md:min-h-96 md:rounded-2xl">
+      <img
+        src={chapter.visual.src}
+        alt={chapter.visual.alt}
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <figcaption className="absolute bottom-3 right-3 rounded-xl bg-foreground/85 px-3 py-2 font-body text-[0.65rem] font-bold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur-md md:bottom-4 md:right-4 md:px-4 md:text-xs md:tracking-[0.14em]">
+        {chapter.visual.caption}
+      </figcaption>
+    </figure>
   );
 };
+
+const AboutSection = () => (
+  <section
+    id="chi-siamo"
+    className="relative overflow-hidden bg-background pb-16 pt-14 md:pb-24 md:pt-20"
+  >
+    <span id="storia" className="absolute top-0 scroll-mt-28" aria-hidden="true" />
+
+    <div className="container">
+      <ScrollReveal>
+        <header className="grid items-end gap-7 px-4 sm:px-0 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
+          <div>
+            <p className="section-eyebrow mb-4">Chi siamo · La nostra storia</p>
+            <h2 className="section-title max-w-6xl">
+              La storia che costruisce chi siamo
+            </h2>
+          </div>
+          <p className="section-copy max-w-xl lg:pb-1">
+            Quattro capitoli intrecciano origini, competenze e risultati: oltre cinquant'anni di
+            esperienza al servizio del territorio.
+          </p>
+        </header>
+      </ScrollReveal>
+
+      <div className="relative mt-10 grid gap-5 px-4 before:absolute before:bottom-20 before:left-[7.5rem] before:top-12 before:hidden before:w-px before:bg-gradient-to-b before:from-primary before:via-primary/35 before:to-border before:content-[''] sm:px-0 lg:mt-16 lg:block lg:before:block">
+        {storyChapters.map((chapter, index) => {
+          const isEven = index % 2 === 0;
+
+          return (
+            <ScrollReveal
+              key={chapter.year}
+              scaleRange={[0.98, 1, 1]}
+              mobileScaleRange={[0.99, 1, 1]}
+              fadeOut={false}
+            >
+              <article
+                className={cn(
+                  "relative grid gap-5 overflow-hidden rounded-2xl border border-border/70 bg-card p-5 shadow-[var(--card-shadow)] sm:p-7 lg:min-h-[36rem] lg:overflow-visible lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-t lg:bg-transparent lg:p-0 lg:py-20 lg:shadow-none lg:first:border-t-0 lg:items-center lg:gap-10 xl:gap-16",
+                  isEven
+                    ? "lg:grid-cols-[7.5rem_minmax(0,0.82fr)_minmax(0,1.18fr)]"
+                    : "lg:grid-cols-[7.5rem_minmax(0,1.18fr)_minmax(0,0.82fr)]"
+                )}
+              >
+                <div className="relative order-1 whitespace-nowrap font-heading text-4xl font-extrabold tabular-nums tracking-tight text-primary lg:w-full lg:self-start lg:pr-6 lg:pt-2 lg:text-right lg:text-5xl">
+                  {chapter.year}
+                </div>
+
+                <div
+                  className={cn(
+                    "contents lg:row-start-1 lg:block lg:max-w-2xl",
+                    isEven ? "lg:col-start-2" : "lg:col-start-3"
+                  )}
+                >
+                  <div className="order-2">
+                    <p className="mb-2 font-body text-[0.7rem] font-bold uppercase tracking-[0.14em] text-primary sm:mb-3 sm:text-sm sm:tracking-[0.16em]">
+                      {chapter.milestone}
+                    </p>
+                    <h3 className="font-heading text-[1.75rem] font-bold leading-[1.05] tracking-tight text-foreground sm:text-4xl xl:text-5xl">
+                      {chapter.capability}
+                    </h3>
+                  </div>
+
+                  <div className="order-4 space-y-3 font-body text-[0.95rem] leading-relaxed text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-lg">
+                    <p>
+                      <span className="md:hidden">{chapter.historyShort}</span>
+                      <span className="hidden md:inline">{chapter.historyText}</span>
+                    </p>
+                    <p>
+                      <span className="md:hidden">{renderRichText(chapter.capabilityShort)}</span>
+                      <span className="hidden md:inline">{renderRichText(chapter.capabilityText)}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className={cn(
+                    "order-3 lg:row-start-1",
+                    isEven ? "lg:col-start-3" : "lg:col-start-2"
+                  )}
+                >
+                  <ChapterVisualPanel chapter={chapter} />
+                </div>
+              </article>
+            </ScrollReveal>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
 
 export default AboutSection;

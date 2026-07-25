@@ -68,7 +68,7 @@ const CompanyDetail = () => {
           <h1 className="text-2xl font-heading font-bold text-foreground mb-4">
             Azienda non trovata
           </h1>
-          <Link to="/" className="text-primary hover:underline">
+          <Link to="/#home" className="text-primary hover:underline">
             Torna alla homepage
           </Link>
         </div>
@@ -81,7 +81,7 @@ const CompanyDetail = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-28 md:pt-36 pb-8 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-32 md:pt-40 pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"
@@ -127,10 +127,12 @@ const CompanyDetail = () => {
                 transition={{ delay: 0.2 }}
                 className="flex-1 w-full lg:w-1/2 shrink-0 flex items-start justify-center lg:justify-end order-1 lg:order-2"
               >
-                <img 
-                  src={logoMap[company.id]} 
-                  alt={`${company.name} logo`} 
-                  className="w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg h-auto object-contain" 
+                {/* Capped at ~340px: the smallest source logo is 300px, so a
+                    larger box would upscale and blur it. */}
+                <img
+                  src={logoMap[company.id]}
+                  alt={`${company.name} logo`}
+                  className="w-full max-w-[300px] sm:max-w-[340px] h-auto object-contain"
                 />
               </motion.div>
             )}
@@ -241,7 +243,7 @@ const CompanyDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="architectural-panel p-6 sm:p-8 min-w-0"
+              className="architectural-panel order-2 min-w-0 p-6 sm:p-8 md:order-1"
             >
               <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-primary" />
@@ -291,7 +293,7 @@ const CompanyDetail = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="architectural-panel p-6 sm:p-8 min-w-0"
+                className="architectural-panel order-1 min-w-0 p-6 sm:p-8 md:order-2"
               >
                 <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />

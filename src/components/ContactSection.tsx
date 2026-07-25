@@ -18,7 +18,7 @@ const ContactSection = () => (
         </div>
       </ScrollReveal>
 
-      <div className="max-w-5xl mx-auto px-4 md:px-0">
+      <div className="max-w-6xl mx-auto px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 border-t border-border">
           <ScrollReveal scaleRange={[0.95, 1.05, 0.95]} fadeOut={false}>
             <div className="pt-10 md:pt-12 md:pr-14 h-full">
@@ -36,7 +36,7 @@ const ContactSection = () => (
                     href="https://www.google.com/maps/search/?api=1&query=Piazzale+Benito+Juarez+10%2F11%2C+00144+Roma+RM%2C+Italia"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-foreground font-body text-base md:text-lg hover:text-primary transition-colors block"
+                    className="text-foreground font-body text-lg md:text-xl hover:text-primary transition-colors block"
                   >
                     Piazzale Benito Juarez 10/11<br />00144, Roma (RM) – Italia
                   </a>
@@ -46,7 +46,7 @@ const ContactSection = () => (
                     <Phone className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
                     Telefono
                   </p>
-                  <div className="text-foreground font-body text-base md:text-lg">
+                  <div className="text-foreground font-body text-lg md:text-xl">
                     <a href="tel:+390645435416" className="hover:text-primary transition-colors">06 45435416</a> –{" "}
                     <a href="tel:+390645435417" className="hover:text-primary transition-colors">06 45435417</a> –{" "}
                     <a href="tel:+390645435418" className="hover:text-primary transition-colors">06 45435418</a>
@@ -57,10 +57,10 @@ const ContactSection = () => (
                     <Mail className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
                     Email
                   </p>
-                  <p className="text-foreground font-body text-base md:text-lg">
+                  <p className="text-foreground font-body text-lg md:text-xl">
                     <a href="mailto:appalti@impreseriunite.it" className="hover:text-primary transition-colors">appalti@impreseriunite.it</a>
                   </p>
-                  <p className="text-foreground font-body text-base md:text-lg">
+                  <p className="text-foreground font-body text-lg md:text-xl">
                     <a href="mailto:info@impreseriunite.it" className="hover:text-primary transition-colors">info@impreseriunite.it</a>
                   </p>
                 </div>
@@ -80,7 +80,7 @@ const ContactSection = () => (
                     <Mail className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
                     PEC Costruzioni Angelico
                   </p>
-                  <p className="text-foreground font-body text-base md:text-lg break-all">
+                  <p className="text-foreground font-body text-lg md:text-xl break-all">
                     <a href="mailto:costruzioniangelicostradalisrl@legalmail.it" className="hover:text-primary transition-colors">
                       costruzioniangelicostradalisrl@legalmail.it
                     </a>
@@ -91,7 +91,7 @@ const ContactSection = () => (
                     <Mail className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
                     PEC Nuova C.C.S.
                   </p>
-                  <p className="text-foreground font-body text-base md:text-lg">
+                  <p className="text-foreground font-body text-lg md:text-xl">
                     <a href="mailto:nuovaccs@legalmail.it" className="hover:text-primary transition-colors">
                       nuovaccs@legalmail.it
                     </a>

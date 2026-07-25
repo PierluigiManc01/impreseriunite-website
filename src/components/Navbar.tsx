@@ -1,21 +1,25 @@
-import { useLayoutEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { useLayoutEffect, useMemo } from "react";
 import logo from "@/assets/impreseriunite-long-logo-removebg.png";
 import { Link, useLocation } from "react-router-dom";
+import PillNav, { type PillNavItem } from "@/components/PillNav";
 
-const links = [
+const links: PillNavItem[] = [
   { label: "Home", href: "/#home" },
-  { label: "Chi Siamo", href: "/#chi-siamo" },
-  { label: "Progetti", href: "/#progetti" },
+  {
+    label: "Aziende",
+    href: "/#aziende",
+    children: [
+      { label: "Costruzioni Angelico", href: "/azienda/costruzioni-angelico" },
+      { label: "Nuova C.C.S.", href: "/azienda/nuova-ccs" },
+    ],
+  },
   { label: "Certificazioni", href: "/certificazioni" },
-  { label: "Contatti", href: "/#contatti" },
+  { label: "Progetti", href: "/progetti" },
 ];
 
 const isAnchorLink = (href: string) => href.startsWith("/#");
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -26,22 +30,31 @@ const Navbar = () => {
     target?.scrollIntoView({ block: "start" });
   }, [isHome, location.hash]);
 
-  const handleClick = () => {
-    setOpen(false);
-  };
+  // On the home page, section links are same-page anchors ("#chi-siamo") so
+  // clicking them doesn't trigger a route change; elsewhere they're full
+  // router links ("/#chi-siamo") that navigate home before scrolling.
+  // Memoized so PillNav's layout effect (which resets the hover circles to
+  // scale 0) doesn't re-run — and interrupt an in-progress hover — on every
+  // unrelated Navbar re-render.
+  const items: PillNavItem[] = useMemo(
+    () =>
+      links.map((l) => ({
+        label: l.label,
+        href: isHome && isAnchorLink(l.href) ? l.href.replace("/", "") : l.href,
+        children: l.children,
+      })),
+    [isHome]
+  );
 
-  const handleLogoClick = () => {
-    setOpen(false);
-  };
+  const activeHref = isHome ? location.hash || "#home" : location.pathname;
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 backdrop-blur-xl">
-      <div className="container flex h-20 items-center justify-between gap-4 md:h-24">
+      <div className="container flex h-24 items-center justify-between gap-4 md:h-28">
         {isHome ? (
           <a
             href="#home"
             className="flex min-h-11 items-center gap-2"
-            onClick={handleLogoClick}
             aria-label="Vai alla home di Imprese Riunite"
           >
             <img
@@ -54,7 +67,6 @@ const Navbar = () => {
           <Link
             to="/#home"
             className="flex min-h-11 items-center gap-2"
-            onClick={handleLogoClick}
             aria-label="Vai alla home di Imprese Riunite"
           >
             <img
@@ -64,74 +76,17 @@ const Navbar = () => {
             />
           </Link>
         )}
-        <div className="hidden items-center gap-8 lg:flex xl:gap-10">
-          {links.map((l) =>
-            isHome && isAnchorLink(l.href) ? (
-              <a
-                key={l.href}
-                href={l.href.replace("/", "")}
-                onClick={handleClick}
-                className="micro-label inline-flex min-h-11 items-center border-b border-transparent px-1 font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {l.label}
-              </a>
-            ) : (
-              <Link
-                key={l.href}
-                to={l.href}
-                onClick={handleClick}
-                className="micro-label inline-flex min-h-11 items-center border-b border-transparent px-1 font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {l.label}
-              </Link>
-            )
-          )}
-        </div>
-        <button
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+
+        <PillNav
+          className="relative h-14"
+          items={items}
+          activeHref={activeHref}
+          baseColor="hsl(217 91% 50%)"
+          pillColor="#ffffff"
+          pillTextColor="hsl(215 25% 12%)"
+          hoveredPillTextColor="#ffffff"
+        />
       </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            id="mobile-navigation"
-            className="overflow-hidden border-b border-border bg-card lg:hidden"
-          >
-            <div className="container flex flex-col divide-y divide-border py-2">
-              {links.map((l) =>
-                isHome && isAnchorLink(l.href) ? (
-                  <a
-                    key={l.href}
-                    href={l.href.replace("/", "")}
-                    onClick={handleClick}
-                    className="flex min-h-11 items-center px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {l.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={l.href}
-                    to={l.href}
-                    onClick={() => setOpen(false)}
-                    className="flex min-h-11 items-center px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {l.label}
-                  </Link>
-                )
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   );
 };

@@ -38,6 +38,16 @@ export type Company = {
   highlights?: string[];
 };
 
+// TEMPORARY project photos: Unsplash CDN placeholders grouped by theme, to be
+// swapped with the real project photos later. `px` builds a sized, cropped URL.
+const px = (id: string) => `https://images.unsplash.com/${id}?w=1200&q=80&auto=format&fit=crop`;
+const PLACEHOLDER = {
+  construction: [px("photo-1504307651254-35680f356dfd"), px("photo-1523217582562-09d0def993a6")],
+  building: [px("photo-1487958449943-2429e8be8625"), px("photo-1503387762-592deb58ef4e")],
+  renovation: [px("photo-1621905251189-08b45d6a269e"), px("photo-1516156008625-3a9d6067fab5")],
+  energy: [px("photo-1466611653911-95081537e5b7"), px("photo-1508514177221-188b1cf16e9d")],
+};
+
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
@@ -66,15 +76,16 @@ export const companies: Company[] = [
       { code: "OS 30", classifica: "III-bis", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
-      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/ANGELICO-certificatoISO_45001-pdf" },
-      { name: "ISO 50001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "ISO 37001", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "ISO 20400", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
-      { name: "SOA", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SOA-pdf" },
-      { name: "SA 8000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-SA_8000-pdf" },
-      { name: "ISO 14000", pdf: "https://www.impreseriunite.it/ANGELICO-certificato-ISO_14000-pdf" },
-      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/angelico-certificato-iso_9001-pdf" },
-      { name: "IMQ", pdf: "https://www.impreseriunite.it/angelico-certificato-imq-pdf" },
+      { name: "ISO 14000", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-14000.pdf" },
+      { name: "ISO 45001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-45001.pdf" },
+      { name: "ISO 50001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-50001.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-9001.pdf" },
+      { name: "SA 8000", pdf: "/assets/certifications/costruzioni-angelico/angelico-sa-8000.pdf" },
+      { name: "SOA", pdf: "/assets/certifications/costruzioni-angelico/angelico-soa.pdf" },
+      { name: "Attestato FGAS", pdf: "/assets/certifications/costruzioni-angelico/angelico-fgas.pdf" },
+      { name: "ESG Rating", pdf: "/assets/certifications/costruzioni-angelico/angelico-esg-rating.pdf" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-uni-pdr-125.pdf" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-politica-parita-genere.pdf" },
     ],
     projects: [
       {
@@ -84,14 +95,7 @@ export const companies: Company[] = [
         amount: "8.454.874,99 €",
         description:
           "Lavorazioni di realizzazione di un nuovo padiglione detentivo della capienza di n. 200 posti presso la casa circondariale di Ariano Irpino.",
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-1-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-2-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-8-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-3-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-4-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ARIANO-5-1-800x600.jpg",
-        ],
+        images: PLACEHOLDER.construction,
       },
       {
         title: "Ristrutturazione DAP Roma",
@@ -100,15 +104,7 @@ export const companies: Company[] = [
         amount: "827.418,37 €",
         description:
           "Lavori di distribuzione funzionale ed architettonica delle aree di accesso e di accoglienza visitatori situate al piano terra presso Roma – DAP.",
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-7-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-6-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-5-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-4-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-3-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/ATRIO-DAP-1-800x600.jpg",
-        ],
+        images: PLACEHOLDER.renovation,
       },
       {
         title: "Ampliamento Casa Circondariale Livorno",
@@ -117,14 +113,7 @@ export const companies: Company[] = [
         amount: "10.918.068,58 €",
         description:
           'Lavori di realizzazione in ampliamento del padiglione "C" di un reparto detentivo da 100 posti presso la Casa Circondariale di Livorno.',
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-10-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-9-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-3-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-4-800x600.jpg",
-        ],
+        images: PLACEHOLDER.building,
       },
     ],
   },
@@ -157,11 +146,14 @@ export const companies: Company[] = [
       { code: "OS 30", classifica: "V", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
-      { name: "ISO 45001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_45001-pdf" },
-      { name: "SOA", pdf: "https://www.impreseriunite.it/nuova-css-certificato-soa-pdf" },
-      { name: "SA 8000", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-sa_8000-pdf" },
-      { name: "ISO 14001", pdf: "https://www.impreseriunite.it/nuova-css-certificato-ISO_14001-pdf" },
-      { name: "ISO 9001", pdf: "https://www.impreseriunite.it/nuova-ccs-certificato-iso_9001-pdf" },
+      { name: "ISO 14001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-14001.pdf" },
+      { name: "ISO 45001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-45001.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-9001.pdf" },
+      { name: "SA 8000", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-sa-8000.pdf" },
+      { name: "SOA", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-soa.pdf" },
+      { name: "Attestato FGAS", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-fgas.pdf" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-pdr125.pdf" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-politica-parita-genere.pdf" },
     ],
     projects: [
       {
@@ -172,13 +164,7 @@ export const companies: Company[] = [
         date: "08/01/2014",
         description:
           "Realizzazione di un nuovo padiglione presso la Casa Circondariale di Cremona.",
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-5-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-3-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/CREMONA-4-800x600.jpg",
-        ],
+        images: PLACEHOLDER.construction,
       },
       {
         title: "Ristrutturazione Casa Circondariale Matera",
@@ -187,15 +173,7 @@ export const companies: Company[] = [
         amount: "500.026,68 €",
         description:
           "Ristrutturazione ed adeguamento al DPR 230/2000 del reparto osservazione – isolamento presso la casa circondariale di Matera.",
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-7-720x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-6-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-5-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-4-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-3-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/MATERA-1-800x600.jpg",
-        ],
+        images: PLACEHOLDER.renovation,
       },
       {
         title: "Ampliamento Padiglione C – Livorno",
@@ -204,15 +182,7 @@ export const companies: Company[] = [
         amount: "7.686.221,09 €",
         description:
           'Realizzazione in ampliamento al padiglione "C" di un reparto detentivo da 100 posti compresa la fornitura e posa in opera di cabine MT e Gruppo Elettrogeno.',
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-7-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-6-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-5-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-4-1-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-3-1-768x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-2-1-768x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/LIVORNO-1-1-800x600.jpg",
-        ],
+        images: PLACEHOLDER.energy,
       },
       {
         title: "Ristrutturazione Padiglione Firenze – Poggioreale",
@@ -221,13 +191,7 @@ export const companies: Company[] = [
         amount: "1.059.297,37 €",
         description:
           'Ristrutturazione del padiglione "Firenze" presso la casa circondariale di Napoli Poggio Reale.',
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-5-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-4-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-3-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-2-800x600.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/POGGIOREALE-1-800x600.jpg",
-        ],
+        images: PLACEHOLDER.building,
       },
       {
         title: "Nuovo Istituto Penitenziario di Catania",
@@ -236,13 +200,7 @@ export const companies: Company[] = [
         amount: "23.916.055,75 €",
         description:
           "Progettazione definitiva ed esecutiva ed esecuzione dei lavori di realizzazione del nuovo istituto penitenziario di Catania.",
-        images: [
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-5.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-4.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-3.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-2.jpg",
-          "https://www.impreseriunite.it/wp-content/uploads/2021/05/Catania-1.jpg",
-        ],
+        images: PLACEHOLDER.construction,
       },
     ],
   },
@@ -315,21 +273,25 @@ export const history = {
       year: "1976",
       title: "Fondazione C.C.S.",
       desc: "Da giovane geometra, a soli 18 anni, Pierluigi Properzi entra a far parte del prestigioso Gruppo Genghini. Diventando a soli 26 anni il più giovane dirigente della società, nel 1976 costituisce, insieme ad altri soci, la Consulenze Costruzioni Speciali (C.C.S.). La società si compone di uno staff di manager, tecnici e maestranze altamente specializzate.",
+      short: "A soli 26 anni, già dirigente del Gruppo Genghini, Pierluigi Properzi fonda con altri soci la Consulenze Costruzioni Speciali (C.C.S.).",
     },
     {
       year: "1980",
       title: "Acquisizione Costruzioni Angelico",
       desc: "Pierluigi Properzi acquista la Costruzioni Angelico Edili Stradali e, grazie alla sua guida lungimirante, la porta in breve tempo ad imporsi nel panorama nazionale delle opere pubbliche.",
+      short: "Properzi acquista Costruzioni Angelico Edili Stradali, portandola in breve tra i nomi di riferimento delle opere pubbliche.",
     },
     {
       year: "1997",
       title: "Nascita della Nuova C.C.S.",
       desc: "Dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, nasce la Nuova C.C.S che focalizza le sue competenze sull' impiantistica elettrica.",
+      short: "Dalla scissione del ramo d'azienda della C.C.S. nasce la Nuova C.C.S., specializzata nell'impiantistica elettrica.",
     },
     {
       year: "Oggi",
       title: "Un team di eccellenza",
       desc: "Attualmente Imprese Riunite - amministrata da Alfredo Mancinelli - vanta un team dinamico composto da ingegneri, architetti e tecnici altamente specializzati che, unito alle grandi capacità di leadership dimostrate dalla famiglia Properzi, ha reso il Gruppo in grado di affrontare qualsiasi tipologia di sfida.",
+      short: "Guidata da Alfredo Mancinelli, Imprese Riunite riunisce ingegneri, architetti e tecnici capaci di affrontare ogni sfida.",
     },
   ],
 };

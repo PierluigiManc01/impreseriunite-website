@@ -28,7 +28,7 @@ const HistoryTimeline = () => {
 
         {/* Single-column list: a plain vertical line with square markers,
             no left/right zigzag — simpler to scan than the prior layout. */}
-        <div className="relative max-w-3xl mx-auto mt-8 md:mt-16 pl-8 md:pl-10">
+        <div className="relative max-w-4xl mx-auto mt-8 md:mt-16 pl-8 md:pl-10">
           <div className="absolute left-2 md:left-2.5 top-1 bottom-1 w-px bg-border" />
           <motion.div
             className="absolute left-2 md:left-2.5 top-1 w-px bg-primary origin-top"
@@ -39,13 +39,16 @@ const HistoryTimeline = () => {
             <ScrollReveal key={item.year} scaleRange={[0.98, 1, 1]} fadeOut={false}>
               <div className="relative pb-14 md:pb-16 last:pb-0">
                 <div className="absolute -left-8 md:-left-10 top-1.5 w-3 h-3 bg-primary" />
-                <span className="font-heading text-3xl md:text-4xl font-bold text-primary tracking-wide">
+                <span className="font-heading text-3xl md:text-5xl font-bold text-primary tracking-wide">
                   {item.year}
                 </span>
-                <h3 className="font-heading font-semibold text-xl md:text-2xl text-foreground mt-2 mb-3">
+                <h3 className="font-heading font-semibold text-2xl md:text-3xl text-foreground mt-2 mb-3">
                   {item.title}
                 </h3>
-                <p className="section-copy max-w-2xl">{item.desc}</p>
+                <p className="section-copy max-w-3xl">
+                  <span className="md:hidden">{item.short ?? item.desc}</span>
+                  <span className="hidden md:inline">{item.desc}</span>
+                </p>
               </div>
             </ScrollReveal>
           ))}

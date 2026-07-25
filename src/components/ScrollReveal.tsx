@@ -1,57 +1,48 @@
-import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
-  /** Scale range: how much to grow/shrink. Default is intentionally subtle. */
+  /** Starting scale for the reveal. Only the first value is used as the "from". */
   scaleRange?: [number, number, number];
-  /** Mobile scale override — if not set, auto-dampened from scaleRange */
+  /** Mobile scale override — if not set, auto-dampened from scaleRange. */
   mobileScaleRange?: [number, number, number];
-  /** Whether to fade out when scrolling past */
+  /** Kept for API compatibility. Content is never hidden anymore. */
   fadeOut?: boolean;
 }
 
+// One-shot reveal: content fades + rises + settles the first time it enters the
+// viewport, then stays put. No scroll-scrubbed opacity — so anchor jumps never
+// land on invisible content, and nothing disappears when scrolling past.
 const ScrollReveal = ({
   children,
   className = "",
   scaleRange = [0.94, 1.04, 1],
   mobileScaleRange,
-  fadeOut = false,
 }: ScrollRevealProps) => {
   const isMobile = useIsMobile();
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center center", "end start"],
-  });
+  const prefersReducedMotion = useReducedMotion();
 
-  const effectiveScale = isMobile
-    ? mobileScaleRange ?? [
-        Math.max(0.96, scaleRange[0]),
-        Math.min(1.025, scaleRange[1]),
-        scaleRange[2],
-      ]
-    : scaleRange;
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
-  const yRange = isMobile ? [24, 0, 0, 0] : [36, 0, 0, 0];
-
-  const opacity = useTransform(
-    scrollYProgress,
-    fadeOut ? [0, 0.3, 0.7, 1] : [0, 0.3, 1, 1],
-    fadeOut ? [0, 1, 1, 0] : [0, 1, 1, 1]
-  );
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    [effectiveScale[0], effectiveScale[1], effectiveScale[1], effectiveScale[2]]
-  );
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], yRange);
+  const fromScale = isMobile
+    ? Math.max(0.98, mobileScaleRange?.[0] ?? scaleRange[0])
+    : Math.min(scaleRange[0], 0.98);
+  const fromY = isMobile ? 18 : 28;
 
   return (
-    <div ref={ref} className={className}>
-      <motion.div style={{ opacity, scale, y }} className="origin-center h-full">
+    <div className={className}>
+      <motion.div
+        className="origin-center h-full"
+        initial={{ opacity: 0, y: fromY, scale: fromScale }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         {children}
       </motion.div>
     </div>

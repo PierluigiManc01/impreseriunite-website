@@ -37,7 +37,7 @@ const CompaniesSection = () => (
       </ScrollReveal>
 
       {/* Three equal-standing cards — no visual hierarchy between them. */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
         {companies.map((c) => {
           const Logo = logoMap[c.id];
           return (
@@ -46,7 +46,6 @@ const CompaniesSection = () => (
                 <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col w-full">
                   <Link
                     to={`/azienda/${c.id}`}
-                    onClick={() => window.scrollTo(0, 0)}
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl mx-auto sm:mx-0 bg-primary/5 flex items-center justify-center border border-border/50 mb-4 sm:mb-6 group-hover:bg-primary/10 transition-colors shrink-0 overflow-hidden p-3 md:p-4"
                   >
                     {Logo ? (
@@ -63,7 +62,7 @@ const CompaniesSection = () => (
                   {c.highlights && c.highlights.length > 0 && (
                     <ul className="space-y-2 mb-4 text-left w-full flex-1">
                       {c.highlights.map((highlight, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm sm:text-base text-muted-foreground font-body">
+                        <li key={idx} className="flex items-start gap-2 text-base sm:text-lg text-muted-foreground font-body">
                           <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                           <span>{highlight}</span>
                         </li>
@@ -74,8 +73,7 @@ const CompaniesSection = () => (
                 <div className="px-6 pb-6 sm:px-8 sm:pb-8 md:px-10 md:pb-10 pt-0 w-full flex justify-center sm:justify-start">
                   <Link
                     to={`/azienda/${c.id}`}
-                    onClick={() => window.scrollTo(0, 0)}
-                    className="inline-flex items-center gap-1.5 md:gap-2 text-xs sm:text-sm md:text-base font-semibold text-primary hover:text-primary/80 transition-colors group/link"
+                    className="inline-flex items-center gap-1.5 md:gap-2 text-sm sm:text-base md:text-lg font-semibold text-primary hover:text-primary/80 transition-colors group/link"
                   >
                     Scopri di più
                     <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
@@ -96,16 +94,16 @@ const CompaniesSection = () => (
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {partnerships.map((partner) => (
               <div
                 key={partner.name}
-                className="flex min-h-36 items-center justify-center rounded-lg border border-border/60 bg-card p-8 md:p-10 transition-colors hover:border-primary/30"
+                className="flex min-h-28 items-center justify-center rounded-lg border border-border/60 bg-card p-4 sm:p-6 md:p-10 transition-colors hover:border-primary/30 sm:min-h-36"
               >
                 <img
                   src={partner.logo}
                   alt={`${partner.name} logo`}
-                  className="max-h-16 md:max-h-20 max-w-[220px] md:max-w-[260px] object-contain"
+                  className="max-h-12 w-auto max-w-full object-contain sm:max-h-16 md:max-h-20"
                   loading="lazy"
                   decoding="async"
                 />
