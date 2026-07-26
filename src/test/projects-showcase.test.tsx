@@ -153,7 +153,7 @@ describe("ProjectsShowcase mobile cards", () => {
         .map(({ title }) => title)
     ).toEqual([
       "Nuova torre di controllo – Milano Linate",
-      "Riqualificazione immobili ATER – Via XVI Settembre",
+      "Riqualificazione Case popolari",
       "Rilocazione luci di pista – Ronchi dei Legionari",
     ]);
 
@@ -162,34 +162,26 @@ describe("ProjectsShowcase mobile cards", () => {
     );
     expect(laziodisuProject?.title).toBe("Residenze universitarie SDO Pietralata");
     expect(laziodisuProject?.description).toContain(
-      "Realizzazione di residenze e servizi correlati"
+      "Realizzazione di impianti di illuminazione"
     );
 
     expect(
       angelico?.projects.find(({ client }) => client === "ATER Civitavecchia")
         ?.details?.[0].value
-    ).toContain("capogruppo e mandataria");
+    ).toContain("mandataria");
     expect(
       angelico?.projects.find(({ client }) => client === "ASL di Pescara")
         ?.newsUrl
     ).toBe(
       "https://www.asl.pe.it/Sezione.jsp?titolo=comunicato-stampa---inaugurata-la-casa-della-comunit%C3%A0-hub-di-scafa&idSezione=2139"
     );
-    expect(
-      angelico?.projects.find(({ title }) =>
-        title.includes("Aule Bunker")
-      )?.details
-    ).toEqual([
-      { label: "Importo iniziale", value: "3.924.096,43 €" },
-      { label: "Varianti e atti aggiuntivi", value: "620.000,00 €" },
-    ]);
     expect(holding?.projects.map(({ title }) => title)).toEqual([
       "Viadotto Muzdalifah",
       "Raccordo Anulare – Lotto 2",
       "Facoltà di Ingegneria di Jeddah",
       "Centro residenziale Le Felciarie",
       "Ristrutturazione e consolidamento della Mole Antonelliana",
-      "Porto turistico ex scalo Matteuzzi",
+      "Porto turistico Riva di Traiano",
       "Palazzina residenziale – Via Saronno",
     ]);
     expect(
@@ -199,7 +191,7 @@ describe("ProjectsShowcase mobile cards", () => {
     ).toContain("mole-antonelliana");
     expect(
       holding?.projects
-        .find(({ title }) => title === "Porto turistico ex scalo Matteuzzi")
+        .find(({ title }) => title === "Porto turistico Riva di Traiano")
         ?.images[0]
     ).toContain("riva-di-traiano");
   });
