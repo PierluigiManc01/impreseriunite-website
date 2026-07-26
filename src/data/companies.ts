@@ -1,16 +1,26 @@
+import moleAntonelliana from "@/assets/mole-antonelliana.webp";
+import rivaDiTraiano from "@/assets/riva-di-traiano.webp";
 export type Project = {
   title: string;
   location: string;
   client: string;
   amount: string;
+  amountLabel?: string;
+  amountNote?: string;
   description: string;
+  newsUrl?: string;
+  details?: {
+    label: string;
+    value: string;
+  }[];
   date?: string;
+  featuredOnHomepage?: boolean;
   images: string[];
 };
 
 export type Certification = {
   name: string;
-  pdf?: string;
+  pdf: string;
 };
 
 export type SoaCategory = {
@@ -28,6 +38,7 @@ export type Company = {
   longDescription: string;
   admin: string;
   technicalDirector?: string;
+  vatNumber?: string;
   address: string;
   phone: string;
   pec: string;
@@ -37,6 +48,48 @@ export type Company = {
   projects: Project[];
   highlights?: string[];
 };
+
+const publicEmail = {
+  label: "info@impreseriunite.it",
+  href: "mailto:info@impreseriunite.it",
+} as const;
+
+export const siteContact = {
+  office: {
+    street: "Piazzale Benito Juarez 10/11",
+    postalCode: "00144",
+    city: "Roma",
+    province: "RM",
+    country: "Italia",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Piazzale+Benito+Juarez+10%2F11%2C+00144+Roma+RM%2C+Italia",
+  },
+  phones: [
+    { label: "06 45435416", href: "tel:+390645435416" },
+    { label: "06 45435417", href: "tel:+390645435417" },
+    { label: "06 45435418", href: "tel:+390645435418" },
+  ],
+  publicEmail,
+  emails: [
+    publicEmail,
+    { label: "appalti@impreseriunite.it", href: "mailto:appalti@impreseriunite.it" },
+  ],
+  institutionalEmails: [
+    {
+      label: "PEC Costruzioni Angelico",
+      value: "costruzioniangelicostradalisrl@legalmail.it",
+      href: "mailto:costruzioniangelicostradalisrl@legalmail.it",
+    },
+    {
+      label: "PEC Nuova C.C.S.",
+      value: "nuovaccs.srl@legalmail.it",
+      href: "mailto:nuovaccs.srl@legalmail.it",
+    },
+  ],
+} as const;
+
+const sharedOfficeAddress = `${siteContact.office.street}, ${siteContact.office.postalCode}, ${siteContact.office.city} (${siteContact.office.province})`;
+const sharedOfficePhones = siteContact.phones.map(({ label }) => label).join(" – ");
 
 // TEMPORARY project photos: Unsplash CDN placeholders grouped by theme, to be
 // swapped with the real project photos later. `px` builds a sized, cropped URL.
@@ -53,19 +106,20 @@ export const companies: Company[] = [
     id: "costruzioni-angelico",
     name: "Costruzioni Angelico",
     fullName: "Costruzioni Angelico Edili Stradali s.r.l.",
-    role: "Grandi opere infrastrutturali e opere pubbliche",
+    role: "Grandi opere infrastrutturali",
     description:
-      "Costruzioni Angelico Edili Stradali s.r.l. nasce nel <strong>1971</strong> e vede in Alfredo Mancinelli (Amministratore Unico), ed in Giuseppe Saputo (Direttore Tecnico), le figure chiave. Grazie ad una guida lungimirante ed al <strong>know how</strong> del top management, si è imposta fin da subito nel panorama nazionale delle opere pubbliche.",
+      "Costruzioni Angelico Edili Stradali s.r.l. nasce nel <strong>1971</strong> e viene acquisita da Properzi nel 1980. Attualmente, vede in Alfredo Mancinelli (Amministratore Unico), ed in Giuseppe Saputo (Direttore Tecnico), le figure chiave. Grazie ad una guida lungimirante ed al <strong>know how</strong> del top management, si è imposta fin da subito nel panorama nazionale delle opere pubbliche.",
     longDescription:
-      "Specializzata nella realizzazione di grandi interventi infrastrutturali, collabora da decenni con Roma Capitale, il Ministero della Giustizia, il Ministero della Difesa, l'ENAV e i principali enti pubblici italiani.",
-    admin: "Geom. Pierluigi Properzi",
+      "Specializzata nella realizzazione di grandi interventi infrastrutturali, collabora da decenni con  <strong>Roma Capitale, il Ministero della Giustizia, il Ministero della Difesa, l'ENAV</strong> e i principali enti pubblici italiani.",
+    admin: "Alfredo Mancinelli",
     technicalDirector: "Geom. Giuseppe Saputo",
-    address: "Piazzale Benito Juarez 10/11, 00144, Roma (RM)",
-    phone: "06 45435416 – 06 45435417 – 06 45435418",
+    vatNumber: "00902311000",
+    address: sharedOfficeAddress,
+    phone: sharedOfficePhones,
     pec: "costruzioniangelicostradalisrl@legalmail.it",
-    email: "appalti@impreseriunite.it",
+    email: siteContact.publicEmail.label,
     highlights: [
-      "Grandi opere infrastrutturali",
+      "Ristrutturazioni e restauri",
       "Edilizia pubblica e penitenziaria",
       "Progetti immobiliari privati"
     ],
@@ -89,31 +143,71 @@ export const companies: Company[] = [
     ],
     projects: [
       {
-        title: "Padiglione Detentivo Ariano Irpino",
-        location: "Ariano Irpino (AV)",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "8.454.874,99 €",
+        title: "Nuova torre di controllo – Milano Linate",
+        location: "Milano Linate",
+        client: "ENAV S.p.A.",
+        amount: "13.374.426,25 €",
+        amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
         description:
-          "Lavorazioni di realizzazione di un nuovo padiglione detentivo della capienza di n. 200 posti presso la casa circondariale di Ariano Irpino.",
-        images: PLACEHOLDER.construction,
+          "Progettazione esecutiva della nuova torre di controllo e del blocco tecnico del centro aeroportuale ENAV di Milano Linate. La realizzazione partirà nel 2027.",
+        images: PLACEHOLDER.energy,
       },
       {
-        title: "Ristrutturazione DAP Roma",
-        location: "Roma",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "827.418,37 €",
+        title: "Riqualificazione Case popolari",
+        location: "Civitavecchia (RM)",
+        client: "ATER Civitavecchia",
+        amount: "5.678.000,00 €",
+        amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
         description:
-          "Lavori di distribuzione funzionale ed architettonica delle aree di accesso e di accoglienza visitatori situate al piano terra presso Roma – DAP.",
+          "Miglioramento sismico ed efficientamento energetico mediante demolizione e ricostruzione degli immobili siti in Civitavecchia, Via XVI Settembre 19/23.",
+        details: [
+          {
+            label: "Appalto in ATI",
+            value:
+              "Costruzioni Angelico Edili Stradali S.r.l. (mandataria) + Nuova C.C.S. S.r.l.",
+          },
+        ],
         images: PLACEHOLDER.renovation,
       },
       {
-        title: "Ampliamento Casa Circondariale Livorno",
-        location: "Livorno",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "10.918.068,58 €",
+        title: "Manutenzione ed efficientamento delle Aule Bunker",
+        location: "Roma",
+        client:
+          "Ministero delle Infrastrutture e della Mobilità Sostenibile – Provveditorato interregionale OO.PP. Lazio, Abruzzo, Sardegna – sede di Roma",
+        amount: "4.544.096,43 €",
+        amountLabel: "Importo complessivo",
         description:
-          'Lavori di realizzazione in ampliamento del padiglione "C" di un reparto detentivo da 100 posti presso la Casa Circondariale di Livorno.',
+          "Appalto integrato per progettazione esecutiva ed esecuzione degli interventi di manutenzione straordinaria ed efficientamento energetico del complesso delle Aule Bunker, Via Casale di San Basilio 169, Roma.",
+        images: PLACEHOLDER.renovation,
+      },
+      {
+        title: "Casa della Comunità di Scafa",
+        location: "Scafa (PE)",
+        client: "ASL di Pescara",
+        amount: "881.496,05 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Realizzazione della Casa della Comunità presso il Comune di Scafa, Via della Stazione.",
+        newsUrl:
+          "https://www.asl.pe.it/Sezione.jsp?titolo=comunicato-stampa---inaugurata-la-casa-della-comunit%C3%A0-hub-di-scafa&idSezione=2139",
         images: PLACEHOLDER.building,
+      },
+      {
+        title: "Accordi quadro per i siti e i sistemi ENAV",
+        location: "Territorio nazionale",
+        client: "ENAV S.p.A.",
+        amount: "6.300.000,00 €",
+        amountLabel: "Importo complessivo",
+        description:
+          "Accordi quadro per lavori civili, impiantistici e manutenzione straordinaria dei siti ENAV e dei sistemi di navigazione aerea e meteorologici sul territorio nazionale.",
+        details: [
+          { label: "Lotto 1 Nord", value: "1.800.000,00 €" },
+          { label: "Lotto 2 Centro", value: "2.250.000,00 €" },
+          { label: "Lotto 3 Sud", value: "2.250.000,00 €" },
+        ],
+        images: PLACEHOLDER.energy,
       },
     ],
   },
@@ -127,10 +221,11 @@ export const companies: Company[] = [
     longDescription:
       "Oggi l'Azienda vanta elevati standard di professionalità nell'installazione di impianti fotovoltaici, di gruppi elettrogeni, di continuità e cabine di trasformazione MT/BT e nella installazione e manutenzione di impianti elettrici, di sicurezza, d'illuminazione e di autonomia industriale.",
     admin: "Alfredo Mancinelli",
-    address: "Piazzale Benito Juarez 10/11, 00144, Roma (RM)",
-    phone: "06 45435416 – 06 45435417 – 06 45435418",
+    vatNumber: "05289751009",
+    address: sharedOfficeAddress,
+    phone: sharedOfficePhones,
     pec: "nuovaccs.srl@legalmail.it",
-    email: "appalti@impreseriunite.it",
+    email: siteContact.publicEmail.label,
     highlights: [
       "Impiantistica fotovoltaica e tecnologica",
       "Sistemi di sicurezza e illuminazione",
@@ -157,50 +252,67 @@ export const companies: Company[] = [
     ],
     projects: [
       {
-        title: "Nuovo Padiglione Casa Circondariale Cremona",
+        title: "Nuovo padiglione detentivo – Cremona",
         location: "Cremona",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "9.896.713,00 €",
-        date: "08/01/2014",
+        client: "Ministero della Giustizia",
+        amount: "7.829.376,75 €",
+        amountLabel: "Importo lavori",
         description:
-          "Realizzazione di un nuovo padiglione presso la Casa Circondariale di Cremona.",
-        images: PLACEHOLDER.construction,
-      },
-      {
-        title: "Ristrutturazione Casa Circondariale Matera",
-        location: "Matera",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "500.026,68 €",
-        description:
-          "Ristrutturazione ed adeguamento al DPR 230/2000 del reparto osservazione – isolamento presso la casa circondariale di Matera.",
-        images: PLACEHOLDER.renovation,
-      },
-      {
-        title: "Ampliamento Padiglione C – Livorno",
-        location: "Livorno",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "7.686.221,09 €",
-        description:
-          'Realizzazione in ampliamento al padiglione "C" di un reparto detentivo da 100 posti compresa la fornitura e posa in opera di cabine MT e Gruppo Elettrogeno.',
+          "Realizzazione di un nuovo padiglione detentivo, compresa la fornitura e posa in opera di cabina MT e gruppo elettrogeno, presso la Casa circondariale di Cremona.",
         images: PLACEHOLDER.energy,
       },
       {
-        title: "Ristrutturazione Padiglione Firenze – Poggioreale",
-        location: "Napoli – Poggioreale",
-        client: "Ministero Grazia e Giustizia – Dipartimento Amministrazione Penitenziaria",
-        amount: "1.059.297,37 €",
+        title: "Cittadella Giudiziaria di Latina",
+        location: "Latina",
+        client:
+          "Ministero delle Infrastrutture e della Mobilità Sostenibile – Provveditorato interregionale OO.PP. Lazio, Abruzzo, Sardegna – sede di Roma",
+        amount: "4.141.437,00 €",
+        amountLabel: "Importo lavori",
         description:
-          'Ristrutturazione del padiglione "Firenze" presso la casa circondariale di Napoli Poggio Reale.',
+          "Appalto integrato per progettazione esecutiva ed esecuzione degli interventi di manutenzione straordinaria ed efficientamento energetico della Cittadella Giudiziaria di Latina – Nuovo Polo Giudiziario.",
+        images: PLACEHOLDER.renovation,
+      },
+      {
+        title: "Impianto di energia alternativa – Roma Rebibbia",
+        location: "Roma – Rebibbia",
+        client: "Ministero della Giustizia",
+        amount: "2.622.892,98 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Opere complementari per la realizzazione di un impianto di produzione di energia alternativa, con adeguamento della cabina MT/BT e installazione di gruppo elettrogeno presso la Casa circondariale di Roma Rebibbia – Laboratorio D.N.A.",
+        images: PLACEHOLDER.energy,
+      },
+      {
+        title: "Rilocazione luci di pista – Ronchi dei Legionari",
+        location: "Ronchi dei Legionari (Gorizia)",
+        client: "ENAV S.p.A.",
+        amount: "1.963.590,00 €",
+        amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
+        description:
+          "Rilocazione dei pozzetti e delle luci di pista presso l’aeroporto di Ronchi dei Legionari.",
+        images: PLACEHOLDER.energy,
+      },
+      {
+        title: "Adeguamento sismico Ala Callegari – Scuola M. Montanari",
+        location: "Ravenna",
+        client: "Comune di Ravenna",
+        amount: "1.688.000,00 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Adeguamento sismico dell’Ala Callegari presso la scuola secondaria di primo grado M. Montanari, nell’ambito del PNRR – Next Generation EU.",
         images: PLACEHOLDER.building,
       },
       {
-        title: "Nuovo Istituto Penitenziario di Catania",
-        location: "Catania",
-        client: "Ufficio del Commissario delegato OPCM",
-        amount: "23.916.055,75 €",
+        title: "Residenze universitarie SDO Pietralata",
+        location: "Roma – Pietralata",
+        client:
+          "LAZIODISU – Ente per il diritto agli studi universitari nel Lazio",
+        amount: "1.430.576,00 €",
+        amountLabel: "Importo lavori",
         description:
-          "Progettazione definitiva ed esecutiva ed esecuzione dei lavori di realizzazione del nuovo istituto penitenziario di Catania.",
-        images: PLACEHOLDER.construction,
+          "Realizzazione di impianti di illuminazione per le residenze universitarie e servizi correlati presso l’area dello SDO di Pietralata.",
+        images: PLACEHOLDER.building,
       },
     ],
   },
@@ -208,16 +320,16 @@ export const companies: Company[] = [
     id: "gruppo-immobiliare-properzi",
     name: "Imprese Riunite",
     fullName: "Imprese Riunite – Properzi Costruzioni Generali",
-    role: "Capogruppo – Holding",
+    role: "Management",
     description:
-      "Imprese Riunite è l'entità capogruppo che coordina e guida le società operative del gruppo. Nata dalla visione imprenditoriale di Pierluigi Properzi, dal 1976 rappresenta il punto di riferimento strategico per le attività di Costruzioni Angelico e Nuova C.C.S., garantendo solidità, governance e sviluppo.",
+      "Imprese Riunite è l'entità manageriale che coordina e guida le società operative del gruppo. Nata dalla visione imprenditoriale di Pierluigi Properzi, dal 1976 rappresenta il punto di riferimento strategico-gestionale per le attività di Costruzioni Angelico e Nuova C.C.S., garantendo solidità, governance e sviluppo.",
     longDescription:
-      "Non operativa direttamente, Imprese Riunite svolge il ruolo di holding, assicurando la coerenza strategica e la sinergia tra le aziende del gruppo. I lavori storici qui elencati risalgono alla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine.",
+      "Non operativa direttamente, Imprese Riunite gestisce la coerenza strategica e la sinergia tra le aziende del gruppo. <strong>Il patrimonio della vecchia C.C.S. (Consulenze Costruzioni Speciali) rappresenta l'origine storica del gruppo.</strong>",
     admin: "Pierluigi Properzi",
-    address: "Piazzale Benito Juarez 10/11, 00144, Roma (RM)",
-    phone: "06 45435416",
+    address: sharedOfficeAddress,
+    phone: siteContact.phones[0].label,
     pec: "info@pec.impreseriunite.it",
-    email: "info@impreseriunite.it",
+    email: siteContact.publicEmail.label,
     highlights: [
       "Coordinamento e guida strategica",
       "Sinergia tra le società operative",
@@ -228,42 +340,82 @@ export const companies: Company[] = [
       {
         title: "Viadotto Muzdalifah",
         location: "La Mecca – Arabia Saudita",
-        client: "Committente Internazionale (ex C.C.S.)",
+        client: "Committente internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla vecchia C.C.S. a livello internazionale.",
-        images: [],
+          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla storica C.C.S. a livello internazionale.",
+        images: PLACEHOLDER.construction,
       },
       {
-        title: "Raccordo Anulare Lotto 2",
+        title: "Raccordo Anulare – Lotto 2",
         location: "Riyadh – Arabia Saudita",
-        client: "Committente Internazionale (ex C.C.S.)",
+        client: "Committente internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell'Arabia Saudita, realizzato dalla storica C.C.S.",
-        images: [],
-      },
-      {
-        title: "Porto Turistico Riva di Traiano",
-        location: "Civitavecchia – Italia",
-        client: "Committente Pubblico (ex C.C.S.)",
-        amount: "",
-        description:
-          "Realizzazione del Porto Turistico Riva di Traiano, importante infrastruttura marittima sulla costa laziale, tra i progetti storici della C.C.S.",
-        images: [],
+          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell’Arabia Saudita, realizzato dalla storica C.C.S.",
+        images: PLACEHOLDER.construction,
       },
       {
         title: "Facoltà di Ingegneria di Jeddah",
         location: "Jeddah – Arabia Saudita",
-        client: "Committente Internazionale (ex C.C.S.)",
+        client: "Committente internazionale (ex C.C.S.)",
         amount: "",
         description:
-          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla vecchia C.C.S.",
-        images: [],
+          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla storica C.C.S.",
+        images: PLACEHOLDER.building,
+      },
+      {
+        title: "Centro residenziale Le Felciarie",
+        location: "Fiano Romano (RM)",
+        client: "Immobil Fiano S.r.l.",
+        amount: "6.350.000,00 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Realizzazione del centro residenziale “Le Felciarie”, composto da 42 villini a Fiano Romano.",
+        images: PLACEHOLDER.building,
+      },
+      {
+        title: "Ristrutturazione e consolidamento della Mole Antonelliana",
+        location: "Torino",
+        client: "Soc. Garboli Rep S.p.A.",
+        amount: "857.318,45 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Lavori di ristrutturazione e consolidamento delle strutture della Mole Antonelliana.",
+        // Photo by Tom Podmore, free under the Unsplash License:
+        // https://unsplash.com/photos/sVqvsDsWPOI
+        images: [moleAntonelliana],
+      },
+      {
+        title: "Porto turistico Riva di Traiano",
+        location: "Civitavecchia (RM)",
+        client:
+          "Associazione Consortile per lo Sviluppo della Nautica da Diporto",
+        amount: "",
+        description:
+          "Realizzazione del porto turistico in località ex scalo Matteuzzi, con 430 posti barca, nel Comune di Civitavecchia.",
+        images: [rivaDiTraiano],
+      },
+      {
+        title: "Palazzina residenziale – Via Saronno",
+        location: "Roma – Prima Porta",
+        client: "Giustiniana Prima S.r.l.",
+        amount: "",
+        description:
+          "Realizzazione di una palazzina composta da 25 appartamenti, 4 box e 25 cantine in Via Saronno s.n.c., Roma.",
+        images: PLACEHOLDER.building,
       },
     ],
   },
 ];
+
+export const operatingCompanies = companies.filter(
+  ({ id }) => id === "costruzioni-angelico" || id === "nuova-ccs"
+);
+
+export const certifiedCompanies = companies.filter(
+  ({ certifications }) => certifications.length > 0
+);
 
 export const history = {
   intro:
@@ -272,26 +424,26 @@ export const history = {
     {
       year: "1976",
       title: "Fondazione C.C.S.",
-      desc: "Da giovane geometra, a soli 18 anni, Pierluigi Properzi entra a far parte del prestigioso Gruppo Genghini. Diventando a soli 26 anni il più giovane dirigente della società, nel 1976 costituisce, insieme ad altri soci, la Consulenze Costruzioni Speciali (C.C.S.). La società si compone di uno staff di manager, tecnici e maestranze altamente specializzate.",
-      short: "A soli 26 anni, già dirigente del Gruppo Genghini, Pierluigi Properzi fonda con altri soci la Consulenze Costruzioni Speciali (C.C.S.).",
+      desc: "Da giovane geometra, a soli 18 anni, <strong>Pierluigi Properzi</strong> entra a far parte del prestigioso Gruppo Genghini. Diventando a soli 26 anni il più giovane dirigente della società, nel 1976 costituisce, insieme ad altri soci, la <strong>Consulenze Costruzioni Speciali (C.C.S.)</strong>. La società si compone di uno staff di manager, tecnici e maestranze altamente specializzate.",
+      short: "A soli 26 anni, già dirigente del Gruppo Genghini, <strong>Pierluigi Properzi</strong> fonda con altri soci la <strong>Consulenze Costruzioni Speciali (C.C.S.)</strong>.",
     },
     {
       year: "1980",
       title: "Acquisizione Costruzioni Angelico",
-      desc: "Pierluigi Properzi acquista la Costruzioni Angelico Edili Stradali e, grazie alla sua guida lungimirante, la porta in breve tempo ad imporsi nel panorama nazionale delle opere pubbliche.",
-      short: "Properzi acquista Costruzioni Angelico Edili Stradali, portandola in breve tra i nomi di riferimento delle opere pubbliche.",
+      desc: "Pierluigi Properzi acquista la <strong>Costruzioni Angelico Edili Stradali</strong> e, grazie alla sua guida lungimirante, la porta in breve tempo ad imporsi nel panorama nazionale delle opere pubbliche.",
+      short: "Properzi acquista <strong>Costruzioni Angelico Edili Stradali</strong>, portandola in breve tra i nomi di riferimento delle opere pubbliche.",
     },
     {
       year: "1997",
       title: "Nascita della Nuova C.C.S.",
-      desc: "Dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, nasce la Nuova C.C.S che focalizza le sue competenze sull' impiantistica elettrica.",
-      short: "Dalla scissione del ramo d'azienda della C.C.S. nasce la Nuova C.C.S., specializzata nell'impiantistica elettrica.",
+      desc: "Dalla scissione del ramo d'azienda della C.C.S. e con la successiva annessione all'interno del Gruppo Immobiliare Properzi, nasce la <strong>Nuova C.C.S</strong> che focalizza le sue competenze sull' impiantistica elettrica.",
+      short: "Dalla scissione del ramo d'azienda della C.C.S. nasce la <strong>Nuova C.C.S.</strong>, specializzata nell'impiantistica elettrica.",
     },
     {
       year: "Oggi",
-      title: "Un team di eccellenza",
-      desc: "Attualmente Imprese Riunite - amministrata da Alfredo Mancinelli - vanta un team dinamico composto da ingegneri, architetti e tecnici altamente specializzati che, unito alle grandi capacità di leadership dimostrate dalla famiglia Properzi, ha reso il Gruppo in grado di affrontare qualsiasi tipologia di sfida.",
-      short: "Guidata da Alfredo Mancinelli, Imprese Riunite riunisce ingegneri, architetti e tecnici capaci di affrontare ogni sfida.",
+      title: "La nuova era",
+      desc: "Attualmente amministrata da <strong>Alfredo Mancinelli</strong>, la società riunisce un team dinamico di ingegneri, architetti e tecnici altamente specializzati. Competenze integrate e leadership familiare, eredità della famiglia Properzi, sono sostenute dalle principali certificazioni di settore, a <strong>garanzia di qualità, sicurezza, responsabilità sociale e solidità operativa</strong>.",
+      short: "Guidata da <strong>Alfredo Mancinelli</strong>, la società negli ultimi anni si è specializzata nella realizzazione di strutture detentive, sedi istituzionali e infrastrutture strategiche per il paese.",
     },
   ],
 };
