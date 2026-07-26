@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import logo_roma from "../assets/committenti/logo-romacapitale.webp";
 import logo_difesa from "../assets/committenti/min-difesa.webp";
 import logo_enav from "../assets/committenti/enav.webp";
@@ -18,7 +18,8 @@ const clients = [
 ];
 
 const ClientLogosMarquee = () => {
-  const duplicated = [...clients, ...clients];
+  const prefersReducedMotion = useReducedMotion();
+  const displayedClients = prefersReducedMotion ? clients : [...clients, ...clients];
 
   return (
     <section id="committenti" className="pt-14 pb-16 md:pt-20 md:pb-24 border-y border-border bg-background overflow-hidden">
@@ -29,22 +30,34 @@ const ClientLogosMarquee = () => {
       </div>
 
       <div className="relative mb-0 mt-0">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+        {!prefersReducedMotion && (
+          <>
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+          </>
+        )}
 
         <motion.div
-          className="flex gap-16 pr-16 items-center whitespace-nowrap w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 20,
-              ease: "linear",
-            },
-          }}
+          className={
+            prefersReducedMotion
+              ? "container flex flex-wrap items-center justify-center gap-8 sm:gap-12"
+              : "flex w-max items-center gap-16 whitespace-nowrap pr-16"
+          }
+          animate={prefersReducedMotion ? undefined : { x: ["0%", "-50%"] }}
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 20,
+                    ease: "linear",
+                  },
+                }
+          }
         >
-          {duplicated.map((client, i) => (
+          {displayedClients.map((client, i) => (
             <div
               key={`${client.name}-${i}`}
               aria-hidden={i >= clients.length}

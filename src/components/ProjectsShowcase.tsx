@@ -1,22 +1,17 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin } from "lucide-react";
-import { companies, type Company, type Project } from "@/data/companies";
+import { operatingCompanies, type Company, type Project } from "@/data/companies";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 import ScrollReveal from "@/components/ScrollReveal";
 import { cn } from "@/lib/utils";
 
 type ProjectEntry = { project: Project; company: Company };
 
-// The showcase only covers the two operating companies; the holding
-// (Imprese Riunite) keeps its projects on its own detail page.
-const showcaseCompanies = companies.filter(
-  (company) => company.id === "costruzioni-angelico" || company.id === "nuova-ccs"
-);
-
+// The showcase only covers the two operating companies.
 // Flatten the showcased companies' projects once, preserving authored order
 // (company order as in data, then project order within each company).
-const allProjectEntries: ProjectEntry[] = showcaseCompanies.flatMap((company) =>
+const allProjectEntries: ProjectEntry[] = operatingCompanies.flatMap((company) =>
   company.projects.map((project) => ({ project, company }))
 );
 
@@ -46,9 +41,9 @@ const ProjectsShowcase = () => {
         <ScrollReveal>
           <div className="mb-8 px-4 sm:px-0">
             <p className="section-eyebrow mb-3">Progetti</p>
-            <h2 className="section-title max-w-6xl">
+            <h1 className="section-title max-w-6xl">
               Cantieri e risultati verificabili
-            </h2>
+            </h1>
           </div>
         </ScrollReveal>
 
@@ -71,7 +66,7 @@ const ProjectsShowcase = () => {
           >
             Tutte
           </button>
-          {showcaseCompanies.map((company) => (
+          {operatingCompanies.map((company) => (
             <button
               key={company.id}
               type="button"
@@ -131,16 +126,34 @@ const ProjectsShowcase = () => {
                   </Link>
                 </h3>
 
+                <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">
+                  {project.description}
+                </p>
+
                 <dl className="mt-4 grid gap-3 border-t border-border pt-4 font-body text-sm">
                   <div>
                     <dt className="micro-label text-muted-foreground">Committente</dt>
                     <dd className="mt-1 leading-snug text-foreground">{project.client}</dd>
                   </div>
+                  {project.details?.map(({ label, value }) => (
+                    <div key={label}>
+                      <dt className="micro-label text-muted-foreground">{label}</dt>
+                      <dd className="mt-1 leading-snug text-foreground">{value}</dd>
+                    </div>
+                  ))}
                   <div>
-                    <dt className="micro-label text-muted-foreground">Importo</dt>
+                    <dt className="micro-label text-muted-foreground">
+                      {project.amountLabel ?? "Importo"}
+                    </dt>
                     <dd className="mt-1 font-semibold tabular-nums text-foreground">
                       {project.amount || "Non disponibile"}
+                      {project.amountNote && " *"}
                     </dd>
+                    {project.amountNote && (
+                      <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        * {project.amountNote}
+                      </dd>
+                    )}
                   </div>
                 </dl>
               </div>
@@ -200,6 +213,15 @@ const ProjectsShowcase = () => {
                 data-testid="desktop-project-facts"
                 className="mt-5 grid grid-cols-[minmax(0,1fr)_max-content] gap-x-8 gap-y-4 border-t border-border pt-5 font-body"
               >
+                <div className="col-span-2">
+                  <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                    Oggetto
+                  </dt>
+                  <dd className="mt-1.5 leading-relaxed text-muted-foreground">
+                    {currentEntry.project.description}
+                  </dd>
+                </div>
+
                 <div className="min-w-0">
                   <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
                     Committente
@@ -212,13 +234,30 @@ const ProjectsShowcase = () => {
                 {currentEntry.project.amount && (
                   <div className="text-right">
                     <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
-                      Importo
+                      {currentEntry.project.amountLabel ?? "Importo"}
                     </dt>
                     <dd className="mt-1.5 whitespace-nowrap font-heading text-xl font-bold tabular-nums text-foreground xl:text-2xl">
                       {currentEntry.project.amount}
+                      {currentEntry.project.amountNote && " *"}
                     </dd>
+                    {currentEntry.project.amountNote && (
+                      <dd className="mt-1 max-w-xs text-xs leading-relaxed text-muted-foreground">
+                        * {currentEntry.project.amountNote}
+                      </dd>
+                    )}
                   </div>
                 )}
+
+                {currentEntry.project.details?.map(({ label, value }) => (
+                  <div key={label} className="col-span-2">
+                    <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                      {label}
+                    </dt>
+                    <dd className="mt-1.5 leading-relaxed text-foreground">
+                      {value}
+                    </dd>
+                  </div>
+                ))}
 
                 {currentEntry.project.date && (
                   <div className="col-span-2">
@@ -234,7 +273,7 @@ const ProjectsShowcase = () => {
           </div>
         </div>
 
-        <ScrollReveal fadeOut={false} mobileScaleRange={[1, 1, 1]}>
+        <ScrollReveal mobileInitialScale={1}>
           <p className="section-copy mx-auto mt-10 max-w-xs px-4 text-center sm:max-w-none sm:px-0">
             Ogni progetto rimanda alla scheda completa dell'azienda che lo ha realizzato.
           </p>

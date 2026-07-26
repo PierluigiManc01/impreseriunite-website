@@ -22,7 +22,7 @@ const ProjectImageCarousel = ({
   eagerFirstImage = true,
 }: ProjectImageCarouselProps) => {
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [interactionPaused, setInteractionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   const next = useCallback(() => {
@@ -42,10 +42,24 @@ const ProjectImageCarousel = ({
   }, []);
 
   useEffect(() => {
-    if (!autoplay || paused || reducedMotion || images.length <= 1) return;
+    if (
+      !autoplay ||
+      interactionPaused ||
+      reducedMotion ||
+      images.length <= 1
+    ) {
+      return;
+    }
     const id = setInterval(next, autoplayInterval);
     return () => clearInterval(id);
-  }, [autoplay, paused, reducedMotion, next, autoplayInterval, images.length]);
+  }, [
+    autoplay,
+    interactionPaused,
+    reducedMotion,
+    next,
+    autoplayInterval,
+    images.length,
+  ]);
 
   if (images.length === 0) return null;
 
@@ -54,11 +68,13 @@ const ProjectImageCarousel = ({
       className={cn("relative overflow-hidden group/carousel", className)}
       role="region"
       aria-label={`Galleria immagini: ${alt}`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)}
+      onMouseEnter={() => setInteractionPaused(true)}
+      onMouseLeave={() => setInteractionPaused(false)}
+      onFocus={() => setInteractionPaused(true)}
+      onBlur={() => setInteractionPaused(false)}
+      onTouchStart={() => setInteractionPaused(true)}
+      onTouchEnd={() => setInteractionPaused(false)}
+      onTouchCancel={() => setInteractionPaused(false)}
     >
       {/* Images */}
       <div
@@ -70,6 +86,7 @@ const ProjectImageCarousel = ({
             key={i}
             src={src}
             alt={`${alt} - ${i + 1}`}
+            aria-hidden={i !== current}
             className="w-full h-full object-cover shrink-0"
             loading={i === 0 && eagerFirstImage ? "eager" : "lazy"}
             decoding="async"
@@ -95,10 +112,10 @@ const ProjectImageCarousel = ({
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
             className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 touch-manipulation rounded-full bg-black/55 p-2 text-white transition-opacity hover:bg-black/75",
+              "absolute left-2 top-1/2 inline-flex min-h-11 min-w-11 -translate-y-1/2 touch-manipulation items-center justify-center rounded-full bg-black/55 p-2 text-white transition-opacity hover:bg-black/75",
               indicatorVariant === "counter"
-                ? "min-h-11 min-w-11 opacity-100"
-                : "min-h-10 min-w-10 opacity-100 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
+                ? "opacity-100"
+                : "opacity-100 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
             )}
             aria-label="Foto precedente"
           >
@@ -107,10 +124,10 @@ const ProjectImageCarousel = ({
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
             className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 touch-manipulation rounded-full bg-black/55 p-2 text-white transition-opacity hover:bg-black/75",
+              "absolute right-2 top-1/2 inline-flex min-h-11 min-w-11 -translate-y-1/2 touch-manipulation items-center justify-center rounded-full bg-black/55 p-2 text-white transition-opacity hover:bg-black/75",
               indicatorVariant === "counter"
-                ? "min-h-11 min-w-11 opacity-100"
-                : "min-h-10 min-w-10 opacity-100 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
+                ? "opacity-100"
+                : "opacity-100 sm:opacity-0 sm:group-hover/carousel:opacity-100 sm:focus-visible:opacity-100"
             )}
             aria-label="Foto successiva"
           >
@@ -124,7 +141,7 @@ const ProjectImageCarousel = ({
                   key={i}
                   onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
                   className={cn(
-                    "flex min-h-6 min-w-6 items-center justify-center rounded-full transition-all before:block before:h-2 before:w-2 before:rounded-full before:content-['']",
+                    "flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all before:block before:h-2 before:w-2 before:rounded-full before:content-['']",
                     i === current ? "bg-white/20 before:bg-white" : "bg-transparent before:bg-white/60"
                   )}
                   aria-current={i === current ? "true" : undefined}

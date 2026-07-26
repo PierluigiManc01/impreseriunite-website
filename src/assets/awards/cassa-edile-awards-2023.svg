@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" role="img" aria-labelledby="title desc">
+  <title id="title">Cassa Edile Awards 2023</title>
+  <desc id="desc">Logo Cassa Edile Awards 2023</desc>
+  <path d="M17 255V70L52 5h151c8 0 12 5 12 13v237H29c-7 0-12-1-12-8Z" fill="#d3bd8d" stroke="#17191d" stroke-width="8" stroke-linejoin="round"/>
+  <path d="m42 71 34-57 34 21-34 36zM89 71l42-42 42 42h-84Zm21-8h42l-21-21z" fill="#fff"/>
+  <g fill="#34302f" font-family="Arial, Helvetica, sans-serif">
+    <text x="38" y="115" font-size="38" font-weight="700">Cassa</text>
+    <text x="38" y="160" font-size="38" font-weight="700">Edile</text>
+    <text x="38" y="207" font-size="34" font-weight="300">Awards</text>
+    <text x="38" y="250" fill="#fff" font-size="34" font-weight="300">2023</text>
+  </g>
+</svg>

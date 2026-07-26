@@ -11,6 +11,10 @@ const links: PillNavItem[] = [
     children: [
       { label: "Costruzioni Angelico", href: "/azienda/costruzioni-angelico" },
       { label: "Nuova C.C.S.", href: "/azienda/nuova-ccs" },
+      {
+        label: "Imprese Riunite",
+        href: "/azienda/gruppo-immobiliare-properzi",
+      },
     ],
   },
   { label: "Certificazioni", href: "/certificazioni" },
@@ -49,7 +53,7 @@ const Navbar = () => {
   const activeHref = isHome ? location.hash || "#home" : location.pathname;
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 backdrop-blur-xl">
+    <header className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 backdrop-blur-xl">
       <div className="container flex h-24 items-center justify-between gap-4 md:h-28">
         {isHome ? (
           <a
@@ -81,13 +85,9 @@ const Navbar = () => {
           className="relative h-14"
           items={items}
           activeHref={activeHref}
-          baseColor="hsl(217 91% 50%)"
-          pillColor="#ffffff"
-          pillTextColor="hsl(215 25% 12%)"
-          hoveredPillTextColor="#ffffff"
         />
       </div>
-    </nav>
+    </header>
   );
 };
 

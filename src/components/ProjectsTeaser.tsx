@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
-import { companies } from "@/data/companies";
+import { operatingCompanies } from "@/data/companies";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const operatingCompanies = companies.filter(
-  (company) => company.id === "costruzioni-angelico" || company.id === "nuova-ccs"
-);
 
 const projectArchive = operatingCompanies.flatMap((company) =>
   company.projects
@@ -13,7 +9,12 @@ const projectArchive = operatingCompanies.flatMap((company) =>
     .map((project) => ({ project, company }))
 );
 
-const [featuredProject, ...secondaryProjects] = projectArchive.slice(0, 3);
+const curatedProjects = projectArchive.filter(
+  ({ project }) => project.featuredOnHomepage
+);
+const teaserProjects =
+  curatedProjects.length >= 3 ? curatedProjects.slice(0, 3) : projectArchive.slice(0, 3);
+const [featuredProject, ...secondaryProjects] = teaserProjects;
 
 const ProjectsTeaser = () => (
   <section id="progetti" className="section-shell bg-background">
@@ -36,7 +37,6 @@ const ProjectsTeaser = () => (
         {featuredProject && (
           <ScrollReveal
             className="sm:col-span-2 lg:col-span-7 lg:row-span-2"
-            fadeOut={false}
           >
             <Link
               to="/progetti"
@@ -64,7 +64,7 @@ const ProjectsTeaser = () => (
                   {featuredProject.project.title}
                 </h3>
                 <div className="mt-6 flex items-end justify-between gap-6 border-t border-primary-foreground/20 pt-5">
-                  <p className="max-w-xl font-body text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
+                  <p className="max-w-xl font-body text-sm leading-relaxed text-primary-foreground/75 sm:text-base xl:text-lg">
                     {featuredProject.project.client}
                   </p>
                   <ArrowRight className="h-6 w-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
@@ -78,7 +78,6 @@ const ProjectsTeaser = () => (
           <ScrollReveal
             key={`${company.id}-${project.title}`}
             className="lg:col-span-5"
-            fadeOut={false}
           >
             <Link
               to="/progetti"
@@ -99,11 +98,11 @@ const ProjectsTeaser = () => (
                   <p className="font-body text-xs font-bold uppercase tracking-[0.14em] text-primary">
                     {company.name}
                   </p>
-                  <h3 className="mt-4 font-heading text-2xl font-bold leading-[1.08] tracking-tight text-foreground transition-colors group-hover:text-primary">
+                  <h3 className="mt-4 font-heading text-2xl font-bold leading-[1.08] tracking-tight text-foreground transition-colors group-hover:text-primary xl:text-3xl">
                     {project.title}
                   </h3>
                 </div>
-                <div className="mt-8 flex items-center gap-2 font-body text-sm font-medium text-muted-foreground">
+                <div className="mt-8 flex items-center gap-2 font-body text-sm font-medium text-muted-foreground xl:text-base">
                   <MapPin className="h-4 w-4 shrink-0 text-primary" />
                   <span>{project.location}</span>
                 </div>
@@ -113,7 +112,7 @@ const ProjectsTeaser = () => (
         ))}
       </div>
 
-      <ScrollReveal fadeOut={false}>
+      <ScrollReveal>
         <div className="mt-8 flex justify-center px-4 sm:px-0">
           <Link
             to="/progetti"

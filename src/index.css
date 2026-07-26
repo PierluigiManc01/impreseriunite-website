@@ -22,7 +22,7 @@
     --secondary-foreground: 215 25% 12%;
 
     --muted: 214 32% 94%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 16% 42%;
 
     --accent: 210 100% 96%;
     --accent-foreground: 217 91% 40%;
@@ -109,6 +109,57 @@
 
   .micro-label {
     @apply font-body text-sm font-semibold uppercase tracking-[0.14em];
+  }
+
+  /* Homepage regains a generous editorial scale on large displays without
+     changing mobile, tablet, or internal-page density. */
+  @media (min-width: 1280px) {
+    .homepage main .section-shell,
+    .homepage main #chi-siamo,
+    .homepage main #committenti {
+      padding-top: 6.5rem;
+      padding-bottom: 6.5rem;
+    }
+
+    .homepage main .section-title {
+      font-size: 5rem;
+      line-height: 1.02;
+    }
+
+    .homepage main .section-copy {
+      font-size: 1.375rem;
+      line-height: 1.75;
+    }
+
+    .homepage main .section-eyebrow,
+    .homepage main .micro-label {
+      font-size: 1rem;
+    }
+
+    .homepage main .panel-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .homepage main .section-shell,
+    .homepage main #chi-siamo,
+    .homepage main #committenti {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+
+    .homepage main .section-title {
+      font-size: 5.5rem;
+    }
+
+    .homepage main .section-copy {
+      font-size: 1.5rem;
+    }
+
+    .homepage main .panel-title {
+      font-size: 2.5rem;
+    }
   }
 
   /* Registration-mark corners — a nod to blueprint/survey drafting marks.

@@ -1,13 +1,13 @@
-import { Fragment } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { history } from "@/data/companies";
 import { cn } from "@/lib/utils";
+import { renderRichText } from "@/lib/render-rich-text";
 
 import cantiere from "@/assets/cantiere.webp";
 import iso from "@/assets/logo-iso-01.webp";
 import soa from "@/assets/logo-soa.jpg";
 import sa from "@/assets/SA-logo.webp";
-import international from "@/assets/internazionali.jpg";
+import rivaDiTraiano from "@/assets/riva-di-traiano.webp";
 import dataCenter from "@/assets/data_center.jpg";
 
 type ChapterVisual =
@@ -25,7 +25,6 @@ type ChapterVisual =
 type StoryChapter = {
   year: string;
   milestone: string;
-  capability: string;
   historyText: string;
   historyShort: string;
   capabilityText: string;
@@ -37,30 +36,12 @@ const storyChapters: StoryChapter[] = [
   {
     year: history.timeline[0].year,
     milestone: history.timeline[0].title,
-    capability: "Esperienza internazionale",
     historyText: history.timeline[0].desc,
     historyShort: history.timeline[0].short ?? history.timeline[0].desc,
     capabilityText:
-      "Dal 1976 il gruppo opera nelle grandi opere civili, marittime e idrauliche. Ha realizzato progetti di rilevanza internazionale in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah; e in Italia il <strong>Porto Turistico Riva di Traiano</strong>.",
+      "Il gruppo opera nelle grandi opere civili, stradali e idrauliche, realizzando progetti di rilevanza nazionale e soprattutto internazionale. Ne sono esempi le opere realizzate in <strong>Arabia Saudita</strong>, tra cui il Viadotto Muzdalifah, il Raccordo Anulare di Riyadh e la Facoltà di Ingegneria di Jeddah.",
     capabilityShort:
-      "Dalle origini, grandi opere civili, marittime e idrauliche in <strong>Arabia Saudita</strong> e in Italia.",
-    visual: {
-      kind: "image",
-      src: international,
-      alt: "Progetti internazionali del gruppo Imprese Riunite",
-      caption: "Arabia Saudita · Italia",
-    },
-  },
-  {
-    year: history.timeline[1].year,
-    milestone: history.timeline[1].title,
-    capability: "Opere pubbliche",
-    historyText: history.timeline[1].desc,
-    historyShort: history.timeline[1].short ?? history.timeline[1].desc,
-    capabilityText:
-      "La nuova fase consolida collaborazioni con Roma Capitale, Ministeri della Giustizia e della Difesa ed <strong>ENAV</strong>. Il gruppo realizza strutture detentive, sedi istituzionali e infrastrutture strategiche come la pista di <strong>Ronchi dei Legionari</strong>.",
-    capabilityShort:
-      "Costruzioni Angelico diventa riferimento per istituzioni, strutture detentive e infrastrutture nazionali.",
+      "Dalle origini, grandi opere civili, stradali e idrauliche in <strong>Arabia Saudita</strong> e in Italia.",
     visual: {
       kind: "image",
       src: cantiere,
@@ -69,15 +50,30 @@ const storyChapters: StoryChapter[] = [
     },
   },
   {
+    year: history.timeline[1].year,
+    milestone: history.timeline[1].title,
+    historyText: history.timeline[1].desc,
+    historyShort: history.timeline[1].short ?? history.timeline[1].desc,
+    capabilityText:
+      "Tra le realizzazioni più notevoli, spiccano la ristrutturazione della <strong>Mole Antonelliana</strong> a Torino, il <strong>Porto Turistico Riva di Traiano</strong> a Civitavecchia e la realizzazione di infrastrutture per il settore della difesa e della sicurezza.",
+    capabilityShort:
+      "Costruzioni Angelico diventa riferimento per istituzioni, strutture detentive e infrastrutture nazionali.",
+    visual: {
+      kind: "image",
+      src: rivaDiTraiano,
+      alt: "Veduta aerea del Porto Turistico Riva di Traiano a Civitavecchia",
+      caption: "Porto Turistico, Civitavecchia",
+    },
+  },
+  {
     year: history.timeline[2].year,
     milestone: history.timeline[2].title,
-    capability: "Impiantistica avanzata",
     historyText: history.timeline[2].desc,
     historyShort: history.timeline[2].short ?? history.timeline[2].desc,
     capabilityText:
-      "Nuova C.C.S. sviluppa competenze in impianti fotovoltaici, gruppi elettrogeni e di continuità, cabine di trasformazione MT/BT, sicurezza, illuminazione e autonomia industriale.",
+      "La società si impone come leader del settore per la realizzazione di <strong>impianti fotovoltaici</strong>, gruppi elettrogeni e di continuità, cabine di trasformazione MT/BT, sicurezza, illuminazione e autonomia industriale.",
     capabilityShort:
-      "Energia, continuità e tecnologia: fotovoltaico, cabine MT/BT, sicurezza e illuminazione.",
+      "La società si impone come leader nell'installazione di impianti <strong>fotovoltaici</strong>, sicurezza e illuminazione e di cabine MT/BT.",
     visual: {
       kind: "image",
       src: dataCenter,
@@ -88,34 +84,18 @@ const storyChapters: StoryChapter[] = [
   {
     year: history.timeline[3].year,
     milestone: history.timeline[3].title,
-    capability: "Qualità certificata",
     historyText: history.timeline[3].desc,
     historyShort: history.timeline[3].short ?? history.timeline[3].desc,
     capabilityText:
-      "Competenze integrate e leadership familiare sono sostenute dalle principali certificazioni di settore, a garanzia di qualità, sicurezza, responsabilità sociale e solidità operativa.",
+      "Negli ultimi anni il gruppo ha dato vita ad un nuova fase di collaborazioni con <strong>Roma Capitale, Ministeri della Giustizia e della Difesa ed ENAV</strong> per la realizzazione di strutture detentive, sedi istituzionali e infrastrutture strategiche per il paese.",
     capabilityShort:
-      "Team specializzato e standard certificati per qualità, sicurezza e responsabilità sociale.",
+      "Team specializzato e standard <strong>certificati per qualità, sicurezza e responsabilità sociale</strong>.",
     visual: {
       kind: "certifications",
       caption: "Standard di gruppo",
     },
   },
 ];
-
-const renderRichText = (text: string) =>
-  text.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
-    const strongMatch = part.match(/^<strong>(.*?)<\/strong>$/);
-
-    if (strongMatch) {
-      return (
-        <strong key={`${strongMatch[1]}-${index}`} className="font-semibold text-foreground">
-          {strongMatch[1]}
-        </strong>
-      );
-    }
-
-    return <Fragment key={`${part}-${index}`}>{part.replace(/<[^>]*>/g, "")}</Fragment>;
-  });
 
 const ChapterVisualPanel = ({ chapter }: { chapter: StoryChapter }) => {
   if (chapter.visual.kind === "certifications") {
@@ -173,38 +153,37 @@ const AboutSection = () => (
       <ScrollReveal>
         <header className="grid items-end gap-7 px-4 sm:px-0 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
           <div>
-            <p className="section-eyebrow mb-4">Chi siamo · La nostra storia</p>
+            <p className="section-eyebrow mb-4">Chi siamo</p>
             <h2 className="section-title max-w-6xl">
               La storia che costruisce chi siamo
             </h2>
           </div>
           <p className="section-copy max-w-xl lg:pb-1">
-            Quattro capitoli intrecciano origini, competenze e risultati: oltre cinquant'anni di
+            Quattro capitoli intrecciano origini, competenze e risultati: cinquant'anni di
             esperienza al servizio del territorio.
           </p>
         </header>
       </ScrollReveal>
 
-      <div className="relative mt-10 grid gap-5 px-4 before:absolute before:bottom-20 before:left-[7.5rem] before:top-12 before:hidden before:w-px before:bg-gradient-to-b before:from-primary before:via-primary/35 before:to-border before:content-[''] sm:px-0 lg:mt-16 lg:block lg:before:block">
+      <div className="relative mt-10 grid gap-5 px-4 before:absolute before:bottom-20 before:left-[7.5rem] before:top-12 before:hidden before:w-px before:bg-gradient-to-b before:from-primary before:via-primary/35 before:to-border before:content-[''] sm:px-0 lg:mt-16 lg:block lg:before:block xl:before:left-[10rem] 2xl:before:left-[12rem]">
         {storyChapters.map((chapter, index) => {
           const isEven = index % 2 === 0;
 
           return (
             <ScrollReveal
               key={chapter.year}
-              scaleRange={[0.98, 1, 1]}
-              mobileScaleRange={[0.99, 1, 1]}
-              fadeOut={false}
+              initialScale={0.98}
+              mobileInitialScale={0.99}
             >
               <article
                 className={cn(
-                  "relative grid gap-5 overflow-hidden rounded-2xl border border-border/70 bg-card p-5 shadow-[var(--card-shadow)] sm:p-7 lg:min-h-[36rem] lg:overflow-visible lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-t lg:bg-transparent lg:p-0 lg:py-20 lg:shadow-none lg:first:border-t-0 lg:items-center lg:gap-10 xl:gap-16",
+                  "relative grid gap-5 overflow-hidden rounded-2xl border border-border/70 bg-card p-5 shadow-[var(--card-shadow)] sm:p-7 lg:min-h-[36rem] lg:overflow-visible lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-t lg:bg-transparent lg:p-0 lg:py-20 lg:shadow-none lg:first:border-t-0 lg:items-center lg:gap-10 xl:min-h-[42rem] xl:gap-16 xl:py-24 2xl:min-h-[46rem]",
                   isEven
-                    ? "lg:grid-cols-[7.5rem_minmax(0,0.82fr)_minmax(0,1.18fr)]"
-                    : "lg:grid-cols-[7.5rem_minmax(0,1.18fr)_minmax(0,0.82fr)]"
+                    ? "lg:grid-cols-[7.5rem_minmax(0,0.82fr)_minmax(0,1.18fr)] xl:grid-cols-[10rem_minmax(0,0.82fr)_minmax(0,1.18fr)] 2xl:grid-cols-[12rem_minmax(0,0.82fr)_minmax(0,1.18fr)]"
+                    : "lg:grid-cols-[7.5rem_minmax(0,1.18fr)_minmax(0,0.82fr)] xl:grid-cols-[10rem_minmax(0,1.18fr)_minmax(0,0.82fr)] 2xl:grid-cols-[12rem_minmax(0,1.18fr)_minmax(0,0.82fr)]"
                 )}
               >
-                <div className="relative order-1 whitespace-nowrap font-heading text-4xl font-extrabold tabular-nums tracking-tight text-primary lg:w-full lg:self-start lg:pr-6 lg:pt-2 lg:text-right lg:text-5xl">
+                <div className="relative order-1 whitespace-nowrap font-heading text-4xl font-extrabold tabular-nums tracking-tight text-primary lg:w-full lg:self-start lg:pr-6 lg:pt-2 lg:text-right lg:text-5xl xl:pr-10 xl:text-6xl 2xl:pr-12 2xl:text-7xl">
                   {chapter.year}
                 </div>
 
@@ -215,18 +194,15 @@ const AboutSection = () => (
                   )}
                 >
                   <div className="order-2">
-                    <p className="mb-2 font-body text-[0.7rem] font-bold uppercase tracking-[0.14em] text-primary sm:mb-3 sm:text-sm sm:tracking-[0.16em]">
+                    <h3 className="font-body text-[1.75rem] font-bold uppercase leading-[1.05] tracking-[0.08em] text-primary sm:text-4xl sm:tracking-[0.1em] xl:text-6xl 2xl:text-7xl">
                       {chapter.milestone}
-                    </p>
-                    <h3 className="font-heading text-[1.75rem] font-bold leading-[1.05] tracking-tight text-foreground sm:text-4xl xl:text-5xl">
-                      {chapter.capability}
                     </h3>
                   </div>
 
-                  <div className="order-4 space-y-3 font-body text-[0.95rem] leading-relaxed text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-lg">
+                  <div className="order-4 space-y-3 font-body text-[0.95rem] leading-relaxed text-muted-foreground sm:mt-6 sm:space-y-4 sm:text-lg xl:mt-8 xl:text-xl 2xl:text-2xl">
                     <p>
-                      <span className="md:hidden">{chapter.historyShort}</span>
-                      <span className="hidden md:inline">{chapter.historyText}</span>
+                      <span className="md:hidden">{renderRichText(chapter.historyShort)}</span>
+                      <span className="hidden md:inline">{renderRichText(chapter.historyText)}</span>
                     </p>
                     <p>
                       <span className="md:hidden">{renderRichText(chapter.capabilityShort)}</span>

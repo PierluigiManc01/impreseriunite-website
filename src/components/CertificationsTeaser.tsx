@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Award } from "lucide-react";
-import { companies } from "@/data/companies";
+import { certifiedCompanies } from "@/data/companies";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const certifiedCompanies = companies.filter((c) => c.certifications.length > 0);
 
 // Unique certificate names across companies, as compact badges for the teaser.
 const uniqueCertNames = Array.from(
@@ -26,12 +24,12 @@ const CertificationsTeaser = () => (
         </div>
       </ScrollReveal>
 
-      <ScrollReveal fadeOut={false}>
+      <ScrollReveal>
         <ul className="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-2.5">
           {uniqueCertNames.map((name) => (
             <li
               key={name}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-3.5 py-1.5 font-body text-xs font-medium text-muted-foreground"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-3.5 py-1.5 font-body text-xs font-medium text-muted-foreground xl:px-4 xl:py-2 xl:text-sm 2xl:text-base"
             >
               <Award className="h-3.5 w-3.5 text-primary" />
               {name}

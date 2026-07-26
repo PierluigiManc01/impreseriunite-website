@@ -1,33 +1,24 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, Building2, ExternalLink, FileText, Zap } from "lucide-react";
-import { companies } from "@/data/companies";
+import { certifiedCompanies } from "@/data/companies";
+import { companyLogos } from "@/data/company-assets";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import logoCcs from "@/assets/NUOVA-CCS.webp";
-import logoAngelico from "@/assets/CostruzioniAngelico-logo.webp";
-
-const logoMap: Record<string, string> = {
-  "costruzioni-angelico": logoAngelico,
-  "nuova-ccs": logoCcs,
-};
-
-const certifiedCompanies = companies.filter((c) => c.certifications.length > 0);
+import { useDocumentMetadata } from "@/hooks/use-document-metadata";
 
 const Certifications = () => {
   const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
+  const revealInitial = prefersReducedMotion ? false : { opacity: 0, y: 20 };
+  const revealTarget = prefersReducedMotion ? undefined : { opacity: 1, y: 0 };
 
-  useEffect(() => {
-    document.title = "Certificazioni | Imprese Riunite";
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        "content",
-        "Registro delle certificazioni e qualificazioni di Costruzioni Angelico e Nuova C.C.S.: qualità, ambiente, sicurezza ed etica per gli appalti pubblici."
-      );
-  }, []);
+  useDocumentMetadata(
+    "Certificazioni | Imprese Riunite",
+    "Registro delle certificazioni e qualificazioni di Costruzioni Angelico e Nuova C.C.S.: qualità, ambiente, sicurezza ed etica per gli appalti pubblici."
+  );
 
   useEffect(() => {
     if (!location.hash) return;
@@ -38,6 +29,7 @@ const Certifications = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
+      <main id="main-content">
 
       {/* Hero */}
       <section className="pt-32 md:pt-40 pb-14 md:pb-20 bg-gradient-to-b from-primary/5 to-background">
@@ -73,9 +65,9 @@ const Certifications = () => {
           <div className="container">
             <ScrollReveal>
               <div className="flex flex-wrap items-center gap-5 mb-12 border-l-4 border-primary pl-6">
-                {logoMap[company.id] && (
+                {companyLogos[company.id] && (
                   <img
-                    src={logoMap[company.id]}
+                    src={companyLogos[company.id]}
                     alt={`${company.name} logo`}
                     className="h-14 md:h-16 w-auto object-contain"
                   />
@@ -108,10 +100,10 @@ const Certifications = () => {
                     return (
                       <motion.div
                         key={cat.code}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={revealInitial}
+                        whileInView={revealTarget}
                         viewport={{ once: true }}
-                        transition={{ delay: i * 0.04 }}
+                        transition={prefersReducedMotion ? undefined : { delay: i * 0.04 }}
                         className="architectural-panel p-5 flex flex-col h-full"
                       >
                         <div className="flex items-center gap-3 mb-3">
@@ -152,13 +144,13 @@ const Certifications = () => {
               {company.certifications.map((cert, i) => (
                 <motion.a
                   key={cert.name}
-                  href={cert.pdf || "#"}
+                  href={cert.pdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={revealInitial}
+                  whileInView={revealTarget}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.04 }}
+                  transition={prefersReducedMotion ? undefined : { delay: i * 0.04 }}
                   className="architectural-panel group p-5 flex items-center gap-4"
                 >
                   <div className="w-11 h-11 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
@@ -166,14 +158,19 @@ const Certifications = () => {
                   </div>
                   <span className="font-heading font-bold text-base md:text-lg leading-snug text-foreground group-hover:text-primary transition-colors">
                     {cert.name}
+                    <span className="sr-only"> (si apre in una nuova scheda)</span>
                   </span>
-                  <ExternalLink className="ml-auto w-5 h-5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <ExternalLink
+                    aria-hidden="true"
+                    className="ml-auto w-5 h-5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
                 </motion.a>
               ))}
             </div>
           </div>
         </section>
       ))}
+      </main>
 
       <Footer />
     </div>
