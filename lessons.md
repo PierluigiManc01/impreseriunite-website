@@ -1,0 +1,3 @@
+# Lessons
+
+- 2026-07-27 — Project galleries render 4:3 on desktop and 16:9 with `object-cover` on mobile. Prepare crop-safe 4:3 masters at 1600×1200, export WebP, and keep key subjects inside central 16:9 safe area.

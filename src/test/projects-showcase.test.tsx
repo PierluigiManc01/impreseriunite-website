@@ -115,7 +115,7 @@ describe("ProjectsShowcase mobile cards", () => {
     expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(11);
   });
 
-  it("matches supplied project counts, totals, clients, and image placeholders", () => {
+  it("matches supplied project counts, totals, clients, and image galleries", () => {
     const angelico = operatingCompanies.find(
       ({ id }) => id === "costruzioni-angelico"
     );
@@ -138,10 +138,20 @@ describe("ProjectsShowcase mobile cards", () => {
       nuovaCcs?.projects.reduce((total, { amount }) => total + parseEuro(amount), 0)
     ).toBeCloseTo(19_675_872.73, 2);
 
+    const montanariProject = nuovaCcs?.projects.find(({ title }) =>
+      title.includes("Scuola M. Montanari")
+    );
+    expect(montanariProject?.images).toHaveLength(7);
     expect(
-      operatingCompanies.flatMap(({ projects }) => projects).every(
-        ({ images }) => images.length === 2
+      montanariProject?.images.every((image) =>
+        image.startsWith("/assets/projects/scuola-montanari-ravenna/")
       )
+    ).toBe(true);
+    expect(
+      operatingCompanies
+        .flatMap(({ projects }) => projects)
+        .filter(({ title }) => !title.includes("Scuola M. Montanari"))
+        .every(({ images }) => images.length === 2)
     ).toBe(true);
     expect(
       holding?.projects.every(({ images }) => images.length > 0)

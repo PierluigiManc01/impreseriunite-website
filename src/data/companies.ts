@@ -101,6 +101,16 @@ const PLACEHOLDER = {
   energy: [px("photo-1466611653911-95081537e5b7"), px("photo-1508514177221-188b1cf16e9d")],
 };
 
+const SCUOLA_MONTANARI_IMAGES = [
+  "/assets/projects/scuola-montanari-ravenna/01-corridoio-completato.webp",
+  "/assets/projects/scuola-montanari-ravenna/02-aula-rinnovata.webp",
+  "/assets/projects/scuola-montanari-ravenna/03-aula-esistente.webp",
+  "/assets/projects/scuola-montanari-ravenna/04-corridoio-impianti.webp",
+  "/assets/projects/scuola-montanari-ravenna/05-impianti-ventilazione.webp",
+  "/assets/projects/scuola-montanari-ravenna/06-posa-fotovoltaico.webp",
+  "/assets/projects/scuola-montanari-ravenna/07-impianto-fotovoltaico.webp",
+];
+
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
@@ -301,7 +311,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Adeguamento sismico dell’Ala Callegari presso la scuola secondaria di primo grado M. Montanari, nell’ambito del PNRR – Next Generation EU.",
-        images: PLACEHOLDER.building,
+        images: SCUOLA_MONTANARI_IMAGES,
       },
       {
         title: "Residenze universitarie SDO Pietralata",
