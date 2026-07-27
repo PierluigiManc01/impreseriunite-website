@@ -111,6 +111,15 @@ const SCUOLA_MONTANARI_IMAGES = [
   "/assets/projects/scuola-montanari-ravenna/07-impianto-fotovoltaico.webp",
 ];
 
+const CASA_COMUNITA_SCAFA_IMAGES = [
+  "/assets/projects/casa-comunita-scafa/01-facciata-cantiere.webp",
+  "/assets/projects/casa-comunita-scafa/02-gru-e-macchinari.webp",
+  "/assets/projects/casa-comunita-scafa/03-struttura-e-ponteggi.webp",
+  "/assets/projects/casa-comunita-scafa/04-struttura-interna.webp",
+  "/assets/projects/casa-comunita-scafa/05-corridoio-impianti.webp",
+  "/assets/projects/casa-comunita-scafa/06-impianto-fotovoltaico.webp",
+];
+
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
@@ -202,7 +211,7 @@ export const companies: Company[] = [
           "Realizzazione della Casa della Comunità presso il Comune di Scafa, Via della Stazione.",
         newsUrl:
           "https://www.asl.pe.it/Sezione.jsp?titolo=comunicato-stampa---inaugurata-la-casa-della-comunit%C3%A0-hub-di-scafa&idSezione=2139",
-        images: PLACEHOLDER.building,
+        images: CASA_COMUNITA_SCAFA_IMAGES,
       },
       {
         title: "Accordi quadro per i siti e i sistemi ENAV",

@@ -147,10 +147,25 @@ describe("ProjectsShowcase mobile cards", () => {
         image.startsWith("/assets/projects/scuola-montanari-ravenna/")
       )
     ).toBe(true);
+
+    const scafaProject = angelico?.projects.find(
+      ({ title }) => title === "Casa della Comunità di Scafa"
+    );
+    expect(scafaProject?.images).toHaveLength(6);
+    expect(
+      scafaProject?.images.every((image) =>
+        image.startsWith("/assets/projects/casa-comunita-scafa/")
+      )
+    ).toBe(true);
+
     expect(
       operatingCompanies
         .flatMap(({ projects }) => projects)
-        .filter(({ title }) => !title.includes("Scuola M. Montanari"))
+        .filter(
+          ({ title }) =>
+            !title.includes("Scuola M. Montanari") &&
+            title !== "Casa della Comunità di Scafa"
+        )
         .every(({ images }) => images.length === 2)
     ).toBe(true);
     expect(
