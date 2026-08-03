@@ -120,6 +120,17 @@ const CASA_COMUNITA_SCAFA_IMAGES = [
   "/assets/projects/casa-comunita-scafa/06-impianto-fotovoltaico.webp",
 ];
 
+const PALAZZO_FARNESE_IMAGES = [
+  "/assets/projects/palazzo-farnese/01-facciata-principale.webp",
+  "/assets/projects/palazzo-farnese/02-accesso-monumentale.webp",
+  "/assets/projects/palazzo-farnese/03-scala-regia.webp",
+  "/assets/projects/palazzo-farnese/04-volta-affrescata.webp",
+  "/assets/projects/palazzo-farnese/05-sala-affrescata.webp",
+  "/assets/projects/palazzo-farnese/06-cantiere-interni.webp",
+  "/assets/projects/palazzo-farnese/07-illuminazione-giardino.webp",
+  "/assets/projects/palazzo-farnese/08-grotta-illuminata.webp",
+];
+
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
@@ -332,6 +343,16 @@ export const companies: Company[] = [
         description:
           "Realizzazione di impianti di illuminazione per le residenze universitarie e servizi correlati presso l’area dello SDO di Pietralata.",
         images: PLACEHOLDER.building,
+      },
+      {
+        title: "Palazzo Farnese di Caprarola",
+        location: "Caprarola (VT)",
+        client: "Ministero della Cultura",
+        amount: "350.000,00 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Interventi impiantistici e di illuminazione per la valorizzazione degli ambienti monumentali e degli spazi esterni di Palazzo Farnese a Caprarola.",
+        images: PALAZZO_FARNESE_IMAGES,
       },
     ],
   },

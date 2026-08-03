@@ -69,7 +69,7 @@ describe("ProjectsShowcase mobile cards", () => {
     renderShowcase();
 
     const cards = screen.getAllByTestId("mobile-project-card");
-    expect(cards).toHaveLength(11);
+    expect(cards).toHaveLength(12);
 
     const firstCard = cards[0];
     expect(
@@ -109,10 +109,10 @@ describe("ProjectsShowcase mobile cards", () => {
     expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(5);
 
     fireEvent.click(screen.getByRole("button", { name: "Nuova C.C.S." }));
-    expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(6);
+    expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(7);
 
     fireEvent.click(screen.getByRole("button", { name: "Tutte" }));
-    expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(11);
+    expect(screen.getAllByTestId("mobile-project-card")).toHaveLength(12);
   });
 
   it("matches supplied project counts, totals, clients, and image galleries", () => {
@@ -125,18 +125,18 @@ describe("ProjectsShowcase mobile cards", () => {
     );
 
     expect(angelico?.projects).toHaveLength(5);
-    expect(nuovaCcs?.projects).toHaveLength(6);
+    expect(nuovaCcs?.projects).toHaveLength(7);
     expect(holding?.projects).toHaveLength(7);
 
     expect(new Set(angelico?.projects.map(({ client }) => client))).toHaveLength(4);
-    expect(new Set(nuovaCcs?.projects.map(({ client }) => client))).toHaveLength(5);
+    expect(new Set(nuovaCcs?.projects.map(({ client }) => client))).toHaveLength(6);
 
     expect(
       angelico?.projects.reduce((total, { amount }) => total + parseEuro(amount), 0)
     ).toBeCloseTo(30_778_018.73, 2);
     expect(
       nuovaCcs?.projects.reduce((total, { amount }) => total + parseEuro(amount), 0)
-    ).toBeCloseTo(19_675_872.73, 2);
+    ).toBeCloseTo(20_025_872.73, 2);
 
     const montanariProject = nuovaCcs?.projects.find(({ title }) =>
       title.includes("Scuola M. Montanari")
@@ -158,13 +158,26 @@ describe("ProjectsShowcase mobile cards", () => {
       )
     ).toBe(true);
 
+    const palazzoFarneseProject = nuovaCcs?.projects.find(
+      ({ title }) => title === "Palazzo Farnese di Caprarola"
+    );
+    expect(palazzoFarneseProject?.client).toBe("Ministero della Cultura");
+    expect(palazzoFarneseProject?.amount).toBe("350.000,00 €");
+    expect(palazzoFarneseProject?.images).toHaveLength(8);
+    expect(
+      palazzoFarneseProject?.images.every((image) =>
+        image.startsWith("/assets/projects/palazzo-farnese/")
+      )
+    ).toBe(true);
+
     expect(
       operatingCompanies
         .flatMap(({ projects }) => projects)
         .filter(
           ({ title }) =>
             !title.includes("Scuola M. Montanari") &&
-            title !== "Casa della Comunità di Scafa"
+            title !== "Casa della Comunità di Scafa" &&
+            title !== "Palazzo Farnese di Caprarola"
         )
         .every(({ images }) => images.length === 2)
     ).toBe(true);
