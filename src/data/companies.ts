@@ -16,6 +16,7 @@ export type Project = {
   date?: string;
   featuredOnHomepage?: boolean;
   images: string[];
+  imageLabels?: string[];
 };
 
 export type Certification = {
@@ -131,6 +132,53 @@ const PALAZZO_FARNESE_IMAGES = [
   "/assets/projects/palazzo-farnese/08-grotta-illuminata.webp",
 ];
 
+const AULE_BUNKER_IMAGES = [
+  "/assets/projects/aule-bunker/01-impianto-fotovoltaico.webp",
+  "/assets/projects/aule-bunker/02-impianti-esterni.webp",
+  "/assets/projects/aule-bunker/03-unita-trattamento-aria.webp",
+  "/assets/projects/aule-bunker/04-impianto-meccanico.webp",
+  "/assets/projects/aule-bunker/05-quadro-controllo.webp",
+  "/assets/projects/aule-bunker/06-quadro-elettrico.webp",
+  "/assets/projects/aule-bunker/07-quadro-tecnico.webp",
+  "/assets/projects/aule-bunker/08-unita-impiantistica.webp",
+];
+
+const CITTADELLA_GIUDIZIARIA_LATINA_IMAGES = [
+  "/assets/projects/latina-cittadella-giudiziaria/01-edificio-giudiziario.webp",
+  "/assets/projects/latina-cittadella-giudiziaria/02-impianto-fotovoltaico.webp",
+  "/assets/projects/latina-cittadella-giudiziaria/03-cabina-elettrica.webp",
+  "/assets/projects/latina-cittadella-giudiziaria/04-cabina-esterna.webp",
+  "/assets/projects/latina-cittadella-giudiziaria/05-quadro-media-tensione.webp",
+];
+
+const ENAV_ACCORDO_QUADRO_IMAGES = [
+  "/assets/projects/enav-accordo-quadro/01-bari-torre.webp",
+  "/assets/projects/enav-accordo-quadro/02-bari-cablaggio.webp",
+  "/assets/projects/enav-accordo-quadro/03-brindisi-fotovoltaico.webp",
+  "/assets/projects/enav-accordo-quadro/04-brindisi-quadri.webp",
+  "/assets/projects/enav-accordo-quadro/05-ciampino-cablaggio.webp",
+  "/assets/projects/enav-accordo-quadro/06-ciampino-quadri.webp",
+  "/assets/projects/enav-accordo-quadro/07-fiumicino-torre.webp",
+  "/assets/projects/enav-accordo-quadro/08-olbia-cantiere.webp",
+  "/assets/projects/enav-accordo-quadro/09-olbia-impianti.webp",
+  "/assets/projects/enav-accordo-quadro/10-olbia-pista.webp",
+  "/assets/projects/enav-accordo-quadro/11-ronchi-pista.webp",
+];
+
+const ENAV_ACCORDO_QUADRO_IMAGE_LABELS = [
+  "Bari",
+  "Bari",
+  "Brindisi",
+  "Brindisi",
+  "Ciampino",
+  "Ciampino",
+  "Fiumicino",
+  "Olbia",
+  "Olbia",
+  "Olbia",
+  "Ronchi dei Legionari",
+];
+
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
@@ -210,7 +258,7 @@ export const companies: Company[] = [
         amountLabel: "Importo complessivo",
         description:
           "Appalto integrato per progettazione esecutiva ed esecuzione degli interventi di manutenzione straordinaria ed efficientamento energetico del complesso delle Aule Bunker, Via Casale di San Basilio 169, Roma.",
-        images: PLACEHOLDER.renovation,
+        images: AULE_BUNKER_IMAGES,
       },
       {
         title: "Casa della Comunità di Scafa",
@@ -237,7 +285,8 @@ export const companies: Company[] = [
           { label: "Lotto 2 Centro", value: "2.250.000,00 €" },
           { label: "Lotto 3 Sud", value: "2.250.000,00 €" },
         ],
-        images: PLACEHOLDER.energy,
+        images: ENAV_ACCORDO_QUADRO_IMAGES,
+        imageLabels: ENAV_ACCORDO_QUADRO_IMAGE_LABELS,
       },
     ],
   },
@@ -300,7 +349,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Appalto integrato per progettazione esecutiva ed esecuzione degli interventi di manutenzione straordinaria ed efficientamento energetico della Cittadella Giudiziaria di Latina – Nuovo Polo Giudiziario.",
-        images: PLACEHOLDER.renovation,
+        images: CITTADELLA_GIUDIZIARIA_LATINA_IMAGES,
       },
       {
         title: "Impianto di energia alternativa – Roma Rebibbia",

@@ -96,6 +96,7 @@ const ProjectsShowcase = () => {
                 {project.images.length > 0 ? (
                   <ProjectImageCarousel
                     images={project.images}
+                    imageLabels={project.imageLabels}
                     alt={project.title}
                     className="h-full"
                     indicatorVariant="counter"
@@ -195,6 +196,7 @@ const ProjectsShowcase = () => {
                 <ProjectImageCarousel
                   key={`${currentEntry.company.id}-${currentEntry.project.title}`}
                   images={currentEntry.project.images}
+                  imageLabels={currentEntry.project.imageLabels}
                   alt={currentEntry.project.title}
                   className="h-full"
                   autoplayInterval={6000}

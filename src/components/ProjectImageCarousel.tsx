@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface ProjectImageCarouselProps {
   images: string[];
+  imageLabels?: string[];
   alt: string;
   className?: string;
   autoplayInterval?: number;
@@ -14,6 +15,7 @@ interface ProjectImageCarouselProps {
 
 const ProjectImageCarousel = ({
   images,
+  imageLabels,
   alt,
   className,
   autoplayInterval = 4000,
@@ -85,7 +87,7 @@ const ProjectImageCarousel = ({
           <img
             key={i}
             src={src}
-            alt={`${alt} - ${i + 1}`}
+            alt={`${alt}${imageLabels?.[i] ? ` — ${imageLabels[i]}` : ""} - ${i + 1}`}
             aria-hidden={i !== current}
             className="w-full h-full object-cover shrink-0"
             loading={i === 0 && eagerFirstImage ? "eager" : "lazy"}
@@ -105,6 +107,17 @@ const ProjectImageCarousel = ({
           />
         ))}
       </div>
+
+      {imageLabels?.[current] && (
+        <span
+          data-testid="project-image-label"
+          className="absolute right-3 top-3 rounded-full bg-black/70 px-3 py-1.5 font-body text-xs font-bold uppercase tracking-[0.12em] text-white shadow-sm"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {imageLabels[current]}
+        </span>
+      )}
 
       {/* Arrows */}
       {images.length > 1 && (

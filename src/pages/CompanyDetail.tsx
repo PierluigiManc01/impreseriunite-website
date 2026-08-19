@@ -160,6 +160,7 @@ const CompanyDetail = () => {
                   <div className="relative aspect-[4/3]">
                     <ProjectImageCarousel
                       images={project.images}
+                      imageLabels={project.imageLabels}
                       alt={project.title}
                       className="h-full"
                     />

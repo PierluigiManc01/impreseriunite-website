@@ -102,6 +102,38 @@ describe("ProjectsShowcase mobile cards", () => {
     expect(within(firstCard).getByText("2 / 2")).toBeInTheDocument();
   });
 
+  it("updates ENAV site labels with the active carousel image", () => {
+    renderShowcase();
+
+    const enavCard = screen
+      .getAllByTestId("mobile-project-card")
+      .find((card) =>
+        within(card).queryByRole("link", {
+          name: "Accordi quadro per i siti e i sistemi ENAV",
+        })
+      );
+
+    expect(enavCard).toBeDefined();
+    expect(within(enavCard!).getByTestId("project-image-label")).toHaveTextContent(
+      "Bari"
+    );
+
+    const nextButton = within(enavCard!).getByRole("button", {
+      name: "Foto successiva",
+    });
+    fireEvent.click(nextButton);
+    expect(within(enavCard!).getByText("2 / 11")).toBeInTheDocument();
+    expect(within(enavCard!).getByTestId("project-image-label")).toHaveTextContent(
+      "Bari"
+    );
+
+    fireEvent.click(nextButton);
+    expect(within(enavCard!).getByText("3 / 11")).toBeInTheDocument();
+    expect(within(enavCard!).getByTestId("project-image-label")).toHaveTextContent(
+      "Brindisi"
+    );
+  });
+
   it("filters mobile cards by operating company", () => {
     renderShowcase();
 
@@ -170,6 +202,49 @@ describe("ProjectsShowcase mobile cards", () => {
       )
     ).toBe(true);
 
+    const auleBunkerProject = angelico?.projects.find(({ title }) =>
+      title.includes("Aule Bunker")
+    );
+    expect(auleBunkerProject?.images).toHaveLength(8);
+    expect(
+      auleBunkerProject?.images.every((image) =>
+        image.startsWith("/assets/projects/aule-bunker/")
+      )
+    ).toBe(true);
+
+    const latinaProject = nuovaCcs?.projects.find(
+      ({ title }) => title === "Cittadella Giudiziaria di Latina"
+    );
+    expect(latinaProject?.images).toHaveLength(5);
+    expect(
+      latinaProject?.images.every((image) =>
+        image.startsWith("/assets/projects/latina-cittadella-giudiziaria/")
+      )
+    ).toBe(true);
+
+    const enavProject = angelico?.projects.find(
+      ({ title }) => title === "Accordi quadro per i siti e i sistemi ENAV"
+    );
+    expect(enavProject?.images).toHaveLength(11);
+    expect(
+      enavProject?.images.every((image) =>
+        image.startsWith("/assets/projects/enav-accordo-quadro/")
+      )
+    ).toBe(true);
+    expect(enavProject?.imageLabels).toEqual([
+      "Bari",
+      "Bari",
+      "Brindisi",
+      "Brindisi",
+      "Ciampino",
+      "Ciampino",
+      "Fiumicino",
+      "Olbia",
+      "Olbia",
+      "Olbia",
+      "Ronchi dei Legionari",
+    ]);
+
     expect(
       operatingCompanies
         .flatMap(({ projects }) => projects)
@@ -177,7 +252,10 @@ describe("ProjectsShowcase mobile cards", () => {
           ({ title }) =>
             !title.includes("Scuola M. Montanari") &&
             title !== "Casa della Comunità di Scafa" &&
-            title !== "Palazzo Farnese di Caprarola"
+            title !== "Palazzo Farnese di Caprarola" &&
+            !title.includes("Aule Bunker") &&
+            title !== "Cittadella Giudiziaria di Latina" &&
+            title !== "Accordi quadro per i siti e i sistemi ENAV"
         )
         .every(({ images }) => images.length === 2)
     ).toBe(true);
