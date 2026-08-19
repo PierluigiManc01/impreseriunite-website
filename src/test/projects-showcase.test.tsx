@@ -80,7 +80,7 @@ describe("ProjectsShowcase mobile cards", () => {
     expect(within(firstCard).getByText("Committente")).toBeInTheDocument();
     expect(within(firstCard).getByText("Importo lavori")).toBeInTheDocument();
     expect(within(firstCard).getByText("13.374.426,25 €")).toBeInTheDocument();
-    expect(within(firstCard).getByText("1 / 2")).toBeInTheDocument();
+    expect(within(firstCard).getByText("1 / 6")).toBeInTheDocument();
   });
 
   it("navigates a card carousel without autoplay controls", () => {
@@ -99,7 +99,7 @@ describe("ProjectsShowcase mobile cards", () => {
     expect(nextButton).toHaveFocus();
     fireEvent.click(nextButton);
 
-    expect(within(firstCard).getByText("2 / 2")).toBeInTheDocument();
+    expect(within(firstCard).getByText("2 / 6")).toBeInTheDocument();
   });
 
   it("updates ENAV site labels with the active carousel image", () => {
@@ -202,6 +202,16 @@ describe("ProjectsShowcase mobile cards", () => {
       )
     ).toBe(true);
 
+    const linateProject = angelico?.projects.find(
+      ({ title }) => title === "Nuova torre di controllo – Milano Linate"
+    );
+    expect(linateProject?.images).toHaveLength(6);
+    expect(
+      linateProject?.images.every((image) =>
+        image.startsWith("/assets/projects/linate-torre-controllo/")
+      )
+    ).toBe(true);
+
     const auleBunkerProject = angelico?.projects.find(({ title }) =>
       title.includes("Aule Bunker")
     );
@@ -253,6 +263,7 @@ describe("ProjectsShowcase mobile cards", () => {
             !title.includes("Scuola M. Montanari") &&
             title !== "Casa della Comunità di Scafa" &&
             title !== "Palazzo Farnese di Caprarola" &&
+            title !== "Nuova torre di controllo – Milano Linate" &&
             !title.includes("Aule Bunker") &&
             title !== "Cittadella Giudiziaria di Latina" &&
             title !== "Accordi quadro per i siti e i sistemi ENAV"

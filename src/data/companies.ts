@@ -132,6 +132,15 @@ const PALAZZO_FARNESE_IMAGES = [
   "/assets/projects/palazzo-farnese/08-grotta-illuminata.webp",
 ];
 
+const LINATE_TORRE_CONTROLLO_IMAGES = [
+  "/assets/projects/linate-torre-controllo/01-torre-controllo-render.webp",
+  "/assets/projects/linate-torre-controllo/02-sala-controllo-render.webp",
+  "/assets/projects/linate-torre-controllo/03-reception-enav-render.webp",
+  "/assets/projects/linate-torre-controllo/04-complesso-torre-render.webp",
+  "/assets/projects/linate-torre-controllo/05-modello-torre.webp",
+  "/assets/projects/linate-torre-controllo/06-modello-strutturale.webp",
+];
+
 const AULE_BUNKER_IMAGES = [
   "/assets/projects/aule-bunker/01-impianto-fotovoltaico.webp",
   "/assets/projects/aule-bunker/02-impianti-esterni.webp",
@@ -229,7 +238,7 @@ export const companies: Company[] = [
         featuredOnHomepage: true,
         description:
           "Progettazione esecutiva della nuova torre di controllo e del blocco tecnico del centro aeroportuale ENAV di Milano Linate. La realizzazione partirà nel 2027.",
-        images: PLACEHOLDER.energy,
+        images: LINATE_TORRE_CONTROLLO_IMAGES,
       },
       {
         title: "Riqualificazione Case popolari",
