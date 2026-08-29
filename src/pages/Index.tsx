@@ -14,11 +14,11 @@ const Index = () => {
     <div className="homepage min-h-screen overflow-x-clip">
       <HeroSection />
       <main id="main-content">
-        <AboutSection />
-        <ClientLogosMarquee />
         <CompaniesSection />
+        <ClientLogosMarquee />
         <ProjectsTeaser />
         <CertificationsTeaser />
+        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
