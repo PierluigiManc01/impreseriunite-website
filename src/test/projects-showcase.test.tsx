@@ -212,6 +212,46 @@ describe("ProjectsShowcase mobile cards", () => {
       )
     ).toBe(true);
 
+    const aterProject = angelico?.projects.find(
+      ({ client }) => client === "ATER Civitavecchia"
+    );
+    expect(aterProject?.images).toHaveLength(11);
+    expect(
+      aterProject?.images.every((image) =>
+        image.startsWith("/assets/projects/ater-civitavecchia/")
+      )
+    ).toBe(true);
+
+    const cremonaProject = nuovaCcs?.projects.find(
+      ({ title }) => title === "Nuovo padiglione detentivo – Cremona"
+    );
+    expect(cremonaProject?.images).toHaveLength(9);
+    expect(
+      cremonaProject?.images.every((image) =>
+        image.startsWith("/assets/projects/casa-circondariale-cremona/")
+      )
+    ).toBe(true);
+
+    const rebibbiaProject = nuovaCcs?.projects.find(({ title }) =>
+      title.includes("Rebibbia")
+    );
+    expect(rebibbiaProject?.images).toHaveLength(7);
+    expect(
+      rebibbiaProject?.images.every((image) =>
+        image.startsWith("/assets/projects/rebibbia-laboratorio-dna/")
+      )
+    ).toBe(true);
+
+    const laziodisuGallery = nuovaCcs?.projects.find(
+      ({ client }) => client.startsWith("LAZIODISU")
+    );
+    expect(laziodisuGallery?.images).toHaveLength(3);
+    expect(
+      laziodisuGallery?.images.every((image) =>
+        image.startsWith("/assets/projects/residenze-universitarie-laziodisu/")
+      )
+    ).toBe(true);
+
     const auleBunkerProject = angelico?.projects.find(({ title }) =>
       title.includes("Aule Bunker")
     );
@@ -264,6 +304,10 @@ describe("ProjectsShowcase mobile cards", () => {
             title !== "Casa della Comunità di Scafa" &&
             title !== "Palazzo Farnese di Caprarola" &&
             title !== "Nuova torre di controllo – Milano Linate" &&
+            !title.startsWith("Riqualificazione Case popolari") &&
+            title !== "Nuovo padiglione detentivo – Cremona" &&
+            !title.includes("Rebibbia") &&
+            !title.startsWith("Residenze universitarie") &&
             !title.includes("Aule Bunker") &&
             title !== "Cittadella Giudiziaria di Latina" &&
             title !== "Accordi quadro per i siti e i sistemi ENAV"

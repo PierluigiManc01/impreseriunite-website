@@ -141,6 +141,48 @@ const LINATE_TORRE_CONTROLLO_IMAGES = [
   "/assets/projects/linate-torre-controllo/06-modello-strutturale.webp",
 ];
 
+const ATER_CIVITAVECCHIA_IMAGES = [
+  "/assets/projects/ater-civitavecchia/01-demolizione-notturna.webp",
+  "/assets/projects/ater-civitavecchia/02-demolizione-edificio.webp",
+  "/assets/projects/ater-civitavecchia/03-scavi-e-movimentazione.webp",
+  "/assets/projects/ater-civitavecchia/04-fondazioni.webp",
+  "/assets/projects/ater-civitavecchia/05-armature-fondazioni.webp",
+  "/assets/projects/ater-civitavecchia/06-posa-corrugati.webp",
+  "/assets/projects/ater-civitavecchia/07-corrugati-impianti.webp",
+  "/assets/projects/ater-civitavecchia/08-cabina-elettrica.webp",
+  "/assets/projects/ater-civitavecchia/09-trasformatori.webp",
+  "/assets/projects/ater-civitavecchia/10-edificio-in-ricostruzione.webp",
+  "/assets/projects/ater-civitavecchia/11-facciata-in-cantiere.webp",
+];
+
+const CASA_CIRCONDARIALE_CREMONA_IMAGES = [
+  "/assets/projects/casa-circondariale-cremona/01-padiglione-in-costruzione.webp",
+  "/assets/projects/casa-circondariale-cremona/02-facciata-padiglione.webp",
+  "/assets/projects/casa-circondariale-cremona/03-passerella-tecnica.webp",
+  "/assets/projects/casa-circondariale-cremona/04-struttura-passerella.webp",
+  "/assets/projects/casa-circondariale-cremona/05-collegamento-padiglioni.webp",
+  "/assets/projects/casa-circondariale-cremona/06-quadro-controllo.webp",
+  "/assets/projects/casa-circondariale-cremona/07-quadro-elettrico.webp",
+  "/assets/projects/casa-circondariale-cremona/08-impianto-tecnico.webp",
+  "/assets/projects/casa-circondariale-cremona/09-centrale-termica.webp",
+];
+
+const REBIBBIA_LABORATORIO_DNA_IMAGES = [
+  "/assets/projects/rebibbia-laboratorio-dna/01-giardino-e-istituto.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/02-pensilina-fotovoltaica.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/03-giardino-roccioso.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/04-pensiline-fotovoltaiche.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/05-edificio-laboratorio.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/06-impianti-esterni.webp",
+  "/assets/projects/rebibbia-laboratorio-dna/07-impianto-meccanico.webp",
+];
+
+const RESIDENZE_UNIVERSITARIE_LAZIODISU_IMAGES = [
+  "/assets/projects/residenze-universitarie-laziodisu/01-corridoio-residenza.webp",
+  "/assets/projects/residenze-universitarie-laziodisu/02-edificio-in-cantiere.webp",
+  "/assets/projects/residenze-universitarie-laziodisu/03-progetto-facciata.webp",
+];
+
 const AULE_BUNKER_IMAGES = [
   "/assets/projects/aule-bunker/01-impianto-fotovoltaico.webp",
   "/assets/projects/aule-bunker/02-impianti-esterni.webp",
@@ -256,7 +298,7 @@ export const companies: Company[] = [
               "Costruzioni Angelico Edili Stradali S.r.l. (mandataria) + Nuova C.C.S. S.r.l.",
           },
         ],
-        images: PLACEHOLDER.renovation,
+        images: ATER_CIVITAVECCHIA_IMAGES,
       },
       {
         title: "Manutenzione ed efficientamento delle Aule Bunker",
@@ -347,7 +389,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Realizzazione di un nuovo padiglione detentivo, compresa la fornitura e posa in opera di cabina MT e gruppo elettrogeno, presso la Casa circondariale di Cremona.",
-        images: PLACEHOLDER.energy,
+        images: CASA_CIRCONDARIALE_CREMONA_IMAGES,
       },
       {
         title: "Cittadella Giudiziaria di Latina",
@@ -368,7 +410,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Opere complementari per la realizzazione di un impianto di produzione di energia alternativa, con adeguamento della cabina MT/BT e installazione di gruppo elettrogeno presso la Casa circondariale di Roma Rebibbia – Laboratorio D.N.A.",
-        images: PLACEHOLDER.energy,
+        images: REBIBBIA_LABORATORIO_DNA_IMAGES,
       },
       {
         title: "Rilocazione luci di pista – Ronchi dei Legionari",
@@ -400,7 +442,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Realizzazione di impianti di illuminazione per le residenze universitarie e servizi correlati presso l’area dello SDO di Pietralata.",
-        images: PLACEHOLDER.building,
+        images: RESIDENZE_UNIVERSITARIE_LAZIODISU_IMAGES,
       },
       {
         title: "Palazzo Farnese di Caprarola",
