@@ -1,28 +1,28 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import CompanyDetail from "./pages/CompanyDetail.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "@/components/ScrollToTop";
 
-const queryClient = new QueryClient();
+const Index = lazy(() => import("./pages/Index.tsx"));
+const CompanyDetail = lazy(() => import("./pages/CompanyDetail.tsx"));
+const Certifications = lazy(() => import("./pages/Certifications.tsx"));
+const Projects = lazy(() => import("./pages/Projects.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/azienda/:id" element={<CompanyDetail />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <BrowserRouter
+    future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+  >
+    <ScrollToTop />
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/azienda/:id" element={<CompanyDetail />} />
+        <Route path="/progetti" element={<Projects />} />
+        <Route path="/certificazioni" element={<Certifications />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  </BrowserRouter>
 );
 
 export default App;

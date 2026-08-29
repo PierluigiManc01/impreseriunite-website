@@ -16,7 +16,7 @@ Marketing/corporate website for Imprese Riunite (construction group, since 1971 
   - Single test file: `npx vitest run src/test/example.test.ts`
 - `npx playwright test` — run e2e tests (config extends `lovable-agent-playwright-config`)
 
-Package manager: repo has both `bun.lock`/`bun.lockb` and `package-lock.json`; either bun or npm works, commands above assume npm.
+Package manager: npm. Keep `package-lock.json` synchronized with `package.json`.
 
 ## Architecture
 

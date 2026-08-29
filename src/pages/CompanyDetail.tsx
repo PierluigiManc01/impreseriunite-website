@@ -1,6 +1,5 @@
-import { Fragment, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
   MapPin,
@@ -13,75 +12,56 @@ import {
   ExternalLink,
   Calendar,
 } from "lucide-react";
-import { companies } from "@/data/companies";
+import { companies, siteContact } from "@/data/companies";
+import { companyLogos } from "@/data/company-assets";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
-import logoCcs from "@/assets/NUOVA-CCS.webp";
-import logoAngelico from "@/assets/CostruzioniAngelico-logo.webp";
-import logoimpreseRiunite from "@/assets/logo-imprese-riunite.webp";
-
-const logoMap: Record<string, string> = {
-  "costruzioni-angelico": logoAngelico,
-  "nuova-ccs": logoCcs,
-  "gruppo-immobiliare-properzi": logoimpreseRiunite,
-};
-
-const renderRichText = (text: string) =>
-  text.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
-    const strongMatch = part.match(/^<strong>(.*?)<\/strong>$/);
-
-    if (strongMatch) {
-      return (
-        <strong key={`${strongMatch[1]}-${index}`} className="font-semibold text-foreground">
-          {strongMatch[1]}
-        </strong>
-      );
-    }
-
-    return <Fragment key={`${part}-${index}`}>{part.replace(/<[^>]*>/g, "")}</Fragment>;
-  });
+import { useDocumentMetadata } from "@/hooks/use-document-metadata";
+import { renderRichText } from "@/lib/render-rich-text";
 
 const CompanyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const company = companies.find((c) => c.id === id);
+  const prefersReducedMotion = useReducedMotion();
+  const revealInitial = prefersReducedMotion ? false : { opacity: 0, y: 20 };
+  const revealTarget = prefersReducedMotion ? undefined : { opacity: 1, y: 0 };
+  const companyPhones = company
+    ? siteContact.phones.filter(({ label }) => company.phone.includes(label))
+    : [];
 
-  useEffect(() => {
-    if (!company) {
-      document.title = "Azienda non trovata | Imprese Riunite";
-      document
-        .querySelector('meta[name="description"]')
-        ?.setAttribute("content", "La pagina azienda richiesta non e' disponibile.");
-      return;
-    }
-
-    document.title = `${company.name} | Imprese Riunite`;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", `${company.name}: ${company.role}. ${company.fullName}.`);
-  }, [company]);
+  useDocumentMetadata(
+    company ? `${company.name} | Imprese Riunite` : "Azienda non trovata | Imprese Riunite",
+    company
+      ? `${company.name}: ${company.role}. ${company.fullName}.`
+      : "La pagina azienda richiesta non e' disponibile."
+  );
 
   if (!company) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <main
+        id="main-content"
+        className="flex min-h-screen items-center justify-center"
+      >
         <div className="text-center">
           <h1 className="text-2xl font-heading font-bold text-foreground mb-4">
             Azienda non trovata
           </h1>
-          <Link to="/" className="text-primary hover:underline">
+          <Link to="/#home" className="text-primary hover:underline">
             Torna alla homepage
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
     <div className="min-h-screen">
       <Navbar />
+      <main id="main-content">
 
       {/* Hero */}
-      <section className="pt-28 md:pt-36 pb-8 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-32 md:pt-40 pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"
@@ -98,7 +78,7 @@ const CompanyDetail = () => {
 
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={revealInitial}
               animate={{ opacity: 1, y: 0 }}
               className="flex-1 w-full min-w-0 lg:w-1/2 order-2 lg:order-1"
             >
@@ -120,17 +100,21 @@ const CompanyDetail = () => {
             </motion.div>
 
             {/* Logo on the right without boxes/borders */}
-            {logoMap[company.id] && (
+            {companyLogos[company.id] && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={
+                  prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }
+                }
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={prefersReducedMotion ? undefined : { delay: 0.2 }}
                 className="flex-1 w-full lg:w-1/2 shrink-0 flex items-start justify-center lg:justify-end order-1 lg:order-2"
               >
-                <img 
-                  src={logoMap[company.id]} 
-                  alt={`${company.name} logo`} 
-                  className="w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg h-auto object-contain" 
+                {/* Capped at ~340px: the smallest source logo is 300px, so a
+                    larger box would upscale and blur it. */}
+                <img
+                  src={companyLogos[company.id]}
+                  alt={`${company.name} logo`}
+                  className="w-full max-w-[300px] sm:max-w-[340px] h-auto object-contain"
                 />
               </motion.div>
             )}
@@ -139,42 +123,44 @@ const CompanyDetail = () => {
       </section>
 
       {/* Projects */}
-      <section className="section-shell bg-background">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <Briefcase className="w-6 h-6 text-primary shrink-0" />
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground leading-tight">
-                Lavori Principali
-              </h2>
-            </div>
-            <p className="section-copy">
-              {company.id === "gruppo-immobiliare-properzi"
-                ? "Progetti storici realizzati dalla vecchia C.C.S. (Consulenze Costruzioni Speciali), da cui il gruppo ha avuto origine."
-                : "Una selezione dei progetti più rappresentativi realizzati dall'azienda."}
-            </p>
-          </motion.div>
+      {company.projects.length > 0 && (
+        <section className="section-shell bg-background">
+          <div className="container">
+            <motion.div
+              initial={revealInitial}
+              whileInView={revealTarget}
+              viewport={{ once: true }}
+              className="mb-8"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <Briefcase className="w-6 h-6 text-primary shrink-0" />
+                <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground leading-tight">
+                  Lavori Principali
+                </h2>
+              </div>
+              <p className="section-copy">
+                {company.id === "gruppo-immobiliare-properzi"
+                  ? "Progetti storici realizzati dalla C.C.S. e dalle società del Gruppo Immobiliare Properzi."
+                  : "Una selezione dei progetti più rappresentativi realizzati dall'azienda."}
+              </p>
+            </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-5">
-            {company.projects.map((project, i) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="architectural-panel overflow-hidden"
-              >
+            <div className="grid md:grid-cols-2 gap-5">
+              {company.projects.map((project, i) => (
+                <motion.div
+                  key={project.title}
+                  initial={revealInitial}
+                  whileInView={revealTarget}
+                  viewport={{ once: true }}
+                  transition={prefersReducedMotion ? undefined : { delay: i * 0.1 }}
+                  className="architectural-panel overflow-hidden"
+                >
                 {/* Image carousel */}
                 {project.images.length > 0 && (
                   <div className="relative aspect-[4/3]">
                     <ProjectImageCarousel
                       images={project.images}
+                      imageLabels={project.imageLabels}
                       alt={project.title}
                       className="h-full"
                     />
@@ -184,11 +170,6 @@ const CompanyDetail = () => {
                         <MapPin className="w-3 h-3 inline mr-1" />
                         {project.location}
                       </span>
-                      {project.amount && (
-                        <span className="text-xs font-semibold bg-white/90 text-foreground px-2.5 py-0.5 rounded-full">
-                          {project.amount}
-                        </span>
-                      )}
                     </div>
                   </div>
                 )}
@@ -199,11 +180,6 @@ const CompanyDetail = () => {
                       <span className="text-xs font-semibold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
                         {project.location}
                       </span>
-                      {project.amount && (
-                        <span className="text-xs font-semibold bg-accent text-accent-foreground px-2.5 py-0.5 rounded-full">
-                          {project.amount}
-                        </span>
-                      )}
                     </div>
                   )}
 
@@ -213,24 +189,70 @@ const CompanyDetail = () => {
                   <p className="section-copy mb-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-xs text-muted-foreground font-body min-w-0">
-                      <span className="font-medium text-foreground/70">Committente:</span>{" "}
-                      {project.client}
+                  {project.amountNote && (
+                    <p className="mb-3 font-body text-xs leading-relaxed text-muted-foreground">
+                      * {project.amountNote}
                     </p>
-                    {project.date && (
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {project.date}
-                      </span>
+                  )}
+                  <dl className="mt-4 grid gap-3 border-t border-border pt-4 font-body">
+                    <div>
+                      <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                        Committente
+                      </dt>
+                      <dd className="mt-1.5 text-lg font-semibold leading-snug text-foreground xl:text-xl">
+                        {project.client}
+                      </dd>
+                    </div>
+                    {project.amount && (
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                          {project.amountLabel ?? "Importo"}
+                        </dt>
+                        <dd className="mt-1.5 text-lg font-semibold tabular-nums text-foreground xl:text-xl">
+                          {project.amount}
+                          {project.amountNote && " *"}
+                        </dd>
+                      </div>
                     )}
-                  </div>
+                    {project.details?.map(({ label, value }) => (
+                      <div key={label}>
+                        <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                          {label}
+                        </dt>
+                        <dd className="mt-1.5 leading-relaxed text-foreground">
+                          {value}
+                        </dd>
+                      </div>
+                    ))}
+                    {project.date && (
+                      <div>
+                        <dt className="sr-only">Data</dt>
+                        <dd className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                          <Calendar className="h-4 w-4 text-primary" />
+                          {project.date}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                  {project.newsUrl && (
+                    <a
+                      href={project.newsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 px-4 py-2 font-body text-sm font-bold tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                    >
+                      DICONO DI NOI
+                      <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                      <span className="sr-only"> (si apre in una nuova scheda)</span>
+                    </a>
+                  )}
                 </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Company Info & Certifications */}
       <section className="section-shell bg-accent/50">
@@ -238,10 +260,10 @@ const CompanyDetail = () => {
           <div className={`grid ${company.certifications.length > 0 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-xl'} gap-5 md:gap-6 max-w-5xl mx-auto`}>
             {/* Contact info */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={revealInitial}
+              whileInView={revealTarget}
               viewport={{ once: true }}
-              className="architectural-panel p-6 sm:p-8 min-w-0"
+              className="architectural-panel order-2 min-w-0 p-6 sm:p-8 md:order-1"
             >
               <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-primary" />
@@ -254,9 +276,17 @@ const CompanyDetail = () => {
                   </p>
                   <p className="text-sm font-body text-foreground font-medium break-words">{company.fullName}</p>
                 </div>
+                {company.vatNumber && (
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-body">
+                      Partita IVA
+                    </p>
+                    <p className="text-sm font-body text-foreground">{company.vatNumber}</p>
+                  </div>
+                )}
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-body">
-                    Amministratore
+                    {company.id === "gruppo-immobiliare-properzi" ? "Fondatore" : "Amministratore"}
                   </p>
                   <p className="text-sm font-body text-foreground">{company.admin}</p>
                 </div>
@@ -271,15 +301,48 @@ const CompanyDetail = () => {
                 <div className="border-t border-border pt-4 space-y-3">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <p className="text-sm font-body text-muted-foreground break-words">{company.address}</p>
+                    <a
+                      href={siteContact.office.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="break-words font-body text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {company.address}
+                      <span className="sr-only"> (si apre in una nuova scheda)</span>
+                    </a>
                   </div>
                   <div className="flex items-start gap-2">
                     <Phone className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <p className="text-sm font-body text-muted-foreground">{company.phone}</p>
+                    <div className="flex flex-wrap gap-x-2 gap-y-1 font-body text-sm text-muted-foreground">
+                      {companyPhones.map((phone, index) => (
+                        <span key={phone.href}>
+                          {index > 0 && <span aria-hidden="true">– </span>}
+                          <a
+                            href={phone.href}
+                            className="transition-colors hover:text-primary"
+                          >
+                            {phone.label}
+                          </a>
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <div className="flex items-start gap-2">
                     <Mail className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <p className="text-sm font-body text-muted-foreground break-all">{company.pec}</p>
+                    <div className="min-w-0 space-y-1 font-body text-sm text-muted-foreground">
+                      <a
+                        href={`mailto:${company.pec}`}
+                        className="block break-all transition-colors hover:text-primary"
+                      >
+                        {company.pec}
+                      </a>
+                      <a
+                        href={`mailto:${company.email}`}
+                        className="block break-all transition-colors hover:text-primary"
+                      >
+                        {company.email}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -288,10 +351,10 @@ const CompanyDetail = () => {
             {/* Certifications */}
             {company.certifications.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={revealInitial}
+                whileInView={revealTarget}
                 viewport={{ once: true }}
-                className="architectural-panel p-6 sm:p-8 min-w-0"
+                className="architectural-panel order-1 min-w-0 p-6 sm:p-8 md:order-2"
               >
                 <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />
@@ -301,7 +364,7 @@ const CompanyDetail = () => {
                   {company.certifications.map((cert) => (
                     <a
                       key={cert.name}
-                      href={cert.pdf || "#"}
+                      href={cert.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex min-w-0 items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
@@ -309,8 +372,12 @@ const CompanyDetail = () => {
                       <FileText className="w-4 h-4 text-primary shrink-0" />
                       <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors break-words">
                         {cert.name}
+                        <span className="sr-only"> (si apre in una nuova scheda)</span>
                       </span>
-                      <ExternalLink className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity" />
+                      <ExternalLink
+                        aria-hidden="true"
+                        className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity"
+                      />
                     </a>
                   ))}
                 </div>
@@ -319,6 +386,7 @@ const CompanyDetail = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>
