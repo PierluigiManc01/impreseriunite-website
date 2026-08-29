@@ -4,3 +4,4 @@
 - 2026-07-27 — Use strongest landscape exterior as first gallery image; follow with construction chronology and finish with technical systems. Keep source evidence intact during enhancement.
 - 2026-08-03 — Heritage galleries need neutral enhancement: preserve fresco detail, stone texture, patina, and installed fixtures; lead with architecture, then document interiors, work context, and lighting systems.
 - 2026-08-03 — Sticky side panels need end runway equal to panel height minus final trigger-row height; observe both dimensions so final row reaches sticky offset before footer releases panel.
+- 2026-08-08 — Framework-contract galleries can stay one project while per-frame site labels preserve subproject context. Keep image and label arrays aligned, and show active label as carousel overlay.

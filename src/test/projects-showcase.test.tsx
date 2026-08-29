@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Navbar from "@/components/Navbar";
 import ProjectsShowcase from "@/components/ProjectsShowcase";
 import { companies, operatingCompanies } from "@/data/companies";
+import { calculateDesktopCarouselLayout } from "@/lib/project-carousel-layout";
 
 vi.mock("@/components/ScrollReveal", () => ({
   default: ({ children }: { children: ReactNode }) => <>{children}</>,
@@ -19,6 +20,11 @@ const renderShowcase = () =>
 
 const parseEuro = (amount: string) =>
   Number(amount.replace(" €", "").replace(/\./g, "").replace(",", "."));
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
 
 describe("Navbar company links", () => {
   it("lists Imprese Riunite in desktop dropdown and mobile menu", () => {
@@ -39,8 +45,55 @@ describe("Navbar company links", () => {
   });
 });
 
-describe("ProjectsShowcase mobile cards", () => {
-  it("uses compact page copy and prominent desktop project facts", () => {
+describe("ProjectsShowcase", () => {
+  it("calculates centered alignment, viewport clamp, and end runway", () => {
+    expect(
+      calculateDesktopCarouselLayout({
+        rowTop: 363,
+        rowHeight: 174,
+        trackTop: 112,
+        trackHeight: 788,
+        carouselHeight: 502,
+        navbarBottom: 112,
+        viewportHeight: 900,
+        lastRowHeight: 133,
+        isLastRowActive: true,
+        boundaryBottom: 1200,
+      })
+    ).toEqual({ offset: 87, runway: 201 });
+
+    expect(
+      calculateDesktopCarouselLayout({
+        rowTop: 80,
+        rowHeight: 120,
+        trackTop: 112,
+        trackHeight: 788,
+        carouselHeight: 502,
+        navbarBottom: 112,
+        viewportHeight: 900,
+        lastRowHeight: 133,
+        isLastRowActive: false,
+        boundaryBottom: 1200,
+      }).offset
+    ).toBe(16);
+
+    expect(
+      calculateDesktopCarouselLayout({
+        rowTop: 600,
+        rowHeight: 160,
+        trackTop: 112,
+        trackHeight: 600,
+        carouselHeight: 400,
+        navbarBottom: 112,
+        viewportHeight: 900,
+        lastRowHeight: 160,
+        isLastRowActive: false,
+        boundaryBottom: 650,
+      }).offset
+    ).toBe(122);
+  });
+
+  it("expands active project facts and keeps company navigation separate", () => {
     renderShowcase();
 
     expect(
@@ -56,13 +109,33 @@ describe("ProjectsShowcase mobile cards", () => {
     ).not.toBeInTheDocument();
 
     const facts = screen.getByTestId("desktop-project-facts");
-    expect(within(facts).getByText("Oggetto")).toBeInTheDocument();
     expect(within(facts).getByText("Committente")).toBeInTheDocument();
     expect(
       within(facts).getByText("ENAV S.p.A.")
     ).toBeInTheDocument();
     expect(within(facts).getByText("Importo lavori")).toBeInTheDocument();
     expect(within(facts).getByText("13.374.426,25 €")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", {
+        name: "Vai alla scheda di Costruzioni Angelico",
+      })
+    ).toHaveAttribute("href", "/azienda/costruzioni-angelico");
+
+    const secondProject = screen.getByTestId("desktop-project-select-1");
+    expect(secondProject).toHaveAttribute("aria-expanded", "false");
+    fireEvent.mouseEnter(secondProject);
+    secondProject.focus();
+    expect(secondProject).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByTestId("desktop-project-select-0")).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+    fireEvent.click(secondProject);
+    expect(secondProject).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByTestId("desktop-project-select-0")).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
   });
 
   it("shows every project with its carousel and required facts", () => {
@@ -228,7 +301,7 @@ describe("ProjectsShowcase mobile cards", () => {
     ).toBe(true);
 
     const aterProject = angelico?.projects.find(
-      ({ client }) => client === "ATER Civitavecchia"
+      ({ title }) => title === "Riqualificazione Case popolari ATER"
     );
     expect(aterProject?.images).toHaveLength(11);
     expect(
@@ -317,7 +390,7 @@ describe("ProjectsShowcase mobile cards", () => {
           ({ title }) =>
             !title.includes("Scuola M. Montanari") &&
             title !== "Casa della Comunità di Scafa" &&
-            title !== "Palazzo Farnese di Caprarola" &&
+            !title.includes("Ronchi dei Legionari") &&
             title !== "Nuova torre di controllo – Milano Linate" &&
             !title.startsWith("Riqualificazione Case popolari") &&
             title !== "Nuovo padiglione detentivo – Cremona" &&
@@ -325,7 +398,8 @@ describe("ProjectsShowcase mobile cards", () => {
             !title.startsWith("Residenze universitarie") &&
             !title.includes("Aule Bunker") &&
             title !== "Cittadella Giudiziaria di Latina" &&
-            title !== "Accordi quadro per i siti e i sistemi ENAV"
+            title !== "Accordi quadro per i siti e i sistemi ENAV" &&
+            !title.includes("Palazzo Farnese di Caprarola")
         )
         .every(({ images }) => images.length === 2)
     ).toBe(true);
@@ -339,21 +413,20 @@ describe("ProjectsShowcase mobile cards", () => {
         .map(({ title }) => title)
     ).toEqual([
       "Nuova torre di controllo – Milano Linate",
-      "Riqualificazione Case popolari",
-      "Rilocazione luci di pista – Ronchi dei Legionari",
+      "Nuovo padiglione detentivo – Cremona",
+      "Palazzo Farnese di Caprarola",
     ]);
 
     const laziodisuProject = nuovaCcs?.projects.find(
       ({ client }) => client.startsWith("LAZIODISU")
     );
-    expect(laziodisuProject?.title).toBe("Residenze universitarie SDO Pietralata");
+    expect(laziodisuProject?.title).toBe("Residenze universitarie LazioDisu");
     expect(laziodisuProject?.description).toContain(
       "Realizzazione di impianti di illuminazione"
     );
 
     expect(
-      angelico?.projects.find(({ client }) => client === "ATER Civitavecchia")
-        ?.details?.[0].value
+      aterProject?.details?.[0].value
     ).toContain("mandataria");
     expect(
       angelico?.projects.find(({ client }) => client === "ASL di Pescara")
@@ -362,12 +435,12 @@ describe("ProjectsShowcase mobile cards", () => {
       "https://www.asl.pe.it/Sezione.jsp?titolo=comunicato-stampa---inaugurata-la-casa-della-comunit%C3%A0-hub-di-scafa&idSezione=2139"
     );
     expect(holding?.projects.map(({ title }) => title)).toEqual([
-      "Viadotto Muzdalifah",
-      "Raccordo Anulare – Lotto 2",
+      "Porto turistico Riva di Traiano",
+      "Ristrutturazione e consolidamento della Mole Antonelliana",
       "Facoltà di Ingegneria di Jeddah",
       "Centro residenziale Le Felciarie",
-      "Ristrutturazione e consolidamento della Mole Antonelliana",
-      "Porto turistico Riva di Traiano",
+      "Viadotto Muzdalifah",
+      "Raccordo Anulare – Lotto 2",
       "Palazzina residenziale – Via Saronno",
     ]);
     expect(
@@ -380,5 +453,15 @@ describe("ProjectsShowcase mobile cards", () => {
         .find(({ title }) => title === "Porto turistico Riva di Traiano")
         ?.images[0]
     ).toContain("riva-di-traiano");
+    expect(
+      holding?.projects.find(
+        ({ title }) => title === "Facoltà di Ingegneria di Jeddah"
+      )?.images
+    ).toEqual([
+      "/assets/projects/jeddah/01-facciata-principale.webp",
+      "/assets/projects/jeddah/02-facolta-ingegneria.webp",
+      "/assets/projects/jeddah/03-campus-king-abdulaziz.webp",
+      "/assets/projects/jeddah/04-edificio-campus.webp",
+    ]);
   });
 });

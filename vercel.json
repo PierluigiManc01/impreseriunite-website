@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/((?!assets/|impreseriunite.ico|placeholder.svg|robots.txt|sitemap.xml).*)",
+      "source": "/((?!assets/|impreseriunite.ico|robots.txt|sitemap.xml).*)",
       "destination": "/index.html"
     }
   ],

@@ -51,8 +51,8 @@ export type Company = {
 };
 
 const publicEmail = {
-  label: "info@impreseriunite.it",
-  href: "mailto:info@impreseriunite.it",
+  label: "protocollo@impreseriunite.it",
+  href: "mailto:protocollo@impreseriunite.it",
 } as const;
 
 export const siteContact = {
@@ -128,6 +128,13 @@ const FIANO_LE_FELCIARIE_IMAGES = [
   "/assets/projects/fiano-le-felciarie/03-villino-e-terreno.webp",
   "/assets/projects/fiano-le-felciarie/04-bagno-completato.webp",
   "/assets/projects/fiano-le-felciarie/05-bagno-e-doccia.webp",
+];
+
+const JEDDAH_FACULTY_IMAGES = [
+  "/assets/projects/jeddah/01-facciata-principale.webp",
+  "/assets/projects/jeddah/02-facolta-ingegneria.webp",
+  "/assets/projects/jeddah/03-campus-king-abdulaziz.webp",
+  "/assets/projects/jeddah/04-edificio-campus.webp",
 ];
 
 const PALAZZO_FARNESE_IMAGES = [
@@ -244,7 +251,7 @@ export const companies: Company[] = [
     id: "costruzioni-angelico",
     name: "Costruzioni Angelico",
     fullName: "Costruzioni Angelico Edili Stradali s.r.l.",
-    role: "Grandi opere infrastrutturali",
+    role: "Edilizia",
     description:
       "Costruzioni Angelico Edili Stradali s.r.l. nasce nel <strong>1971</strong> e viene acquisita da Properzi nel 1980. Attualmente, vede in Alfredo Mancinelli (Amministratore Unico), ed in Giuseppe Saputo (Direttore Tecnico), le figure chiave. Grazie ad una guida lungimirante ed al <strong>know how</strong> del top management, si è imposta fin da subito nel panorama nazionale delle opere pubbliche.",
     longDescription:
@@ -282,7 +289,7 @@ export const companies: Company[] = [
     projects: [
       {
         title: "Nuova torre di controllo – Milano Linate",
-        location: "Milano Linate",
+        location: "Milano",
         client: "ENAV S.p.A.",
         amount: "13.374.426,25 €",
         amountLabel: "Importo lavori",
@@ -292,12 +299,12 @@ export const companies: Company[] = [
         images: LINATE_TORRE_CONTROLLO_IMAGES,
       },
       {
-        title: "Riqualificazione Case popolari",
+        title: "Riqualificazione Case popolari ATER",
         location: "Civitavecchia (RM)",
-        client: "ATER Civitavecchia",
+        client: "Azienda Territoriale per l'Edilizia Residenziale (ATER)",
         amount: "5.678.000,00 €",
         amountLabel: "Importo lavori",
-        featuredOnHomepage: true,
+        featuredOnHomepage: false,
         description:
           "Miglioramento sismico ed efficientamento energetico mediante demolizione e ricostruzione degli immobili siti in Civitavecchia, Via XVI Settembre 19/23.",
         details: [
@@ -354,7 +361,7 @@ export const companies: Company[] = [
     id: "nuova-ccs",
     name: "Nuova C.C.S.",
     fullName: "Nuova C.C.S. S.r.l.",
-    role: "Impiantistica e tecnologie",
+    role: "Impiantistica elettrica",
     description:
       "Nata nel <strong>1997</strong> dalla scissione del ramo d'azienda della C.C.S., la Nuova C.C.S focalizza le sue competenze sulla parte <strong>impiantistica</strong>, mossa dalla spinta determinante del suo attuale amministratore, Alfredo Mancinelli.",
     longDescription:
@@ -396,6 +403,7 @@ export const companies: Company[] = [
         client: "Ministero della Giustizia",
         amount: "7.829.376,75 €",
         amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
         description:
           "Realizzazione di un nuovo padiglione detentivo, compresa la fornitura e posa in opera di cabina MT e gruppo elettrogeno, presso la Casa circondariale di Cremona.",
         images: CASA_CIRCONDARIALE_CREMONA_IMAGES,
@@ -412,7 +420,7 @@ export const companies: Company[] = [
         images: CITTADELLA_GIUDIZIARIA_LATINA_IMAGES,
       },
       {
-        title: "Impianto di energia alternativa – Roma Rebibbia",
+        title: "Impianto di energia alternativa – Laboratorio D.N.A. Rebibbia",
         location: "Roma – Rebibbia",
         client: "Ministero della Giustizia",
         amount: "2.622.892,98 €",
@@ -422,15 +430,14 @@ export const companies: Company[] = [
         images: REBIBBIA_LABORATORIO_DNA_IMAGES,
       },
       {
-        title: "Rilocazione luci di pista – Ronchi dei Legionari",
+        title: "Rilocazione luci di pista – Aeroporto Ronchi dei Legionari",
         location: "Ronchi dei Legionari (Gorizia)",
         client: "ENAV S.p.A.",
         amount: "1.963.590,00 €",
         amountLabel: "Importo lavori",
-        featuredOnHomepage: true,
         description:
           "Rilocazione dei pozzetti e delle luci di pista presso l’aeroporto di Ronchi dei Legionari.",
-        images: PLACEHOLDER.energy,
+        images: ENAV_ACCORDO_QUADRO_IMAGES.slice(10, 11),
       },
       {
         title: "Adeguamento sismico Ala Callegari – Scuola M. Montanari",
@@ -443,7 +450,7 @@ export const companies: Company[] = [
         images: SCUOLA_MONTANARI_IMAGES,
       },
       {
-        title: "Residenze universitarie SDO Pietralata",
+        title: "Residenze universitarie LazioDisu",
         location: "Roma – Pietralata",
         client:
           "LAZIODISU – Ente per il diritto agli studi universitari nel Lazio",
@@ -459,6 +466,7 @@ export const companies: Company[] = [
         client: "Ministero della Cultura",
         amount: "350.000,00 €",
         amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
         description:
           "Interventi impiantistici e di illuminazione per la valorizzazione degli ambienti monumentali e degli spazi esterni di Palazzo Farnese a Caprarola.",
         images: PALAZZO_FARNESE_IMAGES,
@@ -487,55 +495,6 @@ export const companies: Company[] = [
     certifications: [],
     projects: [
       {
-        title: "Viadotto Muzdalifah",
-        location: "La Mecca – Arabia Saudita",
-        client: "Committente internazionale (ex C.C.S.)",
-        amount: "",
-        description:
-          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla storica C.C.S. a livello internazionale.",
-        images: PLACEHOLDER.construction,
-      },
-      {
-        title: "Raccordo Anulare – Lotto 2",
-        location: "Riyadh – Arabia Saudita",
-        client: "Committente internazionale (ex C.C.S.)",
-        amount: "",
-        description:
-          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell’Arabia Saudita, realizzato dalla storica C.C.S.",
-        images: PLACEHOLDER.construction,
-      },
-      {
-        title: "Facoltà di Ingegneria di Jeddah",
-        location: "Jeddah – Arabia Saudita",
-        client: "Committente internazionale (ex C.C.S.)",
-        amount: "",
-        description:
-          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla storica C.C.S.",
-        images: PLACEHOLDER.building,
-      },
-      {
-        title: "Centro residenziale Le Felciarie",
-        location: "Fiano Romano (RM)",
-        client: "Immobil Fiano S.r.l.",
-        amount: "6.350.000,00 €",
-        amountLabel: "Importo lavori",
-        description:
-          "Realizzazione del centro residenziale “Le Felciarie”, composto da 42 villini a Fiano Romano.",
-        images: FIANO_LE_FELCIARIE_IMAGES,
-      },
-      {
-        title: "Ristrutturazione e consolidamento della Mole Antonelliana",
-        location: "Torino",
-        client: "Soc. Garboli Rep S.p.A.",
-        amount: "857.318,45 €",
-        amountLabel: "Importo lavori",
-        description:
-          "Lavori di ristrutturazione e consolidamento delle strutture della Mole Antonelliana.",
-        // Photo by Tom Podmore, free under the Unsplash License:
-        // https://unsplash.com/photos/sVqvsDsWPOI
-        images: [moleAntonelliana],
-      },
-      {
         title: "Porto turistico Riva di Traiano",
         location: "Civitavecchia (RM)",
         client:
@@ -546,14 +505,61 @@ export const companies: Company[] = [
         images: [rivaDiTraiano],
       },
       {
+        title: "Ristrutturazione e consolidamento della Mole Antonelliana",
+        location: "Torino",
+        client: "Soc. Garboli Rep S.p.A. (Privato)",
+        amount: "857.318,45 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Lavori di ristrutturazione e consolidamento delle strutture della Mole Antonelliana.",
+        images: [moleAntonelliana],
+      },
+      {
+        title: "Facoltà di Ingegneria di Jeddah",
+        location: "Jeddah – Arabia Saudita",
+        client: "Committente internazionale (Privato)",
+        amount: "",
+        description:
+          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla storica C.C.S.",
+        images: JEDDAH_FACULTY_IMAGES,
+      },
+      {
+        title: "Centro residenziale Le Felciarie",
+        location: "Fiano Romano (RM)",
+        client: "Immobil Fiano S.r.l. (Privato)",
+        amount: "6.350.000,00 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Realizzazione del centro residenziale “Le Felciarie”, composto da 42 villini a Fiano Romano.",
+        images: FIANO_LE_FELCIARIE_IMAGES,
+      },
+      {
+        title: "Viadotto Muzdalifah",
+        location: "La Mecca – Arabia Saudita",
+        client: "Committente internazionale (Privato)",
+        amount: "",
+        description:
+          "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla storica C.C.S. a livello internazionale.",
+        images: PLACEHOLDER.construction,
+      },
+      {
+        title: "Raccordo Anulare – Lotto 2",
+        location: "Riyadh – Arabia Saudita",
+        client: "Committente internazionale (Privato)",
+        amount: "",
+        description:
+          "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell’Arabia Saudita, realizzato dalla storica C.C.S.",
+        images: PLACEHOLDER.construction,
+      },
+      {
         title: "Palazzina residenziale – Via Saronno",
         location: "Roma – Prima Porta",
-        client: "Giustiniana Prima S.r.l.",
+        client: "Giustiniana Prima S.r.l. (Privato)",
         amount: "",
         description:
           "Realizzazione di una palazzina composta da 25 appartamenti, 4 box e 25 cantine in Via Saronno s.n.c., Roma.",
         images: PLACEHOLDER.building,
-      },
+      }
     ],
   },
 ];

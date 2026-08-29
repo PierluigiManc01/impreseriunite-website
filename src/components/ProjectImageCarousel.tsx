@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { forwardRef, useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,16 +13,22 @@ interface ProjectImageCarouselProps {
   eagerFirstImage?: boolean;
 }
 
-const ProjectImageCarousel = ({
-  images,
-  imageLabels,
-  alt,
-  className,
-  autoplayInterval = 4000,
-  indicatorVariant = "dots",
-  autoplay = true,
-  eagerFirstImage = true,
-}: ProjectImageCarouselProps) => {
+const ProjectImageCarousel = forwardRef<
+  HTMLDivElement,
+  ProjectImageCarouselProps
+>(function ProjectImageCarousel(
+  {
+    images,
+    imageLabels,
+    alt,
+    className,
+    autoplayInterval = 4000,
+    indicatorVariant = "dots",
+    autoplay = true,
+    eagerFirstImage = true,
+  },
+  ref
+) {
   const [current, setCurrent] = useState(0);
   const [interactionPaused, setInteractionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -67,6 +73,7 @@ const ProjectImageCarousel = ({
 
   return (
     <div
+      ref={ref}
       className={cn("relative overflow-hidden group/carousel", className)}
       role="region"
       aria-label={`Galleria immagini: ${alt}`}
@@ -175,6 +182,8 @@ const ProjectImageCarousel = ({
       )}
     </div>
   );
-};
+});
+
+ProjectImageCarousel.displayName = "ProjectImageCarousel";
 
 export default ProjectImageCarousel;

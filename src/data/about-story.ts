@@ -1,5 +1,4 @@
 import { history } from "@/data/companies";
-import jeddah from "@/assets/04-edificio-campus.webp";
 import rivaDiTraiano from "@/assets/riva-di-traiano.webp";
 import dataCenter from "@/assets/data_center.jpg";
 
@@ -37,7 +36,7 @@ export const storyChapters: StoryChapter[] = [
       "Dalle origini, grandi opere civili, stradali e idrauliche in <strong>Arabia Saudita</strong> e in Italia.",
     visual: {
       kind: "image",
-      src: jeddah,
+      src: "/assets/projects/jeddah/04-edificio-campus.webp",
       alt: "Facoltà di Ingegneria di Jeddah, Arabia Saudita",
       caption: "Consulenze Costruzioni Speciali (C.C.S.)",
     },
