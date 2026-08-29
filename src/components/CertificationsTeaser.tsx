@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Award } from "lucide-react";
 import { certifiedCompanies } from "@/data/companies";
 import ScrollReveal from "@/components/ScrollReveal";
+import DotField from "@/components/DotField";
 
 // Unique certificate names across companies, as compact badges for the teaser.
 const uniqueCertNames = Array.from(
@@ -11,8 +12,17 @@ const uniqueCertNames = Array.from(
 // Home teaser for the dedicated /certificazioni page (which also carries the
 // full SOA registry). Keeps the home light while pointing to the source of truth.
 const CertificationsTeaser = () => (
-  <section id="certificazioni" className="section-shell bg-accent/50">
-    <div className="container px-4">
+  <section id="certificazioni" className="section-shell relative isolate overflow-hidden bg-accent/80">
+    <DotField
+      className="pointer-events-none absolute inset-0 z-0"
+      dotRadius={2.4}
+      dotSpacing={18}
+      cursorRadius={360}
+      bulgeStrength={52}
+      glowRadius={145}
+      glowColor="rgba(239, 246, 255, 0.4)"
+    />
+    <div className="container relative z-10 px-4">
       <ScrollReveal>
         <div className="mx-auto max-w-4xl text-center">
           <p className="section-eyebrow mb-3 justify-center">Qualità Verificata</p>

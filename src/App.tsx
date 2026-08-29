@@ -9,7 +9,9 @@ const Projects = lazy(() => import("./pages/Projects.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter
+    future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+  >
     <ScrollToTop />
     <Suspense fallback={null}>
       <Routes>
