@@ -183,12 +183,27 @@ describe("ProjectsShowcase mobile cards", () => {
     const scafaProject = angelico?.projects.find(
       ({ title }) => title === "Casa della Comunità di Scafa"
     );
-    expect(scafaProject?.images).toHaveLength(6);
+    expect(scafaProject?.images).toHaveLength(7);
     expect(
       scafaProject?.images.every((image) =>
         image.startsWith("/assets/projects/casa-comunita-scafa/")
       )
     ).toBe(true);
+
+    const fianoProject = holding?.projects.find(
+      ({ title }) => title === "Centro residenziale Le Felciarie"
+    );
+    expect(fianoProject?.images).toHaveLength(5);
+    expect(
+      fianoProject?.images.every((image) =>
+        image.startsWith("/assets/projects/fiano-le-felciarie/")
+      )
+    ).toBe(true);
+    expect(
+      operatingCompanies
+        .flatMap(({ projects }) => projects)
+        .some(({ title }) => title === "Centro residenziale Le Felciarie")
+    ).toBe(false);
 
     const palazzoFarneseProject = nuovaCcs?.projects.find(
       ({ title }) => title === "Palazzo Farnese di Caprarola"

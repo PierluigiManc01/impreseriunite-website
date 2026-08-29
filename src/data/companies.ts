@@ -119,6 +119,15 @@ const CASA_COMUNITA_SCAFA_IMAGES = [
   "/assets/projects/casa-comunita-scafa/04-struttura-interna.webp",
   "/assets/projects/casa-comunita-scafa/05-corridoio-impianti.webp",
   "/assets/projects/casa-comunita-scafa/06-impianto-fotovoltaico.webp",
+  "/assets/projects/casa-comunita-scafa/07-scala-antincendio.webp",
+];
+
+const FIANO_LE_FELCIARIE_IMAGES = [
+  "/assets/projects/fiano-le-felciarie/01-villino-con-giardino.webp",
+  "/assets/projects/fiano-le-felciarie/02-villino-e-vialetto.webp",
+  "/assets/projects/fiano-le-felciarie/03-villino-e-terreno.webp",
+  "/assets/projects/fiano-le-felciarie/04-bagno-completato.webp",
+  "/assets/projects/fiano-le-felciarie/05-bagno-e-doccia.webp",
 ];
 
 const PALAZZO_FARNESE_IMAGES = [
@@ -512,7 +521,7 @@ export const companies: Company[] = [
         amountLabel: "Importo lavori",
         description:
           "Realizzazione del centro residenziale “Le Felciarie”, composto da 42 villini a Fiano Romano.",
-        images: PLACEHOLDER.building,
+        images: FIANO_LE_FELCIARIE_IMAGES,
       },
       {
         title: "Ristrutturazione e consolidamento della Mole Antonelliana",
