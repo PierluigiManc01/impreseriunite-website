@@ -425,7 +425,7 @@ const ProjectsShowcase = () => {
           <div
             ref={desktopPreviewRef}
             data-testid="desktop-project-preview"
-            className="relative hidden lg:sticky lg:top-28 lg:block lg:h-[calc(100svh-7rem)] lg:self-start lg:overflow-hidden"
+            className="relative hidden lg:sticky lg:top-[var(--site-navbar-height)] lg:block lg:h-[calc(100svh-var(--site-navbar-height))] lg:self-start lg:overflow-hidden"
           >
             <div
               ref={desktopCarouselFrameRef}

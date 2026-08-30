@@ -78,7 +78,7 @@ const Certifications = () => {
       <Navbar />
 
       <main id="main-content">
-        <section className="certifications-blueprint-hero pt-32 md:pt-40">
+        <section className="certifications-blueprint-hero pt-28 md:pt-[8.75rem]">
           <div className="container relative grid gap-12 pb-14 md:pb-20 lg:min-h-[34rem] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20">
             <div>
               <Link
@@ -120,7 +120,7 @@ const Certifications = () => {
         </section>
 
         <nav
-          className="certifications-company-switch sticky top-24 z-20 border-b border-slate-300/90 bg-white/95 shadow-sm backdrop-blur-xl md:top-28"
+          className="certifications-company-switch sticky top-[var(--site-navbar-height)] z-20 border-b border-slate-300/90 bg-white/95 shadow-sm backdrop-blur-xl"
           aria-label="Seleziona azienda certificata"
         >
           <div className="container grid grid-cols-2 gap-3 py-4 md:gap-4 md:py-5">
@@ -149,7 +149,7 @@ const Certifications = () => {
           <section
             key={company.id}
             id={company.id}
-            style={{ scrollMarginTop: "15rem" }}
+            style={{ scrollMarginTop: "14rem" }}
             className={`certifications-company-section py-16 md:py-24 ${
               companyIndex % 2 === 0 ? "bg-[#eaf0f6]" : "bg-[#e2ebf4]"
             }`}

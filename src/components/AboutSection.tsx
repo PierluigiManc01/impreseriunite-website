@@ -14,7 +14,7 @@ const AboutSection = () => {
     <section id="chi-siamo" className="relative bg-background">
       <span
         id="storia"
-        className="absolute top-0 scroll-mt-28"
+        className="absolute top-0 scroll-mt-[var(--site-navbar-height)]"
         aria-hidden="true"
       />
 
@@ -25,11 +25,11 @@ const AboutSection = () => {
       <ScrollStack
         className="about-scroll-stack"
         itemDistance={isMobile ? 70 : 80}
-        itemScale={isMobile ? 0.01 : 0.035}
+        itemScale={isMobile ? 0.01 : 0.025}
         itemStackDistance={isMobile ? 20 : 24}
-        stackPosition={isMobile ? "17%" : "12%"}
-        scaleEndPosition={isMobile ? "40%" : "0%"}
-        baseScale={isMobile ? 0.85 : 0.95}
+        stackPosition={isMobile ? "17%" : "15%"}
+        scaleEndPosition={isMobile ? "40%" : "5%"}
+        baseScale={isMobile ? 0.85 : 0.93}
         blurAmount={0.25}
         useWindowScroll
         disabled={Boolean(prefersReducedMotion)}
