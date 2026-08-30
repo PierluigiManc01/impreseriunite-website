@@ -437,11 +437,11 @@ describe("ProjectsShowcase", () => {
     expect(holding?.projects.map(({ title }) => title)).toEqual([
       "Porto turistico Riva di Traiano",
       "Ristrutturazione e consolidamento della Mole Antonelliana",
-      "Facoltà di Ingegneria di Jeddah",
       "Centro residenziale Le Felciarie",
+      "Palazzina residenziale – Via Saronno",
+      "Facoltà di Ingegneria di Jeddah",
       "Viadotto Muzdalifah",
       "Raccordo Anulare – Lotto 2",
-      "Palazzina residenziale – Via Saronno",
     ]);
     expect(
       holding?.projects

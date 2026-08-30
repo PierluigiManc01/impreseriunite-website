@@ -14,9 +14,27 @@ Marketing/corporate website for Imprese Riunite (construction group, since 1971 
 - `npm run lint` — ESLint
 - `npm test` — run vitest once (`npm run test:watch` for watch mode)
   - Single test file: `npx vitest run src/test/example.test.ts`
-- `npx playwright test` — run e2e tests (config extends `lovable-agent-playwright-config`)
+- `npx playwright test` — run e2e tests
 
 Package manager: npm. Keep `package-lock.json` synchronized with `package.json`.
+
+## Git Workflow
+
+- `main` is the only long-lived branch and should stay deployable.
+- New feature branches are session-scoped: create a branch only for the current requested feature/work session, keep it short-lived, and delete it after the PR is merged.
+- Always ask the user before creating a new feature branch. Do not create branches automatically for every small change; this prevents branch sprawl.
+- When the user approves a branch, create it from latest `main`:
+  - `git switch main`
+  - `git pull --ff-only origin main`
+  - `git switch -c feature/<short-descriptive-name>`
+- Before opening or merging a PR, rebase the feature branch onto latest `main`:
+  - `git fetch origin`
+  - `git rebase origin/main`
+  - resolve conflicts if needed, then `git push --force-with-lease`
+- Use squash-merge for PRs so `main` gets one clean commit per feature/session.
+- Enable/expect GitHub auto-delete of head branches after PR merge. After merge, prune local refs and delete the local branch when safe:
+  - `git fetch --prune`
+  - `git branch -d feature/<short-descriptive-name>`
 
 ## Architecture
 
@@ -29,6 +47,5 @@ Package manager: npm. Keep `package-lock.json` synchronized with `package.json`.
 - **UI primitives** in `src/components/ui/` are shadcn/ui components (Radix UI + `class-variance-authority` + Tailwind) — treat as generated/library code, edit sparingly.
 - Path alias `@` → `src/` (configured in both `vite.config.ts` and `vitest.config.ts`).
 - Tailwind config (`tailwind.config.ts`) carries the brand theme (colors, fonts, animations) — check it before hardcoding styles.
-- `lovable-tagger` Vite plugin is dev-mode only (adds component tagging for the Lovable platform) — not present in production builds.
 - Deployed on Vercel; `vercel.json` handles SPA rewrites (all routes → `index.html` except static assets) and sets security headers.
 - Vitest environment is `jsdom`; setup file at `src/test/setup.ts`.

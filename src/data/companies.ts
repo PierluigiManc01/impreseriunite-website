@@ -92,15 +92,6 @@ export const siteContact = {
 const sharedOfficeAddress = `${siteContact.office.street}, ${siteContact.office.postalCode}, ${siteContact.office.city} (${siteContact.office.province})`;
 const sharedOfficePhones = siteContact.phones.map(({ label }) => label).join(" – ");
 
-// TEMPORARY project photos: Unsplash CDN placeholders grouped by theme, to be
-// swapped with the real project photos later. `px` builds a sized, cropped URL.
-const px = (id: string) => `https://images.unsplash.com/${id}?w=1200&q=80&auto=format&fit=crop`;
-const PLACEHOLDER = {
-  construction: [px("photo-1504307651254-35680f356dfd"), px("photo-1523217582562-09d0def993a6")],
-  building: [px("photo-1487958449943-2429e8be8625"), px("photo-1503387762-592deb58ef4e")],
-  renovation: [px("photo-1621905251189-08b45d6a269e"), px("photo-1516156008625-3a9d6067fab5")],
-  energy: [px("photo-1466611653911-95081537e5b7"), px("photo-1508514177221-188b1cf16e9d")],
-};
 
 const SCUOLA_MONTANARI_IMAGES = [
   "/assets/projects/scuola-montanari-ravenna/01-corridoio-completato.webp",
@@ -130,12 +121,21 @@ const FIANO_LE_FELCIARIE_IMAGES = [
   "/assets/projects/fiano-le-felciarie/05-bagno-e-doccia.webp",
 ];
 
+const GIUSTINIANA_IMAGES = [
+  "/assets/projects/giustiniana/via_saronno.webp",
+];
+
 const JEDDAH_FACULTY_IMAGES = [
   "/assets/projects/jeddah/01-facciata-principale.webp",
   "/assets/projects/jeddah/02-facolta-ingegneria.webp",
   "/assets/projects/jeddah/03-campus-king-abdulaziz.webp",
   "/assets/projects/jeddah/04-edificio-campus.webp",
 ];
+
+const JEDDAH_OTHER_IMAGES = {
+  viadotto: ["/assets/projects/jeddah/viadotto.webp"],
+  autostrada: ["/assets/projects/jeddah/autostrada.webp"],
+};
 
 const PALAZZO_FARNESE_IMAGES = [
   "/assets/projects/palazzo-farnese/01-facciata-principale.webp",
@@ -498,10 +498,10 @@ export const companies: Company[] = [
         title: "Porto turistico Riva di Traiano",
         location: "Civitavecchia (RM)",
         client:
-          "Associazione Consortile per lo Sviluppo della Nautica da Diporto",
+          "Porto Turistico Riva di Traiano S.p.A. (Privato)",
         amount: "",
         description:
-          "Realizzazione del porto turistico in località ex scalo Matteuzzi, con 430 posti barca, nel Comune di Civitavecchia.",
+          "Realizzazione del porto turistico in località ex scalo Matteuzzi, nel Comune di Civitavecchia. L'opera comprende la realizzazione di 1370 posti barca, 1400 posti auto, cantiere navale, circolo nautico, bar e ristoranti con relativi servizi e infrastrutture.",
         images: [rivaDiTraiano],
       },
       {
@@ -515,15 +515,6 @@ export const companies: Company[] = [
         images: [moleAntonelliana],
       },
       {
-        title: "Facoltà di Ingegneria di Jeddah",
-        location: "Jeddah – Arabia Saudita",
-        client: "Committente internazionale (Privato)",
-        amount: "",
-        description:
-          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla storica C.C.S.",
-        images: JEDDAH_FACULTY_IMAGES,
-      },
-      {
         title: "Centro residenziale Le Felciarie",
         location: "Fiano Romano (RM)",
         client: "Immobil Fiano S.r.l. (Privato)",
@@ -534,13 +525,31 @@ export const companies: Company[] = [
         images: FIANO_LE_FELCIARIE_IMAGES,
       },
       {
+        title: "Palazzina residenziale – Via Saronno",
+        location: "Roma – Prima Porta",
+        client: "Giustiniana Prima S.r.l. (Privato)",
+        amount: "",
+        description:
+          "Realizzazione di una palazzina composta da 26 appartamenti, muniti di box e cantine in Via Saronno s.n.c., Roma.",
+        images: GIUSTINIANA_IMAGES,
+      },
+      {
+        title: "Facoltà di Ingegneria di Jeddah",
+        location: "Jeddah – Arabia Saudita",
+        client: "Committente internazionale (Privato)",
+        amount: "",
+        description:
+          "Costruzione della Facoltà di Ingegneria nella città portuale saudita di Jeddah, opera realizzata dalla storica C.C.S.",
+        images: JEDDAH_FACULTY_IMAGES,
+      },
+      {
         title: "Viadotto Muzdalifah",
         location: "La Mecca – Arabia Saudita",
         client: "Committente internazionale (Privato)",
         amount: "",
         description:
           "Realizzazione del Viadotto Muzdalifah, una delle opere infrastrutturali più prestigiose realizzate dalla storica C.C.S. a livello internazionale.",
-        images: PLACEHOLDER.construction,
+        images: JEDDAH_OTHER_IMAGES.viadotto,
       },
       {
         title: "Raccordo Anulare – Lotto 2",
@@ -549,16 +558,7 @@ export const companies: Company[] = [
         amount: "",
         description:
           "Costruzione del secondo lotto del Raccordo Anulare nella capitale dell’Arabia Saudita, realizzato dalla storica C.C.S.",
-        images: PLACEHOLDER.construction,
-      },
-      {
-        title: "Palazzina residenziale – Via Saronno",
-        location: "Roma – Prima Porta",
-        client: "Giustiniana Prima S.r.l. (Privato)",
-        amount: "",
-        description:
-          "Realizzazione di una palazzina composta da 25 appartamenti, 4 box e 25 cantine in Via Saronno s.n.c., Roma.",
-        images: PLACEHOLDER.building,
+        images: JEDDAH_OTHER_IMAGES.autostrada,
       }
     ],
   },
