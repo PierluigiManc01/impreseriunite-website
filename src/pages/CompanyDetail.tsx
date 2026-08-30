@@ -61,7 +61,7 @@ const CompanyDetail = () => {
       <main id="main-content">
 
       {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-8 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-28 md:pt-[8.75rem] pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <Link
             to="/#aziende"

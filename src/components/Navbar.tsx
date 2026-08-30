@@ -54,7 +54,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-30 border-b border-border bg-card/90 backdrop-blur-xl">
-      <div className="container flex h-24 items-center justify-between gap-4 md:h-28">
+      <div className="container flex h-[var(--site-navbar-height)] items-center justify-between gap-4">
         {isHome ? (
           <a
             href="#home"
@@ -82,7 +82,7 @@ const Navbar = () => {
         )}
 
         <PillNav
-          className="relative h-14"
+          className="relative h-12 w-[3.25rem] lg:w-auto"
           items={items}
           activeHref={activeHref}
         />

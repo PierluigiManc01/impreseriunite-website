@@ -340,7 +340,7 @@ const PillNav = ({
       <div
         ref={mobileMenuRef}
         id="pill-mobile-menu"
-        className="invisible fixed inset-x-4 top-[6.75rem] z-40 rounded-3xl border border-border bg-card p-1 opacity-0 shadow-xl md:top-[7.75rem] lg:hidden"
+        className="invisible fixed inset-x-4 top-[calc(var(--site-navbar-height)+0.75rem)] z-40 rounded-3xl border border-border bg-card p-1 opacity-0 shadow-xl lg:hidden"
       >
         <ul className="flex flex-col gap-1">
           {items.flatMap((item) => {

@@ -59,8 +59,15 @@
   /* 17px root: every rem-based size (i.e. all Tailwind text utilities)
      scales up ~6% site-wide. */
   html {
+    --site-navbar-height: 5rem;
     position: relative;
     font-size: 106.25%;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      --site-navbar-height: 6rem;
+    }
   }
 
   body {
@@ -72,13 +79,7 @@
   }
 
   section[id]:not(#home) {
-    scroll-margin-top: 6rem;
-  }
-
-  @media (min-width: 768px) {
-    section[id]:not(#home) {
-      scroll-margin-top: 7rem;
-    }
+    scroll-margin-top: var(--site-navbar-height);
   }
 }
 
