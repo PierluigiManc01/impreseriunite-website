@@ -39,6 +39,7 @@ export type Company = {
   longDescription: string;
   admin: string;
   technicalDirector?: string;
+  technicalresponsible?: string;
   vatNumber?: string;
   address: string;
   phone: string;
@@ -258,6 +259,7 @@ export const companies: Company[] = [
       "Specializzata nella realizzazione di grandi interventi infrastrutturali, collabora da decenni con  <strong>Roma Capitale, il Ministero della Giustizia, il Ministero della Difesa, l'ENAV</strong> e i principali enti pubblici italiani.",
     admin: "Alfredo Mancinelli",
     technicalDirector: "Geom. Giuseppe Saputo",
+    technicalresponsible: "Ing. Ornella Squerzanti",
     vatNumber: "00902311000",
     address: sharedOfficeAddress,
     phone: sharedOfficePhones,
@@ -367,6 +369,8 @@ export const companies: Company[] = [
     longDescription:
       "Oggi l'Azienda vanta elevati standard di professionalità nell'installazione di impianti fotovoltaici, di gruppi elettrogeni, di continuità e cabine di trasformazione MT/BT e nella installazione e manutenzione di impianti elettrici, di sicurezza, d'illuminazione e di autonomia industriale.",
     admin: "Alfredo Mancinelli",
+    technicalDirector: "Alfredo Mancinelli",
+    technicalresponsible: "Ing. Chiara Milani",
     vatNumber: "05289751009",
     address: sharedOfficeAddress,
     phone: sharedOfficePhones,
@@ -398,17 +402,6 @@ export const companies: Company[] = [
     ],
     projects: [
       {
-        title: "Nuovo padiglione detentivo – Cremona",
-        location: "Cremona",
-        client: "Ministero della Giustizia",
-        amount: "7.829.376,75 €",
-        amountLabel: "Importo lavori",
-        featuredOnHomepage: true,
-        description:
-          "Realizzazione di un nuovo padiglione detentivo, compresa la fornitura e posa in opera di cabina MT e gruppo elettrogeno, presso la Casa circondariale di Cremona.",
-        images: CASA_CIRCONDARIALE_CREMONA_IMAGES,
-      },
-      {
         title: "Cittadella Giudiziaria di Latina",
         location: "Latina",
         client:
@@ -420,14 +413,15 @@ export const companies: Company[] = [
         images: CITTADELLA_GIUDIZIARIA_LATINA_IMAGES,
       },
       {
-        title: "Impianto di energia alternativa – Laboratorio D.N.A. Rebibbia",
-        location: "Roma – Rebibbia",
-        client: "Ministero della Giustizia",
-        amount: "2.622.892,98 €",
+        title: "Palazzo Farnese di Caprarola",
+        location: "Caprarola (VT)",
+        client: "Ministero della Cultura",
+        amount: "350.000,00 €",
         amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
         description:
-          "Opere complementari per la realizzazione di un impianto di produzione di energia alternativa, con adeguamento della cabina MT/BT e installazione di gruppo elettrogeno presso la Casa circondariale di Roma Rebibbia – Laboratorio D.N.A.",
-        images: REBIBBIA_LABORATORIO_DNA_IMAGES,
+          "Interventi impiantistici e di illuminazione per la valorizzazione degli ambienti monumentali e degli spazi esterni di Palazzo Farnese a Caprarola.",
+        images: PALAZZO_FARNESE_IMAGES,
       },
       {
         title: "Rilocazione luci di pista – Aeroporto Ronchi dei Legionari",
@@ -438,6 +432,27 @@ export const companies: Company[] = [
         description:
           "Rilocazione dei pozzetti e delle luci di pista presso l’aeroporto di Ronchi dei Legionari.",
         images: ENAV_ACCORDO_QUADRO_IMAGES.slice(10, 11),
+      },
+      {
+        title: "Nuovo padiglione detentivo – Cremona",
+        location: "Cremona",
+        client: "Ministero della Giustizia",
+        amount: "7.829.376,75 €",
+        amountLabel: "Importo lavori",
+        featuredOnHomepage: true,
+        description:
+          "Realizzazione di un nuovo padiglione detentivo, compresa la fornitura e posa in opera di cabina MT e gruppo elettrogeno, presso la Casa circondariale di Cremona.",
+        images: CASA_CIRCONDARIALE_CREMONA_IMAGES,
+      },
+      {
+        title: "Impianto di energia alternativa – Laboratorio D.N.A. Rebibbia",
+        location: "Roma – Rebibbia",
+        client: "Ministero della Giustizia",
+        amount: "2.622.892,98 €",
+        amountLabel: "Importo lavori",
+        description:
+          "Opere complementari per la realizzazione di un impianto di produzione di energia alternativa, con adeguamento della cabina MT/BT e installazione di gruppo elettrogeno presso la Casa circondariale di Roma Rebibbia – Laboratorio D.N.A.",
+        images: REBIBBIA_LABORATORIO_DNA_IMAGES,
       },
       {
         title: "Adeguamento sismico Ala Callegari – Scuola M. Montanari",
@@ -459,17 +474,6 @@ export const companies: Company[] = [
         description:
           "Realizzazione di impianti di illuminazione per le residenze universitarie e servizi correlati presso l’area dello SDO di Pietralata.",
         images: RESIDENZE_UNIVERSITARIE_LAZIODISU_IMAGES,
-      },
-      {
-        title: "Palazzo Farnese di Caprarola",
-        location: "Caprarola (VT)",
-        client: "Ministero della Cultura",
-        amount: "350.000,00 €",
-        amountLabel: "Importo lavori",
-        featuredOnHomepage: true,
-        description:
-          "Interventi impiantistici e di illuminazione per la valorizzazione degli ambienti monumentali e degli spazi esterni di Palazzo Farnese a Caprarola.",
-        images: PALAZZO_FARNESE_IMAGES,
       },
     ],
   },
