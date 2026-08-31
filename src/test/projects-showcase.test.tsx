@@ -413,8 +413,8 @@ describe("ProjectsShowcase", () => {
         .map(({ title }) => title)
     ).toEqual([
       "Nuova torre di controllo – Milano Linate",
-      "Nuovo padiglione detentivo – Cremona",
       "Palazzo Farnese di Caprarola",
+      "Nuovo padiglione detentivo – Cremona"
     ]);
 
     const laziodisuProject = nuovaCcs?.projects.find(

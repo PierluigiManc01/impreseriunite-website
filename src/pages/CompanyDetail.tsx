@@ -298,6 +298,14 @@ const CompanyDetail = () => {
                     <p className="text-sm font-body text-foreground">{company.technicalDirector}</p>
                   </div>
                 )}
+                {company.technicalresponsible && (
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-body">
+                      Responsabile Tecnico
+                    </p>
+                    <p className="text-sm font-body text-foreground">{company.technicalresponsible}</p>
+                  </div>
+                )}
                 <div className="border-t border-border pt-4 space-y-3">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
