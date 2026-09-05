@@ -26,6 +26,7 @@ const getCertificationArea = (name: string) => {
   if (normalizedName.includes("sa 8000")) return "Responsabilità sociale";
   if (normalizedName.includes("fgas")) return "Gas fluorurati";
   if (normalizedName.includes("esg")) return "Sostenibilità";
+  if (normalizedName.includes("rating di legalità")) return "Legalità e trasparenza";
   if (normalizedName.includes("parità") || normalizedName.includes("pdr 125")) {
     return "Parità di genere";
   }

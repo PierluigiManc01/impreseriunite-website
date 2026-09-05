@@ -397,6 +397,7 @@ export const companies: Company[] = [
       { name: "SA 8000", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-sa-8000.pdf" },
       { name: "SOA", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-soa.pdf" },
       { name: "Attestato FGAS", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-fgas.pdf" },
+      { name: "Rating di legalità", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-rating-legalita.pdf" },
       { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-pdr125.pdf" },
       { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-politica-parita-genere.pdf" },
     ],
