@@ -23,6 +23,7 @@ const getCertificationArea = (name: string) => {
   if (normalizedName.includes("1400")) return "Gestione ambientale";
   if (normalizedName.includes("45001")) return "Salute e sicurezza";
   if (normalizedName.includes("50001")) return "Gestione energia";
+  if (normalizedName.includes("37001")) return "Prevenzione corruzione";
   if (normalizedName.includes("sa 8000")) return "Responsabilità sociale";
   if (normalizedName.includes("fgas")) return "Gas fluorurati";
   if (normalizedName.includes("esg")) return "Sostenibilità";

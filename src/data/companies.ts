@@ -278,6 +278,7 @@ export const companies: Company[] = [
     ],
     certifications: [
       { name: "ISO 14000", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-14000.pdf" },
+      { name: "ISO 37001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-37001.pdf" },
       { name: "ISO 45001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-45001.pdf" },
       { name: "ISO 50001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-50001.pdf" },
       { name: "ISO 9001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-9001.pdf" },
