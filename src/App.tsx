@@ -6,6 +6,7 @@ const Index = lazy(() => import("./pages/Index.tsx"));
 const CompanyDetail = lazy(() => import("./pages/CompanyDetail.tsx"));
 const Certifications = lazy(() => import("./pages/Certifications.tsx"));
 const Projects = lazy(() => import("./pages/Projects.tsx"));
+const LegalPolicy = lazy(() => import("./pages/LegalPolicy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const App = () => (
@@ -19,6 +20,8 @@ const App = () => (
         <Route path="/azienda/:id" element={<CompanyDetail />} />
         <Route path="/progetti" element={<Projects />} />
         <Route path="/certificazioni" element={<Certifications />} />
+        <Route path="/privacy-policy" element={<LegalPolicy policy="privacy" />} />
+        <Route path="/cookie-policy" element={<LegalPolicy policy="cookies" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

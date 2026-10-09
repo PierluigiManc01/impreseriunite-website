@@ -34,14 +34,28 @@ describe("Navbar company links", () => {
       </MemoryRouter>
     );
 
-    const links = screen.getAllByRole("link", { name: "Imprese Riunite" });
-    expect(links).toHaveLength(2);
-    links.forEach((link) =>
-      expect(link).toHaveAttribute(
-        "href",
-        "/azienda/gruppo-immobiliare-properzi"
-      )
-    );
+    expect(screen.queryByRole("link", { name: "Imprese Riunite" })).not.toBeInTheDocument();
+    const companyLink = screen.getAllByRole("link", { name: "Aziende", hidden: true }).find((link) => link.hasAttribute("aria-controls"))!;
+    expect(screen.queryByRole("button", { name: "Mostra aziende" })).not.toBeInTheDocument();
+    fireEvent.mouseEnter(companyLink.parentElement!);
+    expect(companyLink).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: "Imprese Riunite" })).toHaveAttribute("href", "/azienda/gruppo-immobiliare-properzi");
+    fireEvent.mouseLeave(companyLink.parentElement!);
+    expect(companyLink).toHaveAttribute("aria-expanded", "false");
+    fireEvent.focus(companyLink);
+    expect(companyLink).toHaveAttribute("aria-expanded", "true");
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(companyLink).toHaveAttribute("aria-expanded", "false");
+    expect(companyLink).toHaveFocus();
+
+    const mobileButton = screen.getByRole("button", { name: "Apri menu di navigazione" });
+    fireEvent.click(mobileButton);
+    expect(mobileButton).toHaveAttribute("aria-expanded", "true");
+    const mobileMenu = document.getElementById("mobile-navigation")!;
+    expect(within(mobileMenu).getByRole("link", { name: "Imprese Riunite" })).toHaveAttribute("href", "/azienda/gruppo-immobiliare-properzi");
+    fireEvent.click(within(mobileMenu).getByRole("link", { name: "Contatti" }));
+    expect(mobileButton).toHaveAttribute("aria-expanded", "false");
+    expect(mobileMenu).not.toBeVisible();
   });
 });
 

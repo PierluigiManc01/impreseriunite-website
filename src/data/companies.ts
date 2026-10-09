@@ -19,9 +19,29 @@ export type Project = {
   imageLabels?: string[];
 };
 
+export type DocumentGroup = "management" | "social" | "soa" | "other" | "policies";
+
+export const documentGroups: { id: DocumentGroup; label: string }[] = [
+  { id: "management", label: "Sistemi di gestione" },
+  { id: "social", label: "Sociale / ESG" },
+  { id: "soa", label: "Qualificazioni SOA" },
+  { id: "other", label: "Altri attestati" },
+  { id: "policies", label: "Politiche aziendali" },
+];
+
+export const managementSystemSubjects: Record<string, string> = {
+  "ISO 9001": "Qualità",
+  "ISO 14001": "Ambiente",
+  "ISO 45001": "Sicurezza",
+  "ISO 50001": "Energia",
+  "ISO 37001": "Anticorruzione",
+};
+
 export type Certification = {
   name: string;
   pdf: string;
+  group: DocumentGroup;
+  kind: "Certificazione" | "Attestazione" | "Rating" | "Politica" | "Qualificazione";
 };
 
 export type SoaCategory = {
@@ -277,17 +297,17 @@ export const companies: Company[] = [
       { code: "OS 30", classifica: "III-bis", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
-      { name: "ISO 14000", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-14000.pdf" },
-      { name: "ISO 37001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-37001.pdf" },
-      { name: "ISO 45001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-45001.pdf" },
-      { name: "ISO 50001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-50001.pdf" },
-      { name: "ISO 9001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-9001.pdf" },
-      { name: "SA 8000", pdf: "/assets/certifications/costruzioni-angelico/angelico-sa-8000.pdf" },
-      { name: "SOA", pdf: "/assets/certifications/costruzioni-angelico/angelico-soa.pdf" },
-      { name: "Attestato FGAS", pdf: "/assets/certifications/costruzioni-angelico/angelico-fgas.pdf" },
-      { name: "ESG Rating", pdf: "/assets/certifications/costruzioni-angelico/angelico-esg-rating.pdf" },
-      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-uni-pdr-125.pdf" },
-      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-politica-parita-genere.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-9001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 14001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-14001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 45001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-45001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 50001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-50001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 37001", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-37001.pdf", group: "management", kind: "Certificazione" },
+      { name: "SA 8000", pdf: "/assets/certifications/costruzioni-angelico/angelico-sa-8000.pdf", group: "social", kind: "Certificazione" },
+      { name: "SOA", pdf: "/assets/certifications/costruzioni-angelico/angelico-soa.pdf", group: "soa", kind: "Qualificazione" },
+      { name: "Attestato FGAS", pdf: "/assets/certifications/costruzioni-angelico/angelico-fgas.pdf", group: "other", kind: "Attestazione" },
+      { name: "ESG Rating", pdf: "/assets/certifications/costruzioni-angelico/angelico-esg-rating.pdf", group: "social", kind: "Rating" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-uni-pdr-125.pdf", group: "social", kind: "Certificazione" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-politica-parita-genere.pdf", group: "policies", kind: "Politica" },
     ],
     projects: [
       {
@@ -392,15 +412,15 @@ export const companies: Company[] = [
       { code: "OS 30", classifica: "V", description: "Impianti elettrici, telefonici, radiotelefonici e televisivi" },
     ],
     certifications: [
-      { name: "ISO 14001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-14001.pdf" },
-      { name: "ISO 45001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-45001.pdf" },
-      { name: "ISO 9001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-9001.pdf" },
-      { name: "SA 8000", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-sa-8000.pdf" },
-      { name: "SOA", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-soa.pdf" },
-      { name: "Attestato FGAS", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-fgas.pdf" },
-      { name: "Rating di legalità", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-rating-legalita.pdf" },
-      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-pdr125.pdf" },
-      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-politica-parita-genere.pdf" },
+      { name: "ISO 9001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-9001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 14001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-14001.pdf", group: "management", kind: "Certificazione" },
+      { name: "ISO 45001", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-iso-45001.pdf", group: "management", kind: "Certificazione" },
+      { name: "SA 8000", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-sa-8000.pdf", group: "social", kind: "Certificazione" },
+      { name: "SOA", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-soa.pdf", group: "soa", kind: "Qualificazione" },
+      { name: "Attestato FGAS", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-fgas.pdf", group: "other", kind: "Attestazione" },
+      { name: "Rating di legalità", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-rating-legalita.pdf", group: "social", kind: "Rating" },
+      { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-pdr125.pdf", group: "social", kind: "Certificazione" },
+      { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/nuova-ccs/nuova-ccs-politica-parita-genere.pdf", group: "policies", kind: "Politica" },
     ],
     projects: [
       {

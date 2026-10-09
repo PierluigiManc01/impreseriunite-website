@@ -2,6 +2,7 @@ import logo from "@/assets/impreseriunite-long-logo-removebg.png";
 import award2023 from "@/assets/awards/cassa-edile-awards-2023.svg";
 import award2024 from "@/assets/awards/cassa-edile-awards-2024.svg";
 import award2025 from "@/assets/awards/cassa-edile-awards-2025.svg";
+import award2026 from "@/assets/awards/cassa-edile-awards-2026.svg";
 import { Link } from "react-router-dom";
 import { certifiedCompanies, siteContact } from "@/data/companies";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -23,20 +24,27 @@ const genderParityLinks = certifiedCompanies.flatMap((company) =>
 );
 
 const awardLinks = [
-  { year: "2023", image: award2023 },
-  { year: "2024", image: award2024 },
-  { year: "2025", image: award2025 },
+  { label: "Cassa Edile Awards 2023", image: award2023 },
+  { label: "Cassa Edile Awards 2024", image: award2024 },
+  { label: "Cassa Edile Awards 2025", image: award2025 },
+  { label: "Cassa Edile Awards 2026", image: award2026 },
 ];
+
+const sharedLegalAddress = certifiedCompanies.every((company) => company.address === certifiedCompanies[0]?.address)
+  ? certifiedCompanies[0]?.address
+  : undefined;
+
+const legalLinkStyle = "inline-flex min-h-11 items-center text-primary-foreground underline underline-offset-4 hover:text-primary-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground";
 
 const Footer = () => (
   <footer className="border-t border-border bg-foreground text-primary-foreground">
-    <div className="container grid gap-8 py-10 md:grid-cols-[1.1fr_0.7fr_0.7fr_0.8fr] md:gap-10 md:py-14">
-      <div>
+    <div className="container grid grid-cols-2 gap-6 py-8 md:grid-cols-[1.1fr_0.7fr_0.7fr_0.8fr] md:gap-8 md:py-10">
+      <div className="col-span-2 md:col-span-1">
         <Link to="/#home" aria-label="Vai alla home di Imprese Riunite" className="inline-block">
           <img
             src={logo}
             alt="Imprese Riunite"
-            className="mb-4 h-14 w-44 object-contain brightness-0 invert"
+            className="mb-3 h-12 w-40 object-contain brightness-0 invert"
           />
         </Link>
         <p className="max-w-md text-base leading-relaxed text-primary-foreground/70">
@@ -68,7 +76,7 @@ const Footer = () => (
         <nav aria-label="Certificazioni e conformità" className="grid gap-2">
           <Link
             to="/certificazioni"
-            className="text-lg text-primary-foreground/75 transition-colors hover:text-primary-foreground"
+            className="text-base text-primary-foreground/75 transition-colors hover:text-primary-foreground"
           >
             Certificazioni
           </Link>
@@ -87,7 +95,7 @@ const Footer = () => (
         </nav>
       </div>
 
-      <div>
+      <div className="col-span-2 md:col-span-1">
         <p className="micro-label mb-3 text-primary-foreground">
           Sede
         </p>
@@ -124,31 +132,36 @@ const Footer = () => (
       </div>
     </div>
     <div className="border-t border-primary-foreground/10">
-      <div className="container grid gap-8 py-8 text-xs leading-relaxed text-primary-foreground/50 sm:text-sm md:grid-cols-[1fr_1.35fr] md:items-center md:gap-12 md:py-10">
-        <div className="order-2 md:order-1">
-          <p>© 2026 Imprese Riunite. Tutti i diritti riservati.</p>
-          <div className="mt-3 grid gap-2">
-            <p>
-              Costruzioni Angelico Edili Stradali S.r.l. | P.IVA 00902311000
-              <br />
-              Sede legale: Piazzale Benito Juarez 10/11 - 00144, Roma (RM)
-            </p>
-            <p>
-              Nuova C.C.S. S.r.l. | P.IVA 05289751009
-              <br />
-              Sede legale: Piazzale Benito Juarez 10/11 - 00144, Roma (RM)
-            </p>
+      <div className="container flex flex-col gap-4 py-3 text-xs leading-relaxed text-primary-foreground/75 lg:flex-row lg:items-center lg:justify-between lg:gap-8 md:py-4">
+        <div className="order-2 min-w-0 lg:order-1">
+          <div className="flex flex-wrap items-center gap-x-6">
+            <p>© 2026 Imprese Riunite. Tutti i diritti riservati.</p>
+            <nav aria-label="Informative legali" className="flex flex-wrap gap-x-4">
+              <Link to="/privacy-policy" className={legalLinkStyle}>Privacy Policy</Link>
+              <Link to="/cookie-policy" className={legalLinkStyle}>Cookie Policy</Link>
+            </nav>
           </div>
-        </div>
-        <div className="order-1 md:order-2 md:justify-self-end">
-          <p className="micro-label mb-3 text-primary-foreground">Riconoscimenti</p>
-          <div className="grid grid-cols-3 gap-3 sm:gap-5" aria-label="Cassa Edile Awards">
-            {awardLinks.map((award) => (
-              <div key={award.year} className="rounded-md">
-                <img src={award.image} alt={`Cassa Edile Awards ${award.year}`} className="h-auto w-24 sm:w-32 lg:w-36" />
-              </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-1">
+            {certifiedCompanies.map((company) => (
+              <p key={company.id}>
+                {company.fullName} · P.IVA {company.vatNumber}
+                {!sharedLegalAddress && <span className="block">Sede legale: {company.address}</span>}
+              </p>
             ))}
           </div>
+          {sharedLegalAddress && <p className="mt-1">Sede legale delle società: {sharedLegalAddress}</p>}
+        </div>
+        <div className="order-1 flex shrink-0 items-start gap-3 lg:order-2" role="group" aria-label="Cassa Edile Awards">
+          {awardLinks.map((award) => (
+            <img
+              key={award.label}
+              src={award.image}
+              alt={award.label}
+              className="h-14 w-12 shrink-0 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
         </div>
       </div>
     </div>
