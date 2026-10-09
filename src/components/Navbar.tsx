@@ -1,9 +1,9 @@
 import { useLayoutEffect, useMemo } from "react";
 import logo from "@/assets/impreseriunite-long-logo-removebg.png";
 import { Link, useLocation } from "react-router-dom";
-import PillNav, { type PillNavItem } from "@/components/PillNav";
+import SiteNav, { type NavItem } from "@/components/SiteNav";
 
-const links: PillNavItem[] = [
+const links: NavItem[] = [
   { label: "Home", href: "/#home" },
   {
     label: "Aziende",
@@ -34,13 +34,7 @@ const Navbar = () => {
     target?.scrollIntoView({ block: "start" });
   }, [isHome, location.hash]);
 
-  // On the home page, section links are same-page anchors ("#chi-siamo") so
-  // clicking them doesn't trigger a route change; elsewhere they're full
-  // router links ("/#chi-siamo") that navigate home before scrolling.
-  // Memoized so PillNav's layout effect (which resets the hover circles to
-  // scale 0) doesn't re-run — and interrupt an in-progress hover — on every
-  // unrelated Navbar re-render.
-  const items: PillNavItem[] = useMemo(
+  const items: NavItem[] = useMemo(
     () =>
       links.map((l) => ({
         label: l.label,
@@ -81,8 +75,8 @@ const Navbar = () => {
           </Link>
         )}
 
-        <PillNav
-          className="relative h-12 w-[3.25rem] lg:w-auto"
+        <SiteNav
+          contactHref={isHome ? "#contatti" : "/#contatti"}
           items={items}
           activeHref={activeHref}
         />

@@ -8,7 +8,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import heroStaticBg from "@/assets/hero-static-bg.webp";
 
@@ -170,14 +169,8 @@ const HeroSection = () => {
                       href="#aziende"
                       className="inline-block rounded-xl bg-primary px-6 py-3 font-heading text-base font-semibold text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 sm:px-8 sm:py-3.5 sm:text-lg"
                     >
-                      Scopri le nostre aziende
+                      Scopri le aziende
                     </a>
-                    <Link
-                      to="/certificazioni"
-                      className="inline-block rounded-xl border border-white/40 px-6 py-3 font-heading text-base font-semibold text-white transition-colors hover:bg-white/10 sm:px-8 sm:py-3.5 sm:text-lg"
-                    >
-                      Le certificazioni
-                    </Link>
                     <a
                       href="#storia"
                       className="inline-block rounded-xl border border-white/40 px-6 py-3 font-heading text-base font-semibold text-white transition-colors hover:bg-white/10 sm:px-8 sm:py-3.5 sm:text-lg"

@@ -6,16 +6,15 @@ import {
   Phone,
   Mail,
   Building2,
-  Award,
   Briefcase,
-  FileText,
-  ExternalLink,
   Calendar,
+  ExternalLink,
 } from "lucide-react";
 import { companies, siteContact } from "@/data/companies";
 import { companyLogos } from "@/data/company-assets";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CompanyDocuments from "@/components/CompanyDocuments";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
 import { useDocumentMetadata } from "@/hooks/use-document-metadata";
 import { renderRichText } from "@/lib/render-rich-text";
@@ -364,31 +363,10 @@ const CompanyDetail = () => {
                 viewport={{ once: true }}
                 className="architectural-panel order-1 min-w-0 p-6 sm:p-8 md:order-2"
               >
-                <h3 className="font-heading font-bold text-lg text-foreground mb-6 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-primary" />
-                  Certificazioni
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {company.certifications.map((cert) => (
-                    <a
-                      key={cert.name}
-                      href={cert.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex min-w-0 items-center gap-2 bg-accent hover:bg-primary/10 rounded-lg px-4 py-3 transition-colors group/cert cursor-pointer"
-                    >
-                      <FileText className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-sm font-body font-medium text-accent-foreground group-hover/cert:text-primary transition-colors break-words">
-                        {cert.name}
-                        <span className="sr-only"> (si apre in una nuova scheda)</span>
-                      </span>
-                      <ExternalLink
-                        aria-hidden="true"
-                        className="w-3 h-3 text-muted-foreground ml-auto shrink-0 opacity-0 group-hover/cert:opacity-100 transition-opacity"
-                      />
-                    </a>
-                  ))}
-                </div>
+                <h2 className="mb-7 font-heading text-xl font-bold text-foreground">
+                  Certificazioni e qualificazioni
+                </h2>
+                <CompanyDocuments company={company} compact />
               </motion.div>
             )}
           </div>

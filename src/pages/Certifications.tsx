@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { certifiedCompanies } from "@/data/companies";
 import { companyLogos } from "@/data/company-assets";
 import isoLogo from "@/assets/logo-iso-01.webp";
@@ -8,6 +8,7 @@ import saLogo from "@/assets/SA-logo.webp";
 import soaLogo from "@/assets/logo-soa.jpg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CompanyDocuments from "@/components/CompanyDocuments";
 import { useDocumentMetadata } from "@/hooks/use-document-metadata";
 
 const heroCertifications = [
@@ -15,26 +16,6 @@ const heroCertifications = [
   { src: saLogo, alt: "Certificazione SA 8000", label: "SA 8000" },
   { src: soaLogo, alt: "Attestazione SOA", label: "SOA" },
 ];
-
-const getCertificationArea = (name: string) => {
-  const normalizedName = name.toLowerCase();
-
-  if (normalizedName.includes("9001")) return "Gestione qualità";
-  if (normalizedName.includes("1400")) return "Gestione ambientale";
-  if (normalizedName.includes("45001")) return "Salute e sicurezza";
-  if (normalizedName.includes("50001")) return "Gestione energia";
-  if (normalizedName.includes("37001")) return "Prevenzione corruzione";
-  if (normalizedName.includes("sa 8000")) return "Responsabilità sociale";
-  if (normalizedName.includes("fgas")) return "Gas fluorurati";
-  if (normalizedName.includes("esg")) return "Sostenibilità";
-  if (normalizedName.includes("rating di legalità")) return "Legalità e trasparenza";
-  if (normalizedName.includes("parità") || normalizedName.includes("pdr 125")) {
-    return "Parità di genere";
-  }
-  if (normalizedName === "soa") return "Lavori pubblici";
-
-  return "Documento certificativo";
-};
 
 const Certifications = () => {
   const location = useLocation();
@@ -170,7 +151,7 @@ const Certifications = () => {
                   </div>
                 )}
                 <p className="mb-3 font-body text-xs font-bold uppercase tracking-[0.18em] text-blue-300">
-                  Impresa certificata
+                  Documenti aziendali
                 </p>
                 <h2 className="font-heading text-3xl font-bold leading-[1.05] tracking-tight md:text-4xl">
                   {company.name}
@@ -178,85 +159,7 @@ const Certifications = () => {
                 <p className="mt-4 font-body text-base leading-relaxed text-slate-300">{company.role}</p>
               </aside>
 
-              <div>
-                {company.soaCategories && company.soaCategories.length > 0 && (
-                  <section aria-labelledby={`${company.id}-soa`} className="mb-16 md:mb-20">
-                    <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-[#123456] pb-4">
-                      <h3
-                        id={`${company.id}-soa`}
-                        className="font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-4xl"
-                      >
-                        Attestazione SOA
-                      </h3>
-                      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
-                        D.P.R. 207/2010
-                      </span>
-                    </div>
-
-                    <div className="mt-5 grid grid-cols-1 border-l border-t border-slate-300 sm:grid-cols-2">
-                      {company.soaCategories.map((category) => (
-                        <article
-                          key={category.code}
-                          className="flex min-h-36 flex-col justify-between border-b border-r border-slate-300 bg-white/60 p-5 md:p-6"
-                        >
-                          <div className="flex items-start justify-between gap-5">
-                            <h4 className="font-heading text-xl font-bold text-slate-950 md:text-2xl">
-                              Cat. {category.code}
-                            </h4>
-                            <span className="font-mono text-base font-bold text-primary md:text-lg">
-                              {category.classifica}
-                            </span>
-                          </div>
-                          <p className="mt-6 max-w-md font-body text-sm leading-relaxed text-slate-600">
-                            {category.description}
-                          </p>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                )}
-
-                <section aria-labelledby={`${company.id}-certifications`}>
-                  <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-[#123456] pb-4">
-                    <h3
-                      id={`${company.id}-certifications`}
-                      className="font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-4xl"
-                    >
-                      Registro certificazioni
-                    </h3>
-                    <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
-                      Documenti originali
-                    </span>
-                  </div>
-
-                  <div className="mt-3">
-                    {company.certifications.map((certification, certificationIndex) => (
-                      <a
-                        key={certification.name}
-                        href={certification.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group grid min-h-[4.75rem] grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-slate-300 py-3 font-body transition-colors hover:bg-white/60 focus-visible:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary md:grid-cols-[3.5rem_1.2fr_1fr_auto] md:gap-5 md:px-2"
-                      >
-                        <span className="font-mono text-xs text-slate-500">
-                          {String(certificationIndex + 1).padStart(2, "0")}
-                        </span>
-                        <strong className="font-heading text-base leading-snug text-slate-950 md:text-lg">
-                          {certification.name}
-                        </strong>
-                        <span className="hidden text-sm text-slate-600 md:block">
-                          {getCertificationArea(certification.name)}
-                        </span>
-                        <span className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-primary md:text-sm">
-                          Apri PDF
-                          <ExternalLink aria-hidden="true" className="h-4 w-4" />
-                          <span className="sr-only"> (si apre in una nuova scheda)</span>
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              </div>
+              <CompanyDocuments company={company} />
             </div>
           </section>
         ))}
