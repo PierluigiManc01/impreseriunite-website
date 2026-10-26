@@ -305,6 +305,7 @@ export const companies: Company[] = [
       { name: "SA 8000", pdf: "/assets/certifications/costruzioni-angelico/angelico-sa-8000.pdf", group: "social", kind: "Certificazione" },
       { name: "SOA", pdf: "/assets/certifications/costruzioni-angelico/angelico-soa.pdf", group: "soa", kind: "Qualificazione" },
       { name: "Attestato FGAS", pdf: "/assets/certifications/costruzioni-angelico/angelico-fgas.pdf", group: "other", kind: "Attestazione" },
+      { name: "ISO 20400:2017 — Acquisti sostenibili", pdf: "/assets/certifications/costruzioni-angelico/angelico-iso-20400.pdf", group: "other", kind: "Certificazione" },
       { name: "ESG Rating", pdf: "/assets/certifications/costruzioni-angelico/angelico-esg-rating.pdf", group: "social", kind: "Rating" },
       { name: "UNI/PdR 125 – Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-uni-pdr-125.pdf", group: "social", kind: "Certificazione" },
       { name: "Politica per la Parità di Genere", pdf: "/assets/certifications/costruzioni-angelico/angelico-politica-parita-genere.pdf", group: "policies", kind: "Politica" },
