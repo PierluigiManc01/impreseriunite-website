@@ -60,6 +60,10 @@ export type Company = {
   admin: string;
   technicalDirector?: string;
   technicalresponsible?: string;
+  /** Anno di fondazione, usato per i dati strutturati (schema.org foundingDate). */
+  foundedYear?: string;
+  /** Meta description (≤155 caratteri) della pagina azienda; se manca si usa `description`. */
+  seoDescription?: string;
   vatNumber?: string;
   address: string;
   phone: string;
@@ -270,6 +274,9 @@ const ENAV_ACCORDO_QUADRO_IMAGE_LABELS = [
 export const companies: Company[] = [
   {
     id: "costruzioni-angelico",
+    foundedYear: "1971",
+    seoDescription:
+      "Costruzioni Angelico Edili Stradali, Roma: edilizia pubblica e penitenziaria, restauri e grandi infrastrutture dal 1971. Qualificata SOA OG 1 classifica VII.",
     name: "Costruzioni Angelico",
     fullName: "Costruzioni Angelico Edili Stradali s.r.l.",
     role: "Edilizia",
@@ -383,6 +390,9 @@ export const companies: Company[] = [
   },
   {
     id: "nuova-ccs",
+    foundedYear: "1997",
+    seoDescription:
+      "Nuova C.C.S. S.r.l., Roma: impianti elettrici, fotovoltaici, cabine MT/BT e illuminazione per opere pubbliche. Nata nel 1997, certificata ISO e SOA.",
     name: "Nuova C.C.S.",
     fullName: "Nuova C.C.S. S.r.l.",
     role: "Impiantistica elettrica",
@@ -502,6 +512,9 @@ export const companies: Company[] = [
   },
   {
     id: "gruppo-immobiliare-properzi",
+    foundedYear: "1976",
+    seoDescription:
+      "Imprese Riunite coordina Costruzioni Angelico e Nuova C.C.S.: la storia del gruppo di Pierluigi Properzi dal 1976 e la sua governance.",
     name: "Imprese Riunite",
     fullName: "Imprese Riunite – Properzi Costruzioni Generali",
     role: "Management",

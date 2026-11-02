@@ -9,7 +9,8 @@ import soaLogo from "@/assets/logo-soa.jpg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CompanyDocuments from "@/components/CompanyDocuments";
-import { useDocumentMetadata } from "@/hooks/use-document-metadata";
+import { useSeo } from "@/hooks/use-seo";
+import { certificationsMeta } from "@/lib/seo";
 
 const heroCertifications = [
   { src: isoLogo, alt: "Certificazione ISO 9001", label: "ISO 9001" },
@@ -24,10 +25,7 @@ const Certifications = () => {
     hashCompanyId || certifiedCompanies[0]?.id
   );
 
-  useDocumentMetadata(
-    "Certificazioni | Imprese Riunite",
-    "Registro delle certificazioni e qualificazioni di Costruzioni Angelico e Nuova C.C.S.: qualità, ambiente, sicurezza ed etica per gli appalti pubblici."
-  );
+  useSeo(certificationsMeta);
 
   useEffect(() => {
     if (!location.hash) return;

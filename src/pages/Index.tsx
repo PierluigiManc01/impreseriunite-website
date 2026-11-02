@@ -6,8 +6,12 @@ import CertificationsTeaser from "@/components/CertificationsTeaser";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import { useSeo } from "@/hooks/use-seo";
+import { homeMeta } from "@/lib/seo";
 
 const Index = () => {
+  useSeo(homeMeta);
+
   return (
     // overflow-x-clip (not -hidden): hidden would create a scroll container
     // and break position:sticky in descendants (e.g. the projects preview).

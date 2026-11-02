@@ -16,7 +16,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CompanyDocuments from "@/components/CompanyDocuments";
 import ProjectImageCarousel from "@/components/ProjectImageCarousel";
-import { useDocumentMetadata } from "@/hooks/use-document-metadata";
+import { useSeo } from "@/hooks/use-seo";
+import { companyMeta, notFoundMeta } from "@/lib/seo";
 import { renderRichText } from "@/lib/render-rich-text";
 
 const CompanyDetail = () => {
@@ -29,12 +30,7 @@ const CompanyDetail = () => {
     ? siteContact.phones.filter(({ label }) => company.phone.includes(label))
     : [];
 
-  useDocumentMetadata(
-    company ? `${company.name} | Imprese Riunite` : "Azienda non trovata | Imprese Riunite",
-    company
-      ? `${company.name}: ${company.role}. ${company.fullName}.`
-      : "La pagina azienda richiesta non e' disponibile."
-  );
+  useSeo(company ? companyMeta(company) : notFoundMeta);
 
   if (!company) {
     return (
