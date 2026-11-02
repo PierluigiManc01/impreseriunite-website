@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { legalCompanies, legalContact, legalPolicies } from "@/data/legal";
-import { useDocumentMetadata } from "@/hooks/use-document-metadata";
+import { useSeo } from "@/hooks/use-seo";
+import { legalMeta } from "@/lib/seo";
 
 const LegalPolicy = ({ policy }: { policy: keyof typeof legalPolicies }) => {
   const content = legalPolicies[policy];
-  useDocumentMetadata(`${content.title} | Imprese Riunite`, content.description);
+  useSeo(legalMeta(policy));
 
   return (
     <div className="min-h-screen bg-background">

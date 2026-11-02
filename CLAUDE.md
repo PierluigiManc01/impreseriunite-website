@@ -47,5 +47,6 @@ Package manager: npm. Keep `package-lock.json` synchronized with `package.json`.
 - **UI primitives** in `src/components/ui/` are shadcn/ui components (Radix UI + `class-variance-authority` + Tailwind) — treat as generated/library code, edit sparingly.
 - Path alias `@` → `src/` (configured in both `vite.config.ts` and `vitest.config.ts`).
 - Tailwind config (`tailwind.config.ts`) carries the brand theme (colors, fonts, animations) — check it before hardcoding styles.
-- Deployed on Vercel; `vercel.json` handles SPA rewrites (all routes → `index.html` except static assets) and sets security headers.
+- Deployed on Vercel; `vercel.json` sets security headers (routes are served from the prerendered files, see SEO).
+- **SEO**: `scripts/vite-plugin-seo.ts` runs after `vite build` and writes one static HTML per route (head tags, JSON-LD, crawlable text), plus `sitemap.xml`, `llms.txt` and `404.html`, all derived from `src/data` via `src/lib/seo.ts` + `src/lib/seo-static.ts`. When adding a route, register it in `seoPages()` and call `useSeo(...)` in the page. `public/sitemap.xml` no longer exists (generated). `vercel.json` has no SPA catch-all: unknown URLs get a real 404.
 - Vitest environment is `jsdom`; setup file at `src/test/setup.ts`.

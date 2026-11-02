@@ -1,13 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectsShowcase from "@/components/ProjectsShowcase";
-import { useDocumentMetadata } from "@/hooks/use-document-metadata";
+import { useSeo } from "@/hooks/use-seo";
+import { projectsMeta } from "@/lib/seo";
 
 const Projects = () => {
-  useDocumentMetadata(
-    "Progetti | Imprese Riunite",
-    "I cantieri del Gruppo Imprese Riunite: opere pubbliche, edilizia penitenziaria e impiantistica, con luogo, committente e importi realizzati da Costruzioni Angelico e Nuova C.C.S."
-  );
+  useSeo(projectsMeta);
 
   return (
     <div className="min-h-screen">
