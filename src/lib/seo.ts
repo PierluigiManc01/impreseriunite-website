@@ -64,6 +64,8 @@ export const companyNode = (company: Company): JsonLdNode => {
     ...(company.foundedYear && { foundingDate: company.foundedYear }),
     ...(company.vatNumber && { vatID: `IT${company.vatNumber}` }),
     address: postalAddress,
+    // Pin of the verified Google Business Profile.
+    geo: { "@type": "GeoCoordinates", latitude: 41.8293628, longitude: 12.4789775 },
     telephone: siteContact.phones[0].href.replace("tel:", ""),
     email: company.email,
     areaServed: { "@type": "Country", name: "Italia" },
@@ -71,7 +73,10 @@ export const companyNode = (company: Company): JsonLdNode => {
       ? {
           logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png`, width: 512, height: 512 },
           founder: { "@type": "Person", name: "Pierluigi Properzi" },
-          sameAs: ["https://www.linkedin.com/company/imprese-riunite/"],
+          sameAs: [
+            "https://www.linkedin.com/company/imprese-riunite/",
+            "https://maps.app.goo.gl/pNzjVwMy6RCCpkCQ6",
+          ],
           subOrganization: operatingCompanies.map((c) => ({ "@id": orgId(c) })),
         }
       : { parentOrganization: { "@id": orgId(group) } }),
@@ -176,7 +181,8 @@ export const legalMeta = (policy: keyof typeof legalPolicies): SeoMeta => {
   const content = legalPolicies[policy];
   const path = policy === "privacy" ? "/privacy-policy" : "/cookie-policy";
   const base = { path, title: `${content.title} | ${SITE_NAME}`, description: content.description };
-  return { ...base, jsonLd: [webPage("WebPage", base), breadcrumb([content.title, path])] };
+  // Kept out of the index so Google does not offer them as sitelinks under the brand result.
+  return { ...base, noindex: true, jsonLd: [webPage("WebPage", base), breadcrumb([content.title, path])] };
 };
 
 export const notFoundMeta: SeoMeta = {
