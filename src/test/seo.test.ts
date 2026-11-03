@@ -36,10 +36,12 @@ describe("seo pages", () => {
     }
   });
 
-  it("lists all indexable pages in the sitemap", () => {
+  it("lists only indexable pages in the sitemap", () => {
     const sitemap = renderSitemap(pages);
     for (const { meta } of pages) {
-      expect(sitemap).toContain(`<loc>https://www.impreseriunite.it${meta.path}</loc>`);
+      const loc = `<loc>https://www.impreseriunite.it${meta.path}</loc>`;
+      if (meta.noindex) expect(sitemap).not.toContain(loc);
+      else expect(sitemap).toContain(loc);
     }
   });
 
